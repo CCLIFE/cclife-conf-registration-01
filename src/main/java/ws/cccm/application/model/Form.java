@@ -40,8 +40,12 @@ public class Form extends BaseObject {
      * Serial Version UID.
      */
     private static final long serialVersionUID = -558954559L;
+    
     private Long id;
     private Long formID;
+    
+    private Family address ;
+    private List<Person> registrants ;
     private Long churchID;
     private String churchName;
     private String churchCity;
