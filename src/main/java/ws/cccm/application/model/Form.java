@@ -9,6 +9,7 @@ package ws.cccm.application.model;
  * @author CH1CHOO1
  */
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -40,12 +41,12 @@ public class Form extends BaseObject {
      * Serial Version UID.
      */
     private static final long serialVersionUID = -558954559L;
-    
+
     private Long id;
     private Long formID;
-    
-    private Family address ;
-    private List<Person> registrants ;
+
+    private Family address = new Family();
+    private ArrayList<Person> registrants;
     private Long churchID;
     private String churchName;
     private String churchCity;
@@ -425,7 +426,7 @@ public class Form extends BaseObject {
     private boolean verifyRegistrationTableVariable1(MessageContext messages, String firstName, String lastName, String gender, String age, String status, String language, Faith faith, Integer rowNum) {
 
         String row = rowNum == 1 ? "" : String.valueOf(rowNum);
-        logger.debug("Faith:[" + faith + "]") ;
+        logger.debug("Faith:[" + faith + "]");
         if ((firstName == null || firstName.length() <= 0)
                 && (lastName == null || lastName.length() <= 0)) {
         } else {
@@ -4210,6 +4211,34 @@ public class Form extends BaseObject {
      */
     public void setHomeCountry(String homeCountry) {
         this.homeCountry = homeCountry;
+    }
+
+    /**
+     * @return the address
+     */
+    public Family getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(Family address) {
+        this.address = address;
+    }
+
+    /**
+     * @return the registrants
+     */
+    public List<Person> getRegistrants() {
+        return registrants;
+    }
+
+    /**
+     * @param registrants the registrants to set
+     */
+    public void setRegistrants(ArrayList<Person> registrants) {
+        this.registrants = registrants;
     }
 
 }

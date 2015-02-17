@@ -1,11 +1,9 @@
 package ws.cccm.registration.validators;
 
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ws.cccm.application.model.Form;
-import ws.cccm.application.model.Person;
 
 public class FormValidator implements Validator {
 
@@ -14,10 +12,12 @@ public class FormValidator implements Validator {
     /**
      * This Validator validates just Person instances
      */
+    @Override
     public boolean supports(Class clazz) {
         return Form.class.equals(clazz);
     }
 
+    @Override
     public void validate(Object obj, Errors e) {
 
 //        ValidationUtils.rejectIfEmpty(e, "homeCity", "errors.required");

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<link rel="stylesheet" href="/webflow-registration/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
 <div id="embeddedFlow">
     <p class="notice">Review Payment</p>
     <form:form id="review" action="${flowExecutionUrl}" modelAttribute="form">
@@ -37,6 +38,11 @@
                                 style="font-weight: bolder; font-size: 14px;">I
                                 authorize CC Life to collect <span id="payAmount">$0.00</span>
                                 from my account.</span><br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form:errors path="paymentMethod" cssClass="fieldError"/>
                         </td>
                     </tr>
                     <tr>

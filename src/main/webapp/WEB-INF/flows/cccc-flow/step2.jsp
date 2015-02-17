@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="embeddedFlow">
     <p class="notice">step 2 - Enter individual information</p>
-    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="form">
+    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="person">
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
@@ -44,8 +44,11 @@
                                     <td>关系 夫妻/子女等:</td>
                                     <td>[TODO]</td>
                                     <td>信主 Beliver:</td>
-                                    <td>&nbsp;&nbsp;是 Yes &nbsp;&nbsp;<form:radiobutton path="faith" value="BELIEVER"/>
-                                        否 No<form:radiobutton path="faith" value="SEEKER"/> <br>
+                                    <td>
+
+                                        &nbsp;&nbsp;是 Yes &nbsp;&nbsp;<form:radiobutton path="acceptedChrist" value="1"/>
+                                        否 No<form:radiobutton path="acceptedChrist" value="0"/> <br>
+
                                     </td>
                                     <td>事奉角色:</td>
                                     <td>
@@ -58,16 +61,16 @@
                                 <tr>
                                     <td>语言 Language:</td>
                                     <td>国语
-                                        Mandarin<form:radiobutton path="language" value="M" /></td>
-                                    <td>广东话 Cantonese <form:radiobutton path="language" value="C" /></td>
-                                    <td>英文 English <form:radiobutton path="language" value="E" /><
+                                        Mandarin<form:radiobutton path="preferedLanguage" value="M" /></td>
+                                    <td>广东话 Cantonese <form:radiobutton path="preferedLanguage" value="C" /></td>
+                                    <td>英文 English <form:radiobutton path="preferedLanguage" value="E" /><
                                     <td>翻译耳机 <br>
                                         Interpreter Headerphone: </td>
                                     <td>[TODO]</td>
                                 </tr>
                                 <tr>
                                     <td>电邮 &nbsp;Email:</td>
-                                    <td colspan="5" rowspan="1"><form:input id="email1" path="email1" size="25" maxlength="50"/></td>
+                                    <td colspan="5" rowspan="1"><form:input id="email" path="email" size="25" maxlength="50"/></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -77,52 +80,51 @@
         </table>
         <hr style="width: 80%; height: 2px;">
 
-
-        <table style="text-align: left; width: 500px; height: 62px;"
-               align="center" border="0" cellpadding="2" cellspacing="2">
-            <tbody>
-                <tr>
-                    <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
-                </tr>
-                <tr>
-                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
-                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
-                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
-                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
-                </tr>
-                <tr>
-                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
-                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
-                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
-                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="width: 80%; height: 2px;">
-        <table
-            style="text-align: center; margin-left: auto; margin-right: auto;">
-            <tbody>
-                <tr>
-                    <td colspan="3" rowspan="1"><b>订餐</b></td>
-                </tr>
-                <tr>
-                    <td>&nbsp; &nbsp;Dec. 28 &nbsp; </td>
-                    <td>&nbsp; &nbsp;Dec. 29 &nbsp; </td>
-                    <td>&nbsp; Dec. 30 &nbsp;</td>
-                </tr>
-                <tr>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch1" value="0"/></td>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch2" value="0"/></td>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch3" value="0"/></td>
-                </tr>
-                <tr>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner1" value="0"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner2" value="0"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner3" value="0"/></td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="width: 80%; height: 2px;">
+                <table style="text-align: left; width: 500px; height: 62px;"
+                       align="center" border="0" cellpadding="2" cellspacing="2">
+                    <tbody>
+                        <tr>
+                            <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
+                        </tr>
+                        <tr>
+                            <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
+                            <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                            <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                            <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
+                        </tr>
+                        <tr>
+                            <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                            <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
+                            <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                            <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr style="width: 80%; height: 2px;">
+                <table
+                    style="text-align: center; margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td colspan="3" rowspan="1"><b>订餐</b></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp; &nbsp;Dec. 28 &nbsp; </td>
+                            <td>&nbsp; &nbsp;Dec. 29 &nbsp; </td>
+                            <td>&nbsp; Dec. 30 &nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>午餐 &nbsp;[TODO]</td>
+                            <td>午餐 &nbsp;[TODO]</td>
+                            <td>午餐 &nbsp;[TODO]</td>
+                        </tr>
+                        <tr>
+                            <td>晚餐 &nbsp;[TODO]</td>
+                            <td>晚餐 &nbsp;[TODO]</td>
+                            <td>晚餐 &nbsp;[TODO]</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr style="width: 80%; height: 2px;">
 
         <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
         <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>

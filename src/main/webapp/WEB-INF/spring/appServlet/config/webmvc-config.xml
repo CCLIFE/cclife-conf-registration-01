@@ -70,16 +70,16 @@
     </bean>
     
     <bean id="registrationController"
-          class="ws.cccm.registration.controller.RegistrationController">
+          class="com.cclife.registration.controller.RegistrationController">
         <!--
         <property name="formView" value="confirm" />
         <property name="successView" value="confirmation" />
-        -->
+   
         <property name="paymentManager" ref="paymentManager" />
         <property name="registrationService" ref="registrationService"/>
         <property name="templateName" value="confirmationLetterChinese.vm"/>
         <property name="messageSource" ref="messageSource"/>
-
+     -->
     </bean>
 
 

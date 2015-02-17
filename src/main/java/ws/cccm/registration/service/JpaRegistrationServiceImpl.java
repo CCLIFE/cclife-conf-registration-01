@@ -831,6 +831,10 @@ public class JpaRegistrationServiceImpl implements RegistrationService {
         } catch (ParseException ex) {
             logger.error("Error generating Registration ID");
         }
+        
+        Person person = new Person();
+        f.setRegistrants(new ArrayList<Person>());
+        f.getRegistrants().add(person);
 
         logger.info("initialize Form exiting");
 

@@ -8,7 +8,7 @@
                 <caption><b>家庭与个人报名资料: Family and Personal Data</b> </caption><tbody>
                     <tr>
                         <td>住址 Street Address1: </td>
-                        <td><form:input path="homeStreetAddress" name="homeStreetAddress" size="30" maxlength="50"/></td>
+                        <td><form:input path="address.homeAddress" name="address" size="30" maxlength="50"/></td>
                     </tr>
                     <tr>
                         <td>住址 Street Address2: </td>

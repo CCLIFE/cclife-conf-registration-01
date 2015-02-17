@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <h2>福音大会报名表</h2>
+    <p align="center"><span class="style2">中国福音大会 2015 报名表 </span><br/>
+        主题:《覺醒--預備迎見你的神》 讲员:饒孝楫、劉傳章、劉志雄...等牧師<br/>
+        时间: 12月27日(週六晚)開始,12月30日(週二午)結束 <br/>地点: &nbsp;The Prayer Palace Church 1111 Arrow Road. Toronto, ON M9M 3B3 Canada<br />
+    </p>
     <h4 class="alt"><a href="<c:url value="/"/>">Home</a></h4>
     <hr>
     <div class="span-4 colborder">
@@ -15,9 +18,9 @@
             Email: cclifefl@gmail.com , cclife@gmail.com</p>
     </div>
     <div class="span-12 colborder">
-        <h3 class="alt">Embedded Flow Area</h3>
+        <h3 class="alt">福音大会报名表</h3>
         <div id="embeddedFlow">
-            <a id="startFlow" href="cccc-flow">Start Embedded Flow</a>
+            <a id="startFlow" href="cccc-flow">這里報名</a>
             <script type="text/javascript">
                 Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: "startFlow", event: "onclick", params: {fragments: "body", mode: "embedded"}}));
             </script>

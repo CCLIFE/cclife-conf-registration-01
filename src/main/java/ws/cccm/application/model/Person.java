@@ -7,6 +7,7 @@ package ws.cccm.application.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -121,7 +122,7 @@ public class Person implements Serializable {
     @Column(name = "Email", length = 50)
     private String email;
     @Column(name = "Language", length = 50)
-    private String language;
+    private String preferedLanguage;
     @Column(name = "LoginID", length = 50)
     private String loginID;
     @Column(name = "Password", length = 50)
@@ -153,6 +154,8 @@ public class Person implements Serializable {
     private Integer acceptedChristLocation;
     @Column(name = "Seeker")
     private Boolean seeker;
+    
+    private Set<Serve> volunteerJobs;
 
     public Person() {
     }
@@ -350,12 +353,12 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getPreferedLanguage() {
+        return preferedLanguage;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setPreferedLanguage(String language) {
+        this.preferedLanguage = language;
     }
 
     public String getLoginID() {
@@ -468,6 +471,20 @@ public class Person implements Serializable {
 
     public void setSeeker(Boolean seeker) {
         this.seeker = seeker;
+    }
+    
+     /**
+     * @return the volunteerJobs
+     */
+    public Set<Serve> getVolunteerJobs() {
+        return volunteerJobs;
+    }
+
+    /**
+     * @param volunteerJobs the volunteerJobs to set
+     */
+    public void setVolunteerJobs(Set<Serve> volunteerJobs) {
+        this.volunteerJobs = volunteerJobs;
     }
 
     @Override

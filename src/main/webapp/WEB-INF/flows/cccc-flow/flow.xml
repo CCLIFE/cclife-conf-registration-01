@@ -5,34 +5,52 @@
 		http://www.springframework.org/schema/webflow 
 		http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-    <var class="ws.cccm.application.model.Form"
+    <!--
+<var class="ws.cccm.application.model.Form"
+    name="form" />
+    -->
+    <var class="com.cclife.registration.domain.RegistrationForm"
          name="form" />
     <var class="ws.cccm.application.model.Paypal"
          name="payObj" />
     
     <on-start>
+        <!--
         <evaluate expression="registrationService.initializeForm()" result="form" />
+        -->
+        <evaluate expression="registrationController.initializeForm()" result="form" />
     </on-start>
     
     <view-state id="step1" model="form" view="cccc/step1">
-        <transition on="next" to="step2"/> 
+        <transition on="next" to="createNewOrSkip"/> 
         <transition on="cancel" to="cancel"/>
     </view-state>
     
-    <view-state id="step2" model="form" view="cccc/step2">
+    <decision-state id="createNewOrSkip">
+        <if test="form.registrants == null || form.registrants.isEmpty() " then="createNew" else="step3" />
+    </decision-state>
+
+    <action-state id="createNew">
+        <evaluate expression="registrationController.createNewPerson(form)" 
+                  result="flowScope.person" />
+        <transition to="step2" />
+    </action-state>
+    
+    <view-state id="step2" model="person" view="cccc/step2">
         <transition on="previous" to="step1"/>
         <transition on="next" to="step3"/> 
         <transition on="cancel" to="cancel"/>
     </view-state>
 
     <view-state id="step3" model="form" view="cccc/step3">
-        <transition on="previous" to="step2"/>
+        <transition on="previous" to="step1"/>
+        <transition on="new" to="createNew"/>
         <transition on="next" to="review"/>
         <transition on="cancel" to="cancel"/>
     </view-state>
     
     <view-state id="review" model="form" view="cccc/review">
-        <transition on="previous" to="step3"/>
+        <transition on="previous" to="step3" validate="false"/>
         <transition on="next" to="payment"/>
         <transition on="cancel" to="cancel"/>
     </view-state>
