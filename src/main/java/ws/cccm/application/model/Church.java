@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+/*
+To try some changes for github
+*/
+
 package ws.cccm.application.model;
 
 import java.io.Serializable;

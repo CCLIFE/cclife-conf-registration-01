@@ -16,68 +16,41 @@
                     </tr>
                     <tr>
                         <td>城市 City: </td>
-                        <td><form:input path="homeCity" name="homeCity"  size="25" maxlength="30"/> </td>
+                        <td><form:input path="homeCity" name="homeCity"  size="30" maxlength="50"/> </td>
                     </tr>
                     <tr>
+                        <td>国家 Country:</td>
                         <td>
-                            <table style="text-align: left; width: 200px; height: 52px;"
-                                   border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td>国家 Country:</td>
-                                        <td>
-                                            [TODO]
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            [TODO]
                         </td>
+                    </tr>
+                    <tr>
+                        <td>州/省 State/Province: </td>
                         <td>
-                            <table style="text-align: left; width: 403px; height: 64px;"
-                                   border="0" cellpadding="0" cellspacing="10">
-                                <tbody>
-                                    <tr>
-                                        <td>州/省 State/Province: </td>
-                                        <td>
-                                            [TODO]
-                                        </td>
-                                        <td>邮政编码 Zipcode/Postal Code:</td>
-                                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            [TODO]
                         </td>
+                    </tr>
+                    <tr>
+                        <td>邮政编码 Zipcode/Postal Code:</td>
+                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">若非美国和加拿大,
                             请填写如下信息：If other than
-                            Canada or United States</td>
+                            Canada or United States
+                        </td>
                     </tr>
                     <tr>
-                        <td>
-                            <table style="text-align: left; width: 200px; height: 52px;"
-                                   border="0" cellpadding="0" cellspacing="10">
-                                <tbody>
-                                    <tr>
-                                        <td>国家 Country: </td>
-                                        <td> [TODO]</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <table style="text-align: left; width: 403px; height: 64px;"
-                                   border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td>州/省 State/Province: </td>
-                                        <td>[TODO]</td>
-                                        <td>邮政编码 Zipcode/Postal Code:</td>
-                                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
+                        <td>国家 Country: </td>
+                        <td> [TODO]</td>
+                    </tr>
+                    <tr>
+                        <td>州/省 State/Province: </td>
+                        <td>[TODO]</td>
+                    </tr>
+                    <tr>
+                        <td>邮政编码 Zipcode/Postal Code:</td>
+                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
                     </tr>
                     <tr>
                         <td>住家电话 Home Phone: </td>
