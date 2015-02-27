@@ -70,7 +70,7 @@
                                     <td>英文 English <form:radiobutton path="language" value="E" /></td>
                                </tr>
                                <tr>
-                                    <td>翻译耳机<br>
+                                    <td>翻译耳机        <br>
                                         Interpreter Headerphone: </td>
                                     <td>[TODO]</td>
                                     <td></td><td></td>
