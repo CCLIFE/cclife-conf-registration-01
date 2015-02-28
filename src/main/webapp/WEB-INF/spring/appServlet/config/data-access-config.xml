@@ -11,7 +11,7 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-    <context:component-scan base-package="ws.cccm.registration"/>
+    <context:component-scan base-package="com.cclife.registration"/>
 
     <!-- Instructs Spring to perfrom declarative transaction management on annotated classes -->
     <tx:annotation-driven />
@@ -23,11 +23,9 @@
     -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-
+    <!--
     <bean id="paymentDao" class="ws.cccm.registration.dao.JpaPaymentDaoImpl"/>
     <bean id="churchDao" class="ws.cccm.registration.dao.JpaChurchDaoImpl"/>
-    <!--
-    <bean id="jpaRegistrationDao" class="ws.cccm.registration.dao.JpaRegistrationDaoImpl"/>
     -->
     <!-- Drives transactions using local JPA APIs -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

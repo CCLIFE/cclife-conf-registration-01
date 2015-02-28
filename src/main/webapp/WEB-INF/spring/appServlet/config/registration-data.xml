@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:aop="http://www.springframework.org/schema/aop"
-        xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
                     http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans.xsd
                     http://www.springframework.org/schema/aop
                     http://www.springframework.org/schema/aop/spring-aop.xsd">
 
    
-
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:registration-config.properties</value>
+        </property>
+    </bean>
+          
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+    
+    <bean id="paypalInstance" class="com.cclife.registration.domain.Paypal">
+        <property name="cmd" value="${redirect_cmd}" />
+        <property name="redirect_cmd" value="${redirect_cmd}" />
+        <property name="business" value="${business}" />
+        <property name="item_name" value="${item_name}"/>
+        <property name="no_shipping" value="${no_shipping}"/>
+        <property name="no_note" value="${no_note}"/>
+        <property name="currency_code" value="${currency_code}"/>
+        <property name="lc" value="${lc}"/>
+        <property name="bn" value="${bn}"/>
+        <property name="return" value="${return}"/>
+        <property name="notify_url" value="${notify_url}"/>
+        <property name="rm" value="${rm}"/>
+    </bean>
+ 
+    <bean id="confirmationUrl" class="java.lang.String">
+        <constructor-arg value="${confirmationUrl}"/>
+    </bean>
+    
+    <bean id="confirmationAltUrl" class="java.lang.String">
+        <constructor-arg value="${confirmationAltUrl}"/>
+    </bean>
+    
+    <bean id="paypalUrl" class="java.lang.String">
+        <constructor-arg value="${paypalUrl}"/>
+    </bean>   
+    
     <bean id="directJdbcDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${databaseDriverClassName}"/>
         <property name="url" value="${databaseUrl}"/>
@@ -23,34 +60,21 @@
             <ref bean="directJdbcDataSource"/>
         </property>
     </bean>
-
-    <bean id="JdbcRegistrationDao"
-        class="ws.cccm.registration.dao.JdbcRegistrationDaoImpl">
-        <property name="jdbcTemplate">
-            <ref bean="jdbcTemplate"/>
-        </property>
-        <property name="INSERT_SQL">
-            <value>INSERT INTO registration (RegistrationID,age,breakfast1,breakfast2,breakfast3,breakfast4,cellPhone,chineseName,dinner1,dinner2,dinner3,dinner4,email,firstName,formID,gender,homeCity,homePhone,homeState,homeStreetAddress,homeZipCode,lastName,lunch1,lunch2,lunch3,lunch4,personID,registrationDate,remarks,status,language,churchID,faith,faithYear,seminar) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)</value>
-        </property>
-        <property name="SELECT_SQL">
-            <value>select * from MYACCT_MOP_PREF where BAN = ?</value>
-        </property>
-    </bean>
-<!--
-    <bean id="jdbcRegistrationService" class="ws.cccm.registration.service.RegistrationServiceImpl">
-        <property name="registrationDao">
-            <ref bean="registrationDao"/>
-        </property>
-        <property name="paymentDao">
-            <ref bean="paymentDao"/>
-        </property>
-    </bean>
--->
+    <!--
+        <bean id="jdbcRegistrationService" class="ws.cccm.registration.service.RegistrationServiceImpl">
+            <property name="registrationDao">
+                <ref bean="registrationDao"/>
+            </property>
+            <property name="paymentDao">
+                <ref bean="paymentDao"/>
+            </property>
+        </bean>
+    -->
 
     <!-- =================================================================== -->
     <!-- Mail: Sender and Velocity configuration                             -->
     <!-- =================================================================== -->
-    <bean id="mailEngine" class="ws.cccm.application.service.MailEngine">
+    <bean id="mailEngine" class="com.cclife.registration.service.MailEngine">
         <property name="mailSender" ref="mailSender"/>
         <property name="velocityEngine" ref="velocityEngine"/>
         <property name="from" value="${mail.default.from}"/>

@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "family", catalog = "cccmdb1", schema = "", uniqueConstraints = {
+@Table(name = "family", catalog = "cccmdb", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"FamilyID"})})
 @XmlRootElement
 @NamedQueries({
@@ -62,6 +62,8 @@ public class Family implements Serializable {
     private String familyName;
     @Column(name = "HomeAddress", length = 60)
     private String homeAddress;
+    @Column(name = "HomeAddress2", length = 60)
+    private String homeAddress2;
     @Column(name = "HomeCity", length = 30)
     private String homeCity;
     @Column(name = "HomeState", length = 2)
@@ -250,6 +252,20 @@ public class Family implements Serializable {
     @Override
     public String toString() {
         return "ws.cccm.model.Family[ familyID=" + familyID + " ]";
+    }
+
+    /**
+     * @return the homeAddress2
+     */
+    public String getHomeAddress2() {
+        return homeAddress2;
+    }
+
+    /**
+     * @param homeAddress2 the homeAddress2 to set
+     */
+    public void setHomeAddress2(String homeAddress2) {
+        this.homeAddress2 = homeAddress2;
     }
     
 }

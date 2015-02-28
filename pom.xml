@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ws.cccm.conference.registration</groupId>
     <artifactId>webflow-registration</artifactId>
-    <name>NEW - Spring Web Flow Registration</name>
+    <name>CCLIFE - Spring Web Flow Registration</name>
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
 
