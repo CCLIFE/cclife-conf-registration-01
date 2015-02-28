@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="embeddedFlow">
     <p class="notice">step 2 - Enter individual information</p>
-    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="form">
+    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant">
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
@@ -13,31 +13,31 @@
                             <tbody>
                                 <tr>
                                     <td>中文姓名:</td>
-                                    <td><form:input path="chineseName" size="20"  /></td>
+                                    <td><form:input path="person.chineseName" size="20"  /></td>
                                     <td>性别 Gender:</td>
                                     <td>
-                                        男 Male <form:radiobutton path="gender" value="M" />
+                                        男 Male <form:radiobutton path="person.gender" value="M" />
                                         &#160;
-                                        女 Female <form:radiobutton path="gender" value="F" />
+                                        女 Female <form:radiobutton path="person.gender" value="F" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>English Lastname:</td>
-                                    <td><form:input id="lastName" path="lastName" size="20" maxlength="30"/></td>
+                                    <td><form:input id="lastName" path="person.lastName" size="20" maxlength="30"/></td>
                                     <td>English Firstname:</td>
-                                    <td><form:input id="firstName" path="firstName" size="20" maxlength="30"/></td>
+                                    <td><form:input id="firstName" path="person.firstName" size="20" maxlength="30"/></td>
                                 </tr>
                                 <tr>
                                     <td>年龄 Age/Age Group:</td>
                                     <td>
-                                        <form:select id="age" path="age">
+                                        <form:select id="age" path="person.age">
                                             <form:option value="" label="-- Select Age --" />
                                             <form:options items="${form.ageGroup}" itemValue="value" itemLabel="label" />
                                         </form:select>
                                     </td>
                                     <td>年级 Grade:</td>
                                     <td>
-                                        <form:select id="status" path="status">
+                                        <form:select id="status" path="person.status">
                                             <form:option value="" label="-- Select Status --" />
                                             <form:options items="${form.statusGroup2}" itemValue="value" itemLabel="label" />
                                         </form:select>
@@ -47,30 +47,31 @@
                                     <td>关系 夫妻/子女等:</td>
                                     <td>[TODO]</td>
                                     <td>信主 Beliver:</td>
-                                    <td>是 Yes<form:radiobutton path="faith" value="BELIEVER"/>&nbsp;&nbsp;
-                                        否 No<form:radiobutton path="faith" value="SEEKER"/> <br>
+                                    <td>
+
+                                        &nbsp;&nbsp;是 Yes &nbsp;&nbsp;<form:radiobutton path="person.acceptedChrist" value="1"/>
+                                        否 No<form:radiobutton path="person.acceptedChrist" value="0"/> <br>
+
                                     </td>
                                 </tr>
                                 <tr>
                                    <td>事奉角色:</td>
                                     <td>
-                                        <form:select id="status" path="status">
+                                        <form:select id="status" path="person.status">
                                             <form:option value="" label="-- 服事 --" />
                                             <form:options items="${form.statusGroup}" itemValue="value" itemLabel="label" />
                                         </form:select>
                                     </td>
                                     <td>电邮 &nbsp;Email:</td>
-                                    <td colspan="5" rowspan="1"><form:input id="email1" path="email1" size="20" maxlength="50"/></td>
+                                    <td colspan="5" rowspan="1"><form:input id="email1" path="person.email" size="20" maxlength="50"/></td>
                                 </tr>
                                <tr>
                                     <td>语言 Language:</td>
                                     <td>国语
-                                        Mandarin<form:radiobutton path="language" value="M" /></td>
-                                    <td>广东话 Cantonese <form:radiobutton path="language" value="C" /></td>
-                                    <td>英文 English <form:radiobutton path="language" value="E" /></td>
-                               </tr>
-                               <tr>
-                                    <td>翻译耳机        <br>
+                                        Mandarin<form:radiobutton path="person.preferedLanguage" value="M" /></td>
+                                    <td>广东话 Cantonese <form:radiobutton path="person.preferedLanguage" value="C" /></td>
+                                    <td>英文 English <form:radiobutton path="person.preferedLanguage" value="E" /><
+                                    <td>翻译耳机 <br>
                                         Interpreter Headerphone: </td>
                                     <td>[TODO]</td>
                                     <td></td><td></td>
@@ -117,14 +118,14 @@
                     <td>&nbsp; Dec. 30 &nbsp;</td>
                 </tr>
                 <tr>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch1" value="0"/></td>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch2" value="0"/></td>
-                    <td>午餐 &nbsp;<form:checkbox path="lunch3" value="0"/></td>
+                    <td>午餐 &nbsp;<form:checkbox path="mealplan.lunch1" value="1"/></td>
+                    <td>午餐 &nbsp;<form:checkbox path="mealplan.lunch2" value="1"/></td>
+                    <td>午餐 &nbsp;<form:checkbox path="mealplan.lunch3" value="1"/></td>
                 </tr>
                 <tr>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner1" value="0"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner2" value="0"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox path="dinner3" value="0"/></td>
+                    <td>晚餐 &nbsp;<form:checkbox path="mealplan.dinner1" value="1"/></td>
+                    <td>晚餐 &nbsp;<form:checkbox path="mealplan.dinner2" value="1"/></td>
+                    <td>晚餐 &nbsp;<form:checkbox path="mealplan.dinner3" value="1"/></td>
                 </tr>
             </tbody>
         </table>

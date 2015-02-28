@@ -4,7 +4,7 @@
     <p class="success">PAY BY CHECK!</p>
     <div>
         <p>
-            Registration at ${form.homeCity}
+            Registration at ${form.address.homeCity}
         <hr style="width: 80%; height: 2px;">
         <a id="startFlow" href="cccc-flow">Start Over</a>
         <script type="text/javascript">

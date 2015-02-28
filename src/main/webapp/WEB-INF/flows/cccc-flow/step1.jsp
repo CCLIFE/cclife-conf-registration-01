@@ -12,27 +12,29 @@
                     </tr>
                     <tr>
                         <td>住址 Street Address2: </td>
-                        <td><form:input path="homeStreetAddress" name="homeStreetAddress" size="30" maxlength="50"/> </td>
+                        <td><form:input path="address.homeAddress2" name="homeStreetAddress2" size="30" maxlength="50"/> </td>
                     </tr>
                     <tr>
                         <td>城市 City: </td>
-                        <td><form:input path="homeCity" name="homeCity"  size="30" maxlength="50"/> </td>
+                        <td><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="50"/> </td>
                     </tr>
                     <tr>
                         <td>国家 Country:</td>
                         <td>
-                            [TODO]
+                            <form:select id="country" path="address.country">
+                                <form:option value="" label="-- Select Country --" />
+                                <form:options items="${form.countries}" itemValue="value" itemLabel="label" />
+                            </form:select>
                         </td>
                     </tr>
                     <tr>
                         <td>州/省 State/Province: </td>
                         <td>
-                            [TODO]
+                            <form:select id="homeState" path="address.homeState">
+                                <form:option value="" label="-- Select State --" />
+                                <form:options items="${form.stateList}" itemValue="value" itemLabel="label" />
+                            </form:select>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>邮政编码 Zipcode/Postal Code:</td>
-                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">若非美国和加拿大,
@@ -42,31 +44,34 @@
                     </tr>
                     <tr>
                         <td>国家 Country: </td>
-                        <td> [TODO]</td>
+                        <td> 
+                            <form:input path="address.country" name="country"  size="30" maxlength="50"/>
+
+                        </td>
                     </tr>
                     <tr>
                         <td>州/省 State/Province: </td>
-                        <td>[TODO]</td>
+                        <td> 
+                            <form:input path="address.homeState" name="state"  size="30" maxlength="50"/>
+                        </td>
                     </tr>
                     <tr>
                         <td>邮政编码 Zipcode/Postal Code:</td>
-                        <td><form:input path="homeZipCode" name="homeZipCode" size="10" maxlength="15"/></td>
+                        <td>
+                            <form:input path="address.homeZip" name="homeZip" size="10" maxlength="15"/>
+                        </td>
                     </tr>
                     <tr>
-                        <td>住家电话 Home Phone: </td>
-                        <td><form:input path="homePhone" name="homePhone" size="15" maxlength="15"/></td>
-                    </tr>
-                    <tr>
-                        <td>手机 Cell Phone: </td>
-                        <td><form:input path="homePhone" name="homePhone" size="15" maxlength="15"/></td>
+                        <td>聯絡电话 Primary Contact Phone: </td>
+                        <td><form:input path="address.homePhone" name="homePhone" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
                         <td>电邮 Email: </td>
-                        <td><form:input path="email" name="email" size="25" maxlength="50"/></td>
+                        <td><form:input path="address.misc1" name="email" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
                         <td>确认电邮 Confirm Email: </td>
-                        <td><form:input path="emailConfirm" name="emailConfirm" size="25" maxlength="50"/></td>
+                        <td><form:input path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
                         <td>所属教会/机构<br>

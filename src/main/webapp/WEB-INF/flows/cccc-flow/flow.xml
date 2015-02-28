@@ -5,14 +5,10 @@
 		http://www.springframework.org/schema/webflow 
 		http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-    <!--
-<var class="ws.cccm.application.model.Form"
-    name="form" />
-    -->
     <var class="com.cclife.registration.domain.RegistrationForm"
          name="form" />
-    <var class="ws.cccm.application.model.Paypal"
-         name="payObj" />
+    <var class="com.cclife.registration.domain.Paypal"
+             name="payObj" />
     
     <on-start>
         <!--
@@ -32,11 +28,11 @@
 
     <action-state id="createNew">
         <evaluate expression="registrationController.createNewPerson(form)" 
-                  result="flowScope.person" />
+                  result="flowScope.registrant" />
         <transition to="step2" />
     </action-state>
     
-    <view-state id="step2" model="person" view="cccc/step2">
+    <view-state id="step2" model="registrant" view="cccc/step2">
         <transition on="previous" to="step1"/>
         <transition on="next" to="step3"/> 
         <transition on="cancel" to="cancel"/>
@@ -61,7 +57,7 @@
     </decision-state>
 
     <action-state id="prepareCredit">
-        <evaluate expression="registrationService.createPaypalRequest(form)"
+        <evaluate expression="registrationController.createPaypalRequest(form)"
                   result="payObj"/>
         <transition to="confirmAndPayByCredit" />
     </action-state>
