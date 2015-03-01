@@ -112,7 +112,7 @@
                                         </tr>
                                         <tr>
                                             <td>语言 Language:</td>
-                                            <td>${registrant.person.preferedLanguage}</td>
+                                            <td>${registrant.person.preferredLanguage}</td>
 
                                             <td>翻译耳机 <br>
                                                 Interpreter Headerphone: </td>

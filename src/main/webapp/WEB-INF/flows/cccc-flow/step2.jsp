@@ -11,7 +11,7 @@
                         <table
                             style="text-align: left; margin-left: auto; margin-right: auto;">
                             <tbody>
-                                <tr>
+                                <tr> 
                                     <td>中文姓名:</td>
                                     <td><form:input path="person.chineseName" size="20"  /></td>
                                     <td>性别 Gender:</td>
@@ -63,14 +63,14 @@
                                         </form:select>
                                     </td>
                                     <td>电邮 &nbsp;Email:</td>
-                                    <td colspan="5" rowspan="1"><form:input id="email1" path="person.email" size="20" maxlength="50"/></td>
+                                    <td colspan="5" rowspan="1"><form:input id="email" path="person.email" size="20" maxlength="50"/></td>
                                 </tr>
                                <tr>
                                     <td>语言 Language:</td>
                                     <td>国语
-                                        Mandarin<form:radiobutton path="person.preferedLanguage" value="M" /></td>
-                                    <td>广东话 Cantonese <form:radiobutton path="person.preferedLanguage" value="C" /></td>
-                                    <td>英文 English <form:radiobutton path="person.preferedLanguage" value="E" /><
+                                        Mandarin<form:radiobutton path="person.preferredLanguage" value="M" /></td>
+                                    <td>广东话 Cantonese <form:radiobutton path="person.preferredLanguage" value="C" /></td>
+                                    <td>英文 English <form:radiobutton path="person.preferredLanguage" value="E" /><
                                     <td>翻译耳机 <br>
                                         Interpreter Headerphone: </td>
                                     <td>[TODO]</td>
