@@ -60,16 +60,6 @@
             <ref bean="directJdbcDataSource"/>
         </property>
     </bean>
-    <!--
-        <bean id="jdbcRegistrationService" class="ws.cccm.registration.service.RegistrationServiceImpl">
-            <property name="registrationDao">
-                <ref bean="registrationDao"/>
-            </property>
-            <property name="paymentDao">
-                <ref bean="paymentDao"/>
-            </property>
-        </bean>
-    -->
 
     <!-- =================================================================== -->
     <!-- Mail: Sender and Velocity configuration                             -->
