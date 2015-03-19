@@ -16,6 +16,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
 /**
@@ -58,9 +59,9 @@ public class MailEngine {
         String result = null;
 
         try {
-            result =
-                    VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,
-                    templateName, "UTF-8", model);
+            result
+                    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,
+                            templateName, "UTF-8", model);
         } catch (VelocityException e) {
             e.printStackTrace();
             log.error(e.getMessage());
@@ -129,13 +130,13 @@ public class MailEngine {
             throws MessagingException {
 
         MimeMessage message = ((JavaMailSenderImpl) mailSender).createMimeMessage();
-        
+
         // use the true flag to indicate you need a multipart message
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setTo(recipients);
         helper.setBcc("cheh.cccm@gmail.com");
- 
+
         // use the default sending if no sender specified
         if (sender == null) {
             helper.setFrom(defaultFrom);
@@ -146,9 +147,9 @@ public class MailEngine {
         String bodyText = null;
 
         try {
-            bodyText =
-                    VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,
-                    templateName, "UTF-8", model);
+            bodyText
+                    = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine,
+                            templateName, "UTF-8", model);
         } catch (VelocityException e) {
             e.printStackTrace();
             log.error(e.getMessage());
@@ -157,7 +158,6 @@ public class MailEngine {
 
         helper.setText(bodyText, true);
         helper.setSubject(subject);
-
 
         ((JavaMailSenderImpl) mailSender).send(message);
     }

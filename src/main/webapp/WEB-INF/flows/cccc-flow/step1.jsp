@@ -24,7 +24,7 @@
                     </tr>
                     <tr>
                         <td>城市 City: </td>
-                        <td><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="50"/> </td>
+                        <td><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="30"/> </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -46,7 +46,7 @@
                     <tr>
                         <td>州/省 State/Province: </td>
                         <td>
-                            <form:select id="homeState" path="address.homeState">
+                            <form:select id="homeState" path="address.homeState" >
                                 <form:option value="" label="-- Select State --" />
                                 <form:options items="${form.stateList}" itemValue="value" itemLabel="label" />
                             </form:select>
@@ -68,7 +68,7 @@
                     <tr>
                         <td>州/省 State/Province: </td>
                         <td> 
-                            <form:input path="address.homeState" name="state"  size="30" maxlength="50"/>
+                            <form:input path="address.homeState" name="state"  size="10" maxlength="2"/>
                         </td>
                     </tr>
 -->

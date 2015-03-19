@@ -20,9 +20,9 @@ import com.cclife.registration.model.Payment;
  * @author CH1CHOO1
  */
 @Repository("paymentDao")
-public class JpaPaymentDaoImpl implements PaymentDao {
+public class PaymentJPADaoImpl implements PaymentDao {
 
-    private static final Logger logger = Logger.getLogger(JpaPaymentDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(PaymentJPADaoImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;

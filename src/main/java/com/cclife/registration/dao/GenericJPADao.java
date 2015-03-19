@@ -13,6 +13,7 @@ import com.cclife.registration.dao.exceptions.RollbackFailureException;
 /**
  *
  * @author ch1choo1
+ * @param <T>
  */
 
 public interface GenericJPADao<T> {

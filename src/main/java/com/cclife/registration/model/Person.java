@@ -164,7 +164,7 @@ public class Person implements Serializable {
     @Size(max = 50)
     @Column(name = "ServingRole")
     private String servingRole;
-    @Size(max = 2)
+    @Size(max = 5)
     @Column(name = "Status")
     private String status;
     @Size(max = 50)

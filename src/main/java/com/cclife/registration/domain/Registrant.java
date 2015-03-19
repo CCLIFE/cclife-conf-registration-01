@@ -17,7 +17,7 @@ public class Registrant extends BaseObject {
     private Person person;
     private Mealplan mealplan;
     private Set<Server> volunteerJobs;
-
+    private Fee fee;
     /**
      * @return the person
      */
@@ -73,6 +73,20 @@ public class Registrant extends BaseObject {
     @Override
     public int hashCode() {
         return 0 ;
+    }
+
+    /**
+     * @return the fee
+     */
+    public Fee getFee() {
+        return fee;
+    }
+
+    /**
+     * @param fee the fee to set
+     */
+    public void setFee(Fee fee) {
+        this.fee = fee;
     }
 
         

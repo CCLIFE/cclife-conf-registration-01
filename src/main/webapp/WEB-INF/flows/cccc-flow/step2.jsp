@@ -57,7 +57,7 @@
                                 <tr>
                                    <td>事奉角色:</td>
                                     <td>
-                                        <form:select id="status" path="person.status">
+                                        <form:select id="status" path="person.misc1">
                                             <form:option value="" label="-- 服事 --" />
                                             <form:options items="${form.statusGroup}" itemValue="value" itemLabel="label" />
                                         </form:select>
@@ -67,11 +67,10 @@
                                 </tr>
                                <tr>
                                     <td>语言 Language:</td>
-                                    <td>国语
-                                        Mandarin<form:radiobutton path="person.preferredLanguage" value="M" /></td>
-                                    <td>广东话 Cantonese <form:radiobutton path="person.preferredLanguage" value="C" /></td>
-                                    <td>英文 English <form:radiobutton path="person.preferredLanguage" value="E" /><
-                                    <td>翻译耳机 <br>
+                                    <td>国语 Mandarin <form:radiobutton path="person.preferredLanguage" value="M"/></td>
+                                    <td>广东话 Cantonese <form:radiobutton path="person.preferredLanguage" value="C"/></td>
+                                    <td>英文 English <form:radiobutton path="person.preferredLanguage" value="E"/>
+                                    <td>翻译耳机:<br>
                                         Interpreter Headerphone: </td>
                                     <td>[TODO]</td>
                                     <td></td><td></td>

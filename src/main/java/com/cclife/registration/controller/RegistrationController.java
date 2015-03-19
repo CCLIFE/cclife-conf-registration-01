@@ -5,6 +5,7 @@
  */
 package com.cclife.registration.controller;
 
+import com.cclife.registration.domain.Fee;
 import com.cclife.registration.domain.LabelValue;
 import com.cclife.registration.domain.PaymentMethod;
 import com.cclife.registration.domain.Paypal;
@@ -16,10 +17,13 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import com.cclife.registration.model.Person;
 import com.cclife.registration.domain.Registrant;
+import com.cclife.registration.service.RegistrationService;
 import java.text.ParseException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.cclife.registration.util.DateUtil;
+import java.util.Iterator;
+import java.util.logging.Level;
 
 /**
  *
@@ -35,7 +39,9 @@ public class RegistrationController {
     private String confirmationUrl;
     @Autowired
     private String confirmationAltUrl;
-    
+    @Autowired
+    private RegistrationService registrationService;
+
     public RegistrationForm initializeForm() {
         RegistrationForm registrationForm = new RegistrationForm();
 
@@ -341,7 +347,7 @@ public class RegistrationController {
 //        p.setBusiness("Registration@cccm.ws");
 //        p.setBusiness("clhoo_1288811245_biz@msn.com");
 //        p.setItem_name("CCCC/Grace 2014");
-        double total = form.getExpense().getTotalAdultRegistrationFee() + form.getExpense().getTotalNonAdultRegistrationFee() + form.getExpense().getTotalMealsFee();
+        double total = form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee();
         paypalInstance.setAmount(String.valueOf(total));
         paypalInstance.setCustom(String.valueOf(total));
 //        p.setNo_shipping("0");
@@ -363,11 +369,76 @@ public class RegistrationController {
         paypalInstance.setZip(form.getAddress().getHomeZip());
         paypalInstance.setReturn(confirmationUrl);
 
-        if (form.getEventID().compareTo(201403) == 0) {
-            paypalInstance.setReturn(confirmationAltUrl);
-        }
+//        if (form.getEventID().compareTo(201403) == 0) {
+//            paypalInstance.setReturn(confirmationAltUrl);
+//        }
         logger.info("createPaypalRequest exiting");
 
         return paypalInstance;
+    }
+
+    public void submit(RegistrationForm form) {
+        try {
+            registrationService.submit(form);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, "Submit registration form", ex);
+        }
+    }
+
+    public void calculateFee(RegistrationForm form) {
+
+        Iterator<Registrant> it = form.getRegistrants().iterator();
+
+        double grpTotalRegistrationFee = 0;
+        double grpTotalMealFee = 0;
+
+        while (it.hasNext()) {
+
+            Registrant regt = it.next();
+
+            if (regt.getFee() == null) {
+                Fee fee = new Fee();
+                regt.setFee(fee);
+            }
+
+            regt.getFee().setTotalRegistrationFee(10.0);
+            Mealplan mp = regt.getMealplan();
+
+            Integer breakfastCount = (mp.getBreakfast1() != null ? mp.getBreakfast1() : 0)
+                    + (mp.getBreakfast2() != null ? mp.getBreakfast2() : 0)
+                    + (mp.getBreakfast3() != null ? mp.getBreakfast3() : 0)
+                    + (mp.getBreakfast4() != null ? mp.getBreakfast4() : 0)
+                    + (mp.getBreakfast5() != null ? mp.getBreakfast5() : 0);
+            regt.getFee().setBreakfastCount(breakfastCount);
+            regt.getFee().setTotalBreakfastFee(breakfastCount * 0);
+
+            Integer lunchCount = (mp.getLunch1() != null ? mp.getLunch1() : 0)
+                    + (mp.getLunch2() != null ? mp.getLunch2() : 0)
+                    + (mp.getLunch3() != null ? mp.getLunch3() : 0)
+                    + (mp.getLunch4() != null ? mp.getLunch4() : 0)
+                    + (mp.getLunch5() != null ? mp.getLunch5() : 0);
+            regt.getFee().setLunchCount(lunchCount);
+            regt.getFee().setTotalLunchFee(lunchCount * 7);
+
+            Integer dinnerCount = (mp.getDinner1() != null ? mp.getDinner1() : 0)
+                    + (mp.getDinner2() != null ? mp.getDinner2() : 0)
+                    + (mp.getDinner3() != null ? mp.getDinner3() : 0)
+                    + (mp.getDinner4() != null ? mp.getDinner4() : 0)
+                    + (mp.getDinner5() != null ? mp.getDinner5() : 0);
+            regt.getFee().setDinnerCount(dinnerCount);
+            regt.getFee().setTotalDinnerFee(dinnerCount * 8);
+
+            regt.getFee().setTotalMealsFee(regt.getFee().getTotalBreakfastFee() + regt.getFee().getTotalLunchFee() + regt.getFee().getTotalDinnerFee());
+            // Grand total
+            grpTotalRegistrationFee += regt.getFee().getTotalRegistrationFee();
+            grpTotalMealFee += regt.getFee().getTotalMealsFee();
+        }
+
+        if (form.getExpense() == null) {
+            Fee fee = new Fee();
+            form.setExpense(fee);
+        }
+        form.getExpense().setTotalRegistrationFee(grpTotalRegistrationFee);
+        form.getExpense().setTotalMealsFee(grpTotalMealFee);
     }
 }
