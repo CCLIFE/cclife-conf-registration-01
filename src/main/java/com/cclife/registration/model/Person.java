@@ -178,7 +178,15 @@ public class Person implements Serializable {
     private Boolean willingToBeVolunteer;
     @Column(name = "WorkPhone")
     private Double workPhone;
-
+    
+    /**
+     * The following code is added for issue5.
+     */
+    private String headphone;
+    /**
+     * End of code for issue5.
+     */
+    
     public Person() {
     }
 
@@ -494,7 +502,22 @@ public class Person implements Serializable {
     public void setWorkPhone(Double workPhone) {
         this.workPhone = workPhone;
     }
-
+    
+    /**
+     * The following code is added for issue5.
+     */
+    public String getHeadphone(){
+        return this.headphone;
+    }
+    public void setHeadphone( String headphone){
+        this.headphone = headphone;
+    }
+    /**
+     * End of code for issue5.
+     */
+        
+    
+            
     @Override
     public int hashCode() {
         int hash = 0;

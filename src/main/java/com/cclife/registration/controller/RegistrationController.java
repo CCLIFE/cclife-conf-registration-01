@@ -136,9 +136,12 @@ public class RegistrationController {
 
         registrationForm.setRelationshipGroup(relationshipGroup);
 
+        /** statusGroup is the list of serving roles **/
+        
         List<LabelValue> statusGroup;
         statusGroup = new ArrayList<LabelValue>();
 
+        /**
         statusGroup.add(new LabelValue("F(\u5168\u8077\u50B3\u9053)", "F"));
         statusGroup.add(new LabelValue("P(\u6559\u6703\u7267\u8005)", "P"));
         statusGroup.add(new LabelValue("T(\u795E\u5B78\u751F)", "T"));
@@ -147,6 +150,15 @@ public class RegistrationController {
         statusGroup.add(new LabelValue("E(\u6559\u6703\u9577\u57F7)", "E"));
         statusGroup.add(new LabelValue("S(\u5C0F\u7D44\u6216\u5718\u5951\u540C\u5DE5)", "S"));
         statusGroup.add(new LabelValue("O(\u5176\u4ED6)", "O"));
+        **/
+        
+        statusGroup.add(new LabelValue("\u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
+        statusGroup.add(new LabelValue("\u795E\u5B78\u751F", "2"));
+        statusGroup.add(new LabelValue("\u6559\u6703\u9577\u57F7 / \u5718\u5951\u540C\u5DE5", "3"));
+        statusGroup.add(new LabelValue("\u798F\u97F3\u6A5F\u69CB\u540C\u5DE5", "4"));
+        statusGroup.add(new LabelValue("\u6559\u6703\u6210\u54E1", "5"));
+        statusGroup.add(new LabelValue("\u6155\u9053\u53CB", "6"));
+       /**
         statusGroup.add(new LabelValue("-- Status(English Conf) --", ""));
         statusGroup.add(new LabelValue("Married", "M"));
         statusGroup.add(new LabelValue("Engaged", "EN"));
@@ -166,14 +178,16 @@ public class RegistrationController {
         statusGroup.add(new LabelValue("Toddlers (age 0-3)", "TO"));
         statusGroup.add(new LabelValue("Elementary (K-5)", "EL"));
         statusGroup.add(new LabelValue("Other", "O"));
+        **/
+        
         registrationForm.setStatusGroup(statusGroup);
 
         List<LabelValue> statusGroup2;
         statusGroup2 = new ArrayList<LabelValue>();
 
-        statusGroup2.add(new LabelValue("Married", "M"));
-        statusGroup2.add(new LabelValue("Engaged", "EN"));
-        statusGroup2.add(new LabelValue("Single", "S"));
+        //statusGroup2.add(new LabelValue("Married", "M"));
+        //statusGroup2.add(new LabelValue("Engaged", "EN"));
+        //statusGroup2.add(new LabelValue("Single", "S"));
         statusGroup2.add(new LabelValue("Graduate School", "GS"));
         statusGroup2.add(new LabelValue("Undergrad - Sr", "C4"));
         statusGroup2.add(new LabelValue("Undergrad - Jr", "C3"));
@@ -298,6 +312,23 @@ public class RegistrationController {
         countryList.add(new LabelValue("Canada", "CA"));
 
         registrationForm.setCountries(countryList);
+        
+        /**
+         * The following code added for issue5.
+         */
+        List<LabelValue> languageList = new ArrayList<LabelValue>();
+        languageList.add( new LabelValue ("Mandarin", "M"));
+        languageList.add( new LabelValue ("Cantonese", "C"));
+        languageList.add( new LabelValue ("English", "E"));
+        registrationForm.setLanguages( languageList );
+        
+        List<LabelValue> headphoneList = new ArrayList<LabelValue>();
+        headphoneList.add( new LabelValue ("Mandarin to Cantonese", "MtoC"));
+        headphoneList.add( new LabelValue ("Mandarin to English", "MtoE"));
+        registrationForm.setHeadphones( headphoneList );
+        /** 
+         * End of code for issue5.
+         */
 
         try {
             Date d = DateUtil.getToday().getTime();
@@ -321,7 +352,7 @@ public class RegistrationController {
 
         Registrant registrant = new Registrant();
         Person person = new Person();
-        person.setFirstName("New");
+        //person.setFirstName("New");
         registrant.setPerson(person);
         form.getRegistrants().add(registrant);
         Mealplan mealPlan = new Mealplan();
