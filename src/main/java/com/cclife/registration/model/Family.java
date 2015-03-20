@@ -5,7 +5,6 @@
  */
 package com.cclife.registration.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Ephesus
  */
 @Entity
-@Table(name = "family", catalog = "cccmdb", schema = "", uniqueConstraints = {
+@Table(name = "family", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"FamilyID"})})
 @XmlRootElement
 @NamedQueries({
@@ -47,7 +46,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Family.findByMisc1", query = "SELECT f FROM Family f WHERE f.misc1 = :misc1"),
     @NamedQuery(name = "Family.findByMisc2", query = "SELECT f FROM Family f WHERE f.misc2 = :misc2"),
     @NamedQuery(name = "Family.findByMisc3", query = "SELECT f FROM Family f WHERE f.misc3 = :misc3")})
-public class Family implements Serializable {
+public class Family extends com.cclife.registration.domain.BaseObject {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

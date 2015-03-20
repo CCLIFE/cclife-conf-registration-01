@@ -24,9 +24,9 @@ import org.apache.log4j.Logger;
  * @author CH1CHOO1
  */
 @Repository("churchDao")
-public class JpaChurchDaoImpl implements ChurchDao {
+public class ChurchJPADaoImpl implements ChurchDao {
 
-    private static final Logger logger = Logger.getLogger(JpaChurchDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(ChurchJPADaoImpl.class);
     
     @PersistenceContext
     private EntityManager entityManager;

@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public class UID {
@@ -16,7 +17,6 @@ public class UID {
     private static char separator;
     private static StringBuilder IPAddressSegment;
     private static SecureRandom prng;
-    
 
     static {
         try {
@@ -84,7 +84,12 @@ public class UID {
         return strRetVal.toString().toUpperCase();
     }
 
-
+    public static int generateUniqueId() {
+        UUID idOne = UUID.randomUUID();
+        String str = "" + idOne;
+        int uid = str.hashCode();
+        String filterStr = "" + uid;
+        str = filterStr.replaceAll("-", "");
+        return Integer.parseInt(str);
+    }
 }
-
-

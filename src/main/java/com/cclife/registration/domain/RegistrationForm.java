@@ -8,6 +8,7 @@ package com.cclife.registration.domain;
  *
  * @author CH1CHOO1
  */
+import com.cclife.registration.model.Event;
 import com.cclife.registration.model.Payment;
 import com.cclife.registration.model.Family;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class RegistrationForm extends BaseObject {
 
     private Long formID;
 
+    private Event event;
     private Family address = new Family();
     private ArrayList<Registrant> registrants = new ArrayList<Registrant>();
     private Long churchID;
@@ -49,7 +51,6 @@ public class RegistrationForm extends BaseObject {
     private Boolean Misc2;
     private Payment payment;
     private String discountCode;
-    private Integer eventID;
     private Fee expense;
     
     private PaymentMethod paymentMethod;  
@@ -770,7 +771,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: registrationDate.
      *
-     * @param registrationDate the registrationDate value you wish to set
+     * @param RegistrationDate
      */
     public void setRegistrationDate(Date RegistrationDate) {
         this.registrationDate = RegistrationDate;
@@ -918,15 +919,15 @@ public class RegistrationForm extends BaseObject {
     /**
      * @return the eventID
      */
-    public Integer getEventID() {
-        return eventID;
+    public Event getEvent() {
+        return event;
     }
 
     /**
-     * @param eventID the eventID to set
+     * @param event
      */
-    public void setEventID(Integer eventID) {
-        this.eventID = eventID;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     /**

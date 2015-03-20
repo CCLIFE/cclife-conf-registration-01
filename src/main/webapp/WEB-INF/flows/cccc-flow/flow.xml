@@ -8,7 +8,7 @@
     <var class="com.cclife.registration.domain.RegistrationForm"
          name="form" />
     <var class="com.cclife.registration.domain.Paypal"
-             name="payObj" />
+         name="payObj" />
     
     <on-start>
         <!--
@@ -34,9 +34,14 @@
     
     <view-state id="step2" model="registrant" view="cccc/step2">
         <transition on="previous" to="step1"/>
-        <transition on="next" to="step3"/> 
+        <transition on="next" to="calculateFee"/> 
         <transition on="cancel" to="cancel"/>
     </view-state>
+    
+    <action-state id="calculateFee">
+        <evaluate expression="registrationController.calculateFee(form)"  />
+        <transition to="step3" />
+    </action-state>
 
     <view-state id="step3" model="form" view="cccc/step3">
         <transition on="previous" to="step1"/>
@@ -47,7 +52,9 @@
     
     <view-state id="review" model="form" view="cccc/review">
         <transition on="previous" to="step3" validate="false"/>
-        <transition on="next" to="payment"/>
+        <transition on="next" to="payment">
+            <evaluate expression="registrationController.submit(form)"/>
+        </transition>
         <transition on="cancel" to="cancel"/>
     </view-state>
 

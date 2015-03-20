@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.cclife.registration.domain;
 
 /**
@@ -11,12 +10,12 @@ package com.cclife.registration.domain;
  * @author Ephesus
  */
 public class Fee {
-    
+
     private Integer eventID;
     private Long registrationID;
-    
-    private int breakfastCount ;
-    private double totalBreakfastFee ;
+
+    private int breakfastCount;
+    private double totalBreakfastFee;
 
     private int lunchCount;
     private double totalLunchFee;
@@ -24,15 +23,17 @@ public class Fee {
     private int dinnerCount;
     private double totalDinnerFee;
 
-    private double totalMealsFee ;
+    private double totalMealsFee;
 
-            // Registration Fee
-    private int adultHeadcount ;
-    private int nonAdultHeadcount ;
-    private int nonAdultXHeadcount ;
-    
-    private double totalAdultRegistrationFee ;
-    private double totalNonAdultRegistrationFee ;
+    // Registration Fee
+    private int adultHeadcount;
+    private int nonAdultHeadcount;
+    private int nonAdultXHeadcount;
+
+    private double adultRegistrationFee;
+    private double nonAdultRegistrationFee;
+
+    private double totalRegistrationFee;
     /**
      * @return the eventID
      */
@@ -204,28 +205,42 @@ public class Fee {
     /**
      * @return the totalAdultRegistrationFee
      */
-    public double getTotalAdultRegistrationFee() {
-        return totalAdultRegistrationFee;
+    public double getAdultRegistrationFee() {
+        return adultRegistrationFee;
     }
 
     /**
-     * @param totalAdultRegistrationFee the totalAdultRegistrationFee to set
+     * @param adultRegistrationFee
      */
-    public void setTotalAdultRegistrationFee(double totalAdultRegistrationFee) {
-        this.totalAdultRegistrationFee = totalAdultRegistrationFee;
+    public void setAdultRegistrationFee(double adultRegistrationFee) {
+        this.adultRegistrationFee = adultRegistrationFee;
     }
 
     /**
      * @return the totalNonAdultRegistrationFee
      */
-    public double getTotalNonAdultRegistrationFee() {
-        return totalNonAdultRegistrationFee;
+    public double getNonAdultRegistrationFee() {
+        return nonAdultRegistrationFee;
     }
 
     /**
-     * @param totalNonAdultRegistrationFee the totalNonAdultRegistrationFee to set
+     * @param nonAdultRegistrationFee
      */
-    public void setTotalNonAdultRegistrationFee(double totalNonAdultRegistrationFee) {
-        this.totalNonAdultRegistrationFee = totalNonAdultRegistrationFee;
+    public void setnNonAdultRegistrationFee(double nonAdultRegistrationFee) {
+        this.nonAdultRegistrationFee = nonAdultRegistrationFee;
+    }
+
+    /**
+     * @return the totalRegistrationFee
+     */
+    public double getTotalRegistrationFee() {
+        return totalRegistrationFee;
+    }
+
+    /**
+     * @param totalRegistrationFee the totalRegistrationFee to set
+     */
+    public void setTotalRegistrationFee(double totalRegistrationFee) {
+        this.totalRegistrationFee = totalRegistrationFee;
     }
 }
