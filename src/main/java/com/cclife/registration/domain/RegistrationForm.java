@@ -62,7 +62,13 @@ public class RegistrationForm extends BaseObject {
     private List<LabelValue> statusGroup2;
     private List<LabelValue> stateList;
 
-
+    /**
+     * For issue5.
+     * The following part is added for language and interpret headphone.
+     */
+    private List<LabelValue> languages;
+    private List<LabelValue> headphones;
+    
     /**
      * Default constructor, mainly for hibernate use.
      */
@@ -1060,5 +1066,24 @@ public class RegistrationForm extends BaseObject {
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-
+    
+    /**
+     * For issue5.
+     * The following methods is getters and setters for language and interpret headphones.
+     */
+    public void setLanguages( List<LabelValue> languages ){
+        this.languages = languages;
+    }
+    
+    public List<LabelValue> getLanguages(){
+        return this.languages;
+    }
+    
+    public void setHeadphones( List<LabelValue> headphones ){
+        this.headphones = headphones;
+    }
+    
+    public List<LabelValue> getHeadphones(){
+        return this.headphones;
+    }
 }
