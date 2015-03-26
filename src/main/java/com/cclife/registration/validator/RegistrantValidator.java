@@ -56,32 +56,30 @@ public class RegistrantValidator {
                messages.addMessage(new MessageBuilder().error().source("person.status").
                        defaultText("Grade is required for youth. ").build());
             }
-        }
-        
-        /** 
-         * Need to add logic to check if the registrant is youth, if true, then email is required. 
-         */
-        
-        if( true ){ 
-            String email1 = registrant.getPerson().getEmail().trim();
-            String email2 = registrant.getPerson().getMisc1().trim();
-            if ( email1.isEmpty() || !email1.contains("@") ) {
-                messages.addMessage(new MessageBuilder().error().source("person.email").
-                        defaultText("Please enter valid email address. ").build());
-            }
             else{
-                if ( email2.isEmpty() || !email2.contains("@") ) {
-                    messages.addMessage(new MessageBuilder().error().source("person.misc1").
-                            defaultText("Please enter valid confirm email. ").build());
-                }
-                else{
-                    if( !email1.equalsIgnoreCase(email2) ){
-                         messages.addMessage(new MessageBuilder().error().source("person.email").
-                                defaultText("Email and confirm email are not identical. ").build());
-
+               int ageToCheck = Integer.parseInt(registrant.getPerson().getAge().trim() );
+               if( ( ageToCheck >= 13 ) && ( ageToCheck <=18 ) ){
+                    String email1 = registrant.getPerson().getEmail().trim();
+                    String email2 = registrant.getPerson().getMisc1().trim();
+                    if ( email1.isEmpty() || !email1.contains("@") ) {
+                        messages.addMessage(new MessageBuilder().error().source("person.email").
+                                defaultText("Please enter valid email address. ").build());
                     }
-                }
-            }
+                    else{
+                        if ( email2.isEmpty() || !email2.contains("@") ) {
+                            messages.addMessage(new MessageBuilder().error().source("person.misc1").
+                                    defaultText("Please enter valid confirm email. ").build());
+                        }
+                        else{
+                            if( !email1.equalsIgnoreCase(email2) ){
+                                 messages.addMessage(new MessageBuilder().error().source("person.email").
+                                        defaultText("Email and confirm email are not identical. ").build());
+
+                            }
+                        }
+                    }
+               }    
+             }
         }
         
         logger.debug("Done validate step2.");
