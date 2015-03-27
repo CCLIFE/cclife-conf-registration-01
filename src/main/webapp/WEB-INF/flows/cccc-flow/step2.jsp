@@ -150,16 +150,16 @@
                                     <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
                                  </tr>
                 <tr>
-                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="1"/></td>
-                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="2"/></td>
-                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="3"/></td>
-                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="4"/></td>
+                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
+                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
                 </tr>
                 <tr>
-                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="5"/></td>
-                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="6"/></td>
-                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="7"/></td>
-                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="8"/></td>
+                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
+                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
                 </tr>
             </tbody>
         </table>
