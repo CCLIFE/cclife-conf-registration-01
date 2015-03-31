@@ -9,7 +9,7 @@ package com.cclife.registration.domain;
  *
  * @author Ephesus
  */
-public class Fee {
+public class Fee extends BaseObject {
 
     private Integer eventID;
     private Long registrationID;
@@ -242,5 +242,20 @@ public class Fee {
      */
     public void setTotalRegistrationFee(double totalRegistrationFee) {
         this.totalRegistrationFee = totalRegistrationFee;
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
