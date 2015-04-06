@@ -20,29 +20,16 @@
                         <td>${form.address.homeCity}</td>
                     </tr>
                     <tr>
-                        <td>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>州/省 State/Province: </td>
-                                        <td>${form.address.homeState}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <table style="text-align: left; width: 403px; height: 64px;"
-                                   border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td align="rignt">邮政编码 Zipcode/Postal Code:</td>
-                                        <td>${form.address.homeZip}</td>
-                                        <td align="rignt">国家 Country:</td>
-                                        <td>${form.address.country}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
+                        <td>州/省 State/Province: </td>
+                        <td>${form.address.homeState}</td>
+                    </tr>
+                    <tr>
+                        <td align="rignt">邮政编码 Zipcode/Postal Code:</td>
+                        <td>${form.address.homeZip}</td>
+                    </tr>
+                    <tr>
+                        <td align="rignt">国家 Country:</td>
+                        <td>${form.address.country}</td>
                     </tr>
                     <tr>
                         <td>聯絡电话 Primary Contact Phone:</td>
@@ -70,57 +57,57 @@
         <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
             <hr style="width: 70%; height: 2px;">
             <div>
-                <table style="text-align: left; margin-left: auto; margin-right: auto;">
+                <table style="text-align: left; margin-left: auto; margin-right: auto; border:2; width: 100%" >
                     <tbody>
                         <tr>
                             <td align="left"> <b>第 ${count.count} 个人的资料 Information of Person No. ${count.count} </b>
 
                             </td>
-                            <td align="right">  </td>
+                            <td align="right"> </td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <table style="width: 900px; height: 61px; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+                                <table style="width: 500px; height: 61px; text-align: left; margin-left: auto; margin-right: auto; border:2; ">
                                     <tbody>
                                         <tr>
                                             <td>中文姓名:</td>
                                             <td>${registrant.person.chineseName}</td>
-                                            <td>English Lastname:</td>
+                                            <td>性别 Gender:</td>
+                                            <td>${registrant.person.gender}</td>
+                                        </tr>
+                                        <tr>
+                                           <td>English Lastname:</td>
                                             <td>${registrant.person.lastName}</td>
                                             <td>English Firstname:</td>
                                             <td>${registrant.person.firstName}</td>
                                         </tr>
                                         <tr>
-                                            <td>性别 Gender:</td>
-                                            <td>${registrant.person.gender}</td>
                                             <td>年龄 Age/Age Group:</td>
                                             <td>${registrant.person.age}</td>
                                             <td>年级 Grade:</td>
-
-                                            <td>[TODO]
-                                            </td>
+                                            <td>${registrant.person.status}</td>
                                         </tr>
                                         <tr>
                                             <td>关系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
                                             <td>信主 Beliver:</td>
-
                                             <td>Y </td>
-                                            <td>事奉角色:</td>
-                                            <td>${registrant.person.status}</td>
                                         </tr>
                                         <tr>
                                             <td>语言 Language:</td>
                                             <td>${registrant.person.preferredLanguage}</td>
 
                                             <td>翻译耳机 <br>
-                                                Interpreter Headerphone: </td>
-                                            <td>[TODO]</td>
+                                                Interpreter Headphone: </td>
+                                            <td>${registrant.person.headphone}</td>
+                                        </tr>
+                                        <tr>
+                                           <td>事奉角色:</td>
+                                            <td colspan="3">${registrant.person.servingRole}</td>
                                         </tr>
                                         <tr>
                                             <td>电邮 &nbsp;Email:</td>
-                                            <td colspan="5" rowspan="1">${registrant.person.email}</td>
-
+                                            <td colspan="3">${registrant.person.email}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,7 +129,7 @@
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='OTHER' }"><c:set var="other" value="Y" /></c:if>
             </c:forEach>
             <div>
-                <table style="text-align: left; width: 600px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
+                <table style="text-align: left; width: 500px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
                     <tbody>
                         <tr>
                             <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
