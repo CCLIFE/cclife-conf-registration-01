@@ -3,11 +3,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
                     http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans.xsd
                     http://www.springframework.org/schema/aop
-                    http://www.springframework.org/schema/aop/spring-aop.xsd">
+                    http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
    
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -15,6 +17,14 @@
             <value>classpath:registration-config.properties</value>
         </property>
     </bean>
+    
+    <util:map id="feeMap">
+        <entry key="REGISTRATION1" value="201501,2015-04-15T00:00:00Z,12,0,REGISTRATION1,Early bird registration fee,10"/>
+        <entry key="REGISTRATION2" value="201501,2015-11-15T00:00:00Z,12,0,REGISTRATION2,Regular registration fee,15"/>
+        <entry key="REGISTRATION3" value="201501,2015-12-10T00:00:00Z,12,0,REGISTRATION3,Late registration,15"/>
+        <entry key="LUNCH1" value="201501,,0,0,REGISTRATION3,Lunch Fee,7"/>
+        <entry key="DINNER1" value="201501,,0,0,REGISTRATION3,Dinner Fee,8"/>
+    </util:map>
           
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">

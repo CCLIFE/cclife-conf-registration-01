@@ -5,257 +5,118 @@
  */
 package com.cclife.registration.domain;
 
+import java.io.Serializable;
+import org.joda.time.DateTime;
+
 /**
  *
  * @author Ephesus
  */
-public class Fee extends BaseObject {
+public class Fee implements Serializable {
 
-    private Integer eventID;
-    private Long registrationID;
+    private String eventID;
+    private DateTime effectiveDate;
+    private Integer ageLevel;
+    private int priority ;
+    private String codeName;
+    private String description;
+    private Double amount;
 
-    private int breakfastCount;
-    private double totalBreakfastFee;
-
-    private int lunchCount;
-    private double totalLunchFee;
-
-    private int dinnerCount;
-    private double totalDinnerFee;
-
-    private double totalMealsFee;
-
-    // Registration Fee
-    private int adultHeadcount;
-    private int nonAdultHeadcount;
-    private int nonAdultXHeadcount;
-
-    private double adultRegistrationFee;
-    private double nonAdultRegistrationFee;
-
-    private double totalRegistrationFee;
     /**
      * @return the eventID
      */
-    public Integer getEventID() {
+    public String getEventID() {
         return eventID;
     }
 
     /**
      * @param eventID the eventID to set
      */
-    public void setEventID(Integer eventID) {
+    public void setEventID(String eventID) {
         this.eventID = eventID;
     }
 
     /**
-     * @return the registrationID
+     * @return the ageLevel
      */
-    public Long getRegistrationID() {
-        return registrationID;
+    public Integer getAgeLevel() {
+        return ageLevel;
     }
 
     /**
-     * @param registrationID the registrationID to set
+     * @param ageLevel the ageLevel to set
      */
-    public void setRegistrationID(Long registrationID) {
-        this.registrationID = registrationID;
+    public void setAgeLevel(Integer ageLevel) {
+        this.ageLevel = ageLevel;
     }
 
     /**
-     * @return the breakfastCount
+     * @return the effectiveDate
      */
-    public int getBreakfastCount() {
-        return breakfastCount;
+    public DateTime getEffectiveDate() {
+        return effectiveDate;
     }
 
     /**
-     * @param breakfastCount the breakfastCount to set
+     * @param effectiveDate the effectiveDate to set
      */
-    public void setBreakfastCount(int breakfastCount) {
-        this.breakfastCount = breakfastCount;
+    public void setEffectiveDate(DateTime effectiveDate) {
+        this.effectiveDate = effectiveDate;
     }
 
     /**
-     * @return the totalBreakfastFee
+     * @return the description
      */
-    public double getTotalBreakfastFee() {
-        return totalBreakfastFee;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @param totalBreakfastFee the totalBreakfastFee to set
+     * @param description the description to set
      */
-    public void setTotalBreakfastFee(double totalBreakfastFee) {
-        this.totalBreakfastFee = totalBreakfastFee;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
-     * @return the lunchCount
+     * @return the amount
      */
-    public int getLunchCount() {
-        return lunchCount;
+    public Double getAmount() {
+        return amount;
     }
 
     /**
-     * @param lunchCount the lunchCount to set
+     * @param amount the amount to set
      */
-    public void setLunchCount(int lunchCount) {
-        this.lunchCount = lunchCount;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
     /**
-     * @return the totalLunchFee
+     * @return the priority
      */
-    public double getTotalLunchFee() {
-        return totalLunchFee;
+    public int getPriority() {
+        return priority;
     }
 
     /**
-     * @param totalLunchFee the totalLunchFee to set
+     * @param priority the priority to set
      */
-    public void setTotalLunchFee(double totalLunchFee) {
-        this.totalLunchFee = totalLunchFee;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     /**
-     * @return the dinnerCount
+     * @return the codeName
      */
-    public int getDinnerCount() {
-        return dinnerCount;
+    public String getCodeName() {
+        return codeName;
     }
 
     /**
-     * @param dinnerCount the dinnerCount to set
+     * @param codeName the codeName to set
      */
-    public void setDinnerCount(int dinnerCount) {
-        this.dinnerCount = dinnerCount;
-    }
-
-    /**
-     * @return the totalDinnerFee
-     */
-    public double getTotalDinnerFee() {
-        return totalDinnerFee;
-    }
-
-    /**
-     * @param totalDinnerFee the totalDinnerFee to set
-     */
-    public void setTotalDinnerFee(double totalDinnerFee) {
-        this.totalDinnerFee = totalDinnerFee;
-    }
-
-    /**
-     * @return the totalMealsFee
-     */
-    public double getTotalMealsFee() {
-        return totalMealsFee;
-    }
-
-    /**
-     * @param totalMealsFee the totalMealsFee to set
-     */
-    public void setTotalMealsFee(double totalMealsFee) {
-        this.totalMealsFee = totalMealsFee;
-    }
-
-    /**
-     * @return the adultHeadcount
-     */
-    public int getAdultHeadcount() {
-        return adultHeadcount;
-    }
-
-    /**
-     * @param adultHeadcount the adultHeadcount to set
-     */
-    public void setAdultHeadcount(int adultHeadcount) {
-        this.adultHeadcount = adultHeadcount;
-    }
-
-    /**
-     * @return the nonAdultHeadcount
-     */
-    public int getNonAdultHeadcount() {
-        return nonAdultHeadcount;
-    }
-
-    /**
-     * @param nonAdultHeadcount the nonAdultHeadcount to set
-     */
-    public void setNonAdultHeadcount(int nonAdultHeadcount) {
-        this.nonAdultHeadcount = nonAdultHeadcount;
-    }
-
-    /**
-     * @return the nonAdultXHeadcount
-     */
-    public int getNonAdultXHeadcount() {
-        return nonAdultXHeadcount;
-    }
-
-    /**
-     * @param nonAdultXHeadcount the nonAdultXHeadcount to set
-     */
-    public void setNonAdultXHeadcount(int nonAdultXHeadcount) {
-        this.nonAdultXHeadcount = nonAdultXHeadcount;
-    }
-
-    /**
-     * @return the totalAdultRegistrationFee
-     */
-    public double getAdultRegistrationFee() {
-        return adultRegistrationFee;
-    }
-
-    /**
-     * @param adultRegistrationFee
-     */
-    public void setAdultRegistrationFee(double adultRegistrationFee) {
-        this.adultRegistrationFee = adultRegistrationFee;
-    }
-
-    /**
-     * @return the totalNonAdultRegistrationFee
-     */
-    public double getNonAdultRegistrationFee() {
-        return nonAdultRegistrationFee;
-    }
-
-    /**
-     * @param nonAdultRegistrationFee
-     */
-    public void setnNonAdultRegistrationFee(double nonAdultRegistrationFee) {
-        this.nonAdultRegistrationFee = nonAdultRegistrationFee;
-    }
-
-    /**
-     * @return the totalRegistrationFee
-     */
-    public double getTotalRegistrationFee() {
-        return totalRegistrationFee;
-    }
-
-    /**
-     * @param totalRegistrationFee the totalRegistrationFee to set
-     */
-    public void setTotalRegistrationFee(double totalRegistrationFee) {
-        this.totalRegistrationFee = totalRegistrationFee;
-    }
-
-    @Override
-    public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
     }
 }

@@ -17,7 +17,7 @@ public class Registrant extends BaseObject {
     private Person person;
     private Mealplan mealplan;
     private Set<Server> volunteerJobs;
-    private Fee fee;
+    private Expense fee;
     /**
      * @return the person
      */
@@ -78,14 +78,14 @@ public class Registrant extends BaseObject {
     /**
      * @return the fee
      */
-    public Fee getFee() {
+    public Expense getFee() {
         return fee;
     }
 
     /**
      * @param fee the fee to set
      */
-    public void setFee(Fee fee) {
+    public void setFee(Expense fee) {
         this.fee = fee;
     }
 
