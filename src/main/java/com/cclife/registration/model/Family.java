@@ -87,6 +87,18 @@ public class Family extends com.cclife.registration.domain.BaseObject {
     private String misc2;
     @Column(name = "Misc3", length = 50)
     private String misc3;
+    
+    /**
+     * The following code is added for issue21: input of other country and state.
+     */
+    private String otherCountry;
+    private String otherState;
+    private String ucCountry;
+    private String ucState;
+    /**
+     * End of code for issue21.
+     */
+    
 
     public Family() {
     }
@@ -267,4 +279,38 @@ public class Family extends com.cclife.registration.domain.BaseObject {
         this.homeAddress2 = homeAddress2;
     }
     
+    /**
+     * the following code is added for issue21: input of other country and state.
+     */
+    public String getOtherCountry(){
+        return otherCountry;
+    }
+    
+    public void setOtherCountry( String otherCountry ){
+        this.otherCountry = otherCountry;
+    }
+    
+    public String getOtherState(){
+        return otherState;
+    }
+    
+    public void setOtherState( String otherState ){
+        this.otherState = otherState;
+    }
+     
+    public String getUcCountry(){
+        return ucCountry;
+    }
+    
+    public void setUcCountry( String ucCountry ){
+        this.ucCountry= ucCountry;
+    }
+     
+    public String getUcState(){
+        return ucState;
+    }
+    public void setUcState( String ucState ){
+        this.ucState = ucState;
+    }
+      
 }
