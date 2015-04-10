@@ -1087,4 +1087,18 @@ public class RegistrationForm extends BaseObject {
     public List<LabelValue> getHeadphones(){
         return this.headphones;
     }
+
+    /**
+     * @return the fees
+     */
+    public List<Fee> getFees() {
+        return fees;
+    }
+
+    /**
+     * @param fees the fees to set
+     */
+    public void setFees(List<Fee> fees) {
+        this.fees = fees;
+    }
 }

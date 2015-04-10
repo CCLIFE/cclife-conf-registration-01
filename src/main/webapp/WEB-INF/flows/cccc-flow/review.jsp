@@ -9,15 +9,15 @@
                 <tbody>
                     <tr>
                         <td>总报名人数 Number of persons:</td>
-                        <td>2</td>
+                        <td>${form.registrants.size()}</td>
                     </tr>
                     <tr>
                         <td>总报名费 Total Registration Fee:</td>
-                        <td>$20.00</td>
+                        <td>${form.expense.totalRegistrationFee}</td>
                     </tr>
                     <tr>
                         <td>总餐费 Total Meal Fee:</td>
-                        <td>$180.00</td>
+                        <td>${form.expense.totalMealsFee}</td>
                     </tr>
                     <tr>
                         <td>总费用 Total:</td>

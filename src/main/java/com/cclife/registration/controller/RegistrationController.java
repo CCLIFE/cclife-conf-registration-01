@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import javax.annotation.Resource;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -167,7 +168,7 @@ public class RegistrationController {
          * statusGroup.add(new
          * LabelValue("S(\u5C0F\u7D44\u6216\u5718\u5951\u540C\u5DE5)", "S"));
          * statusGroup.add(new LabelValue("O(\u5176\u4ED6)", "O"));
-        *
+         *
          */
         statusGroup.add(new LabelValue("\u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
         statusGroup.add(new LabelValue("\u795E\u5B78\u751F", "2"));
@@ -194,7 +195,7 @@ public class RegistrationController {
          * statusGroup.add(new LabelValue("Toddlers (age 0-3)", "TO"));
          * statusGroup.add(new LabelValue("Elementary (K-5)", "EL"));
          * statusGroup.add(new LabelValue("Other", "O"));
-        *
+         *
          */
 
         registrationForm.setStatusGroup(statusGroup);
@@ -350,14 +351,51 @@ public class RegistrationController {
         fees = new ArrayList<Fee>();
 
         for (Map.Entry<String, String> entry : feeMap.entrySet()) {
-
+            logger.debug("Key : " + entry.getKey() + " Value : "
+                    + entry.getValue());
             StringTokenizer st = new StringTokenizer(entry.getValue(), ",");
+            int count = 0;
+            Fee fee = new Fee();
             while (st.hasMoreTokens()) {
-                System.out.println(st.nextToken());
+
+                count++;
+
+                switch (count) {
+                    case 1:
+                        fee.setEventID(st.nextToken());
+                        logger.debug("event id:" + fee.getEventID());
+                        break;
+                    case 2:
+                        DateTime dt = new DateTime(st.nextToken());
+                        fee.setEffectiveDate(dt);
+                        logger.debug("effective date:" + fee.getEffectiveDate());
+                        break;
+                    case 3:
+                        fee.setAgeLevel(Integer.parseInt(st.nextToken()));
+                        logger.debug("age level:" + fee.getAgeLevel());
+                        break;
+                    case 4:
+                        fee.setPriority(Integer.parseInt(st.nextToken()));
+                        logger.debug("priority:" + fee.getPriority());
+                        break;
+                    case 5:
+                        fee.setCodeName(st.nextToken());
+                        logger.debug("code name:" + fee.getCodeName());
+                        break;
+                    case 6:
+                        fee.setDescription(st.nextToken());
+                        logger.debug("description:" + fee.getDescription());
+                        break;
+                    case 7:
+                        fee.setAmount(Double.valueOf(st.nextToken()));
+                        logger.debug("amount:" + fee.getAmount());
+                        break;
+                }
+
             }
-//            System.out.println("Key : " + entry.getKey() + " Value : "
-//                    + entry.getValue());
-         }
+            fees.add(fee);
+        }
+        registrationForm.setFees(fees);
 
         try {
             Date d = DateUtil.getToday().getTime();
@@ -450,12 +488,13 @@ public class RegistrationController {
 
             Registrant regt = it.next();
 
-            if (regt.getFee() == null) {
-                Expense fee = new Expense();
-                regt.setFee(fee);
+            // >>>>>>>>>>>>>>>>>>>>> Meal fee >>>>>>>>>>>>>>>>>>>>>
+            if (regt.getExpense() == null) {
+                Expense expense = new Expense();
+                regt.setExpense(expense);
             }
 
-            regt.getFee().setTotalRegistrationFee(10.0);
+            regt.getExpense().setTotalRegistrationFee(10.0);
             Mealplan mp = regt.getMealplan();
 
             Integer breakfastCount = (mp.getBreakfast1() != null ? mp.getBreakfast1() : 0)
@@ -463,29 +502,29 @@ public class RegistrationController {
                     + (mp.getBreakfast3() != null ? mp.getBreakfast3() : 0)
                     + (mp.getBreakfast4() != null ? mp.getBreakfast4() : 0)
                     + (mp.getBreakfast5() != null ? mp.getBreakfast5() : 0);
-            regt.getFee().setBreakfastCount(breakfastCount);
-            regt.getFee().setTotalBreakfastFee(breakfastCount * 0);
+            regt.getExpense().setBreakfastCount(breakfastCount);
+            regt.getExpense().setTotalBreakfastFee(breakfastCount * 0);
 
             Integer lunchCount = (mp.getLunch1() != null ? mp.getLunch1() : 0)
                     + (mp.getLunch2() != null ? mp.getLunch2() : 0)
                     + (mp.getLunch3() != null ? mp.getLunch3() : 0)
                     + (mp.getLunch4() != null ? mp.getLunch4() : 0)
                     + (mp.getLunch5() != null ? mp.getLunch5() : 0);
-            regt.getFee().setLunchCount(lunchCount);
-            regt.getFee().setTotalLunchFee(lunchCount * 7);
+            regt.getExpense().setLunchCount(lunchCount);
+            regt.getExpense().setTotalLunchFee(lunchCount * 7);
 
             Integer dinnerCount = (mp.getDinner1() != null ? mp.getDinner1() : 0)
                     + (mp.getDinner2() != null ? mp.getDinner2() : 0)
                     + (mp.getDinner3() != null ? mp.getDinner3() : 0)
                     + (mp.getDinner4() != null ? mp.getDinner4() : 0)
                     + (mp.getDinner5() != null ? mp.getDinner5() : 0);
-            regt.getFee().setDinnerCount(dinnerCount);
-            regt.getFee().setTotalDinnerFee(dinnerCount * 8);
+            regt.getExpense().setDinnerCount(dinnerCount);
+            regt.getExpense().setTotalDinnerFee(dinnerCount * 8);
 
-            regt.getFee().setTotalMealsFee(regt.getFee().getTotalBreakfastFee() + regt.getFee().getTotalLunchFee() + regt.getFee().getTotalDinnerFee());
+            regt.getExpense().setTotalMealsFee(regt.getExpense().getTotalBreakfastFee() + regt.getExpense().getTotalLunchFee() + regt.getExpense().getTotalDinnerFee());
             // Grand total
-            grpTotalRegistrationFee += regt.getFee().getTotalRegistrationFee();
-            grpTotalMealFee += regt.getFee().getTotalMealsFee();
+            grpTotalRegistrationFee += regt.getExpense().getTotalRegistrationFee();
+            grpTotalMealFee += regt.getExpense().getTotalMealsFee();
         }
 
         if (form.getExpense() == null) {
