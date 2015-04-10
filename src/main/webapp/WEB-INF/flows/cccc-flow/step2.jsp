@@ -18,7 +18,7 @@
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.lastName" cssClass="fieldError"/></td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td>English Lastname:</td>
                                     <td><form:input id="lastName" path="person.lastName" size="20" maxlength="30"/></td>
@@ -26,7 +26,7 @@
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.firstName" cssClass="fieldError"/></td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td>English Firstname:</td>
                                     <td><form:input id="firstName" path="person.firstName" size="20" maxlength="30"/></td>
@@ -34,7 +34,7 @@
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.gender" cssClass="fieldError"/></td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td>性别 Gender:</td>
                                     <td>
@@ -46,7 +46,7 @@
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.age" cssClass="fieldError"/></td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td>年龄 Age/Age Group:</td>
                                     <td>
@@ -59,7 +59,7 @@
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.status" cssClass="fieldError"/></td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td>年级 Grade:</td>
                                     <td>
@@ -78,41 +78,41 @@
                                         </form:select>
                                     </td>
                                 </tr>
-                               <tr>
+                                <tr>
                                     <td>语言 Language:</td>
                                     <td>
-                                       <form:select id="language" path="person.preferredLanguage">
-                                             <form:options items="${form.languages}" itemValue="value" itemLabel="label" />
+                                        <form:select id="language" path="person.preferredLanguage">
+                                            <form:options items="${form.languages}" itemValue="value" itemLabel="label" />
                                         </form:select>
                                     </td>
-                               </tr>
-                               <tr>
+                                </tr>
+                                <tr>
                                     <td>翻译耳机 <br>
                                         Interpreter Headphone: </td>
                                     <td>                                       
                                         <form:select id="headphone" path="person.headphone">
-                                           <form:option value="" label="-- No Need --" />
-                                           <form:options items="${form.headphones}" itemValue="value" itemLabel="label" />
+                                            <form:option value="" label="-- No Need --" />
+                                            <form:options items="${form.headphones}" itemValue="value" itemLabel="label" />
                                         </form:select>
                                     </td>
-                                 </tr>
+                                </tr>
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.email" cssClass="fieldError"/></td>
-                                 </tr>
-                                 <tr>
+                                </tr>
+                                <tr>
                                     <td>电邮 &nbsp;Email:</td>
                                     <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td> <form:errors path="person.misc1" cssClass="fieldError"/></td>
-                                 </tr>
-                                 <tr>
+                                </tr>
+                                <tr>
                                     <td>确认电邮 &nbsp; Confirm Email:</td>
                                     <td><form:input id="confirmEmail" path="person.misc1" size="30" maxlength="50"/></td>
                                 </tr>
-                               <tr>
+                                <tr>
                                     <td>信主 Beliver:</td>
                                     <td>
 
@@ -122,7 +122,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                   <td>事奉角色:</td>
+                                    <td>事奉角色:</td>
                                     <td>
                                         <form:select id="status" path="person.servingRole">
                                             <form:option value="" label="-- 服事 --" />
@@ -145,21 +145,21 @@
                 <tr>
                     <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
-                                 </tr>
                 <tr>
-                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="1"/></td>
-                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="2"/></td>
-                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="3"/></td>
-                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="4"/></td>
+                    <td></td>
+                    <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
                 </tr>
                 <tr>
-                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="5"/></td>
-                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="6"/></td>
-                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="7"/></td>
-                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="8"/></td>
+                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
+                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
+                </tr>
+                <tr>
+                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
+                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
                 </tr>
             </tbody>
         </table>

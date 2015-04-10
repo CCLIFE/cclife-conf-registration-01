@@ -51,9 +51,10 @@ public class RegistrationForm extends BaseObject {
     private Boolean Misc2;
     private Payment payment;
     private String discountCode;
-    private Fee expense;
+    private Expense expense;
     
     private PaymentMethod paymentMethod;  
+    private List<Fee> fees ;
         
     private List<LabelValue> ageGroup;
     private List<LabelValue> countries;
@@ -1028,14 +1029,14 @@ public class RegistrationForm extends BaseObject {
     /**
      * @return the expense
      */
-    public Fee getExpense() {
+    public Expense getExpense() {
         return expense;
     }
 
     /**
      * @param expense the expense to set
      */
-    public void setExpense(Fee expense) {
+    public void setExpense(Expense expense) {
         this.expense = expense;
     }
 
@@ -1085,5 +1086,19 @@ public class RegistrationForm extends BaseObject {
     
     public List<LabelValue> getHeadphones(){
         return this.headphones;
+    }
+
+    /**
+     * @return the fees
+     */
+    public List<Fee> getFees() {
+        return fees;
+    }
+
+    /**
+     * @param fees the fees to set
+     */
+    public void setFees(List<Fee> fees) {
+        this.fees = fees;
     }
 }

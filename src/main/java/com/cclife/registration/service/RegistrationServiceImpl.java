@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Service;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private static final Logger logger = Logger.getLogger(RegistrationServiceImpl.class);
+
     @Autowired
     private GenericJPADao<Family> familyDao;
     @Autowired
@@ -127,7 +129,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             params.put("amountPaid", payment.getAmount());
 
             mailEngine.sendMessage(recipients, "cclife@gmail.com", subject, "CCLIFE_2015_Registration_Confirmation.html", params);
-            
+
             logger.debug("Message Sent :" + form.getAddress().getMisc1());
         } catch (MessagingException ex) {
             java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
