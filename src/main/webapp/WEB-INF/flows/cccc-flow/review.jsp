@@ -21,7 +21,7 @@
                     </tr>
                     <tr>
                         <td>总费用 Total:</td>
-                        <td>$200.00</td>
+                        <td>${form.expense.totalMealsFee + form.expense.totalRegistrationFee}</td>
                     </tr>
                     <tr>
                         <td>我愿为大会奉献 I will donate $</td>

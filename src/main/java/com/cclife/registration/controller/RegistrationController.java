@@ -488,13 +488,31 @@ public class RegistrationController {
 
             Registrant regt = it.next();
 
-            // >>>>>>>>>>>>>>>>>>>>> Meal fee >>>>>>>>>>>>>>>>>>>>>
             if (regt.getExpense() == null) {
                 Expense expense = new Expense();
                 regt.setExpense(expense);
             }
+            // >>>>>>>>>>>>>>>>>>>>> Registration fee >>>>>>>>>>>>>>>>>>>>> 
 
-            regt.getExpense().setTotalRegistrationFee(10.0);
+            Iterator<Fee> it1 = form.getFees().iterator();
+            DateTime now = new DateTime();
+            while (it1.hasNext()) {
+                Fee fee = it1.next();
+                if (fee.getCodeName().contains("REGISTRATION") && now.isBefore(fee.getEffectiveDate())) {
+                    if (regt.getPerson().getAge().startsWith("A")) {
+                        regt.getExpense().setTotalRegistrationFee(fee.getAmount());
+                        regt.getExpense().setAdultHeadcount(1);
+                    } else if (Integer.parseInt(regt.getPerson().getAge()) > fee.getAgeLevel()) {
+                        regt.getExpense().setTotalRegistrationFee(fee.getAmount());
+                        regt.getExpense().setAdultHeadcount(1);
+                    } else {
+                        regt.getExpense().setTotalRegistrationFee(0);
+                    }
+                    
+                    break;
+                }
+            }
+            // >>>>>>>>>>>>>>>>>>>>> Meal fee >>>>>>>>>>>>>>>>>>>>>            
             Mealplan mp = regt.getMealplan();
 
             Integer breakfastCount = (mp.getBreakfast1() != null ? mp.getBreakfast1() : 0)
@@ -533,6 +551,7 @@ public class RegistrationController {
         }
         form.getExpense().setTotalRegistrationFee(grpTotalRegistrationFee);
         form.getExpense().setTotalMealsFee(grpTotalMealFee);
+
     }
 
 }
