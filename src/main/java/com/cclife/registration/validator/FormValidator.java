@@ -2,6 +2,9 @@ package com.cclife.registration.validator;
 
 import com.cclife.registration.domain.PaymentMethod;
 import com.cclife.registration.domain.RegistrationForm;
+import com.cclife.registration.domain.LabelValue;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -41,26 +44,76 @@ public class FormValidator {
                     defaultText("Please enter your city. ").build());
         }
 
-         if (form.getAddress().getHomeState().trim().isEmpty() ) {
-            messages.addMessage(new MessageBuilder().error().source("address.homeState").
-                    defaultText("Please enter your state. ").build());
-        }
-
-         if (form.getAddress().getCountry().trim().isEmpty() ) {
-            messages.addMessage(new MessageBuilder().error().source("address.country").
+        if (form.getAddress().getUcCountry().trim().isEmpty() ) {
+            messages.addMessage(new MessageBuilder().error().source("address.ucCountry").
                     defaultText("Please enter your country. ").build());
-        }
+        }else{
+             String countrySelected = form.getAddress().getUcCountry().trim();
+             if( !countrySelected.equals("OC")){  //US or Canada
+                if (form.getAddress().getUcState().trim().isEmpty() ) {
+                   messages.addMessage(new MessageBuilder().error().source("address.ucState").
+                           defaultText("Please enter your state/province. ").build());
+                }else{
+    
+                    form.getAddress().setCountry( countrySelected );
+                    form.getAddress().setHomeState( form.getAddress().getUcState().trim() );
+                }
+                if( countrySelected.equals("CA")){  //if CA, then initialize the select drop down list
+                    List<LabelValue> stateList = new ArrayList<LabelValue>();
+
+                    stateList.add(new LabelValue("Alberta", "AB"));
+                    stateList.add(new LabelValue("British Columbia", "BC"));
+                    stateList.add(new LabelValue("Manitoba", "MB"));
+                    stateList.add(new LabelValue("New Brunswick", "NB"));
+                    
+                    stateList.add(new LabelValue("Newfoundland and Labrador", "NL"));
+                    stateList.add(new LabelValue("Nova Scotia", "NS"));
+                    stateList.add(new LabelValue("Northwest Territories", "NT"));
+                    stateList.add(new LabelValue("Nunavut", "NU"));
+                    
+                    stateList.add(new LabelValue("Ontario", "ON"));
+                    stateList.add(new LabelValue("rince Edward Island", "PE"));
+                    stateList.add(new LabelValue("Quebec", "QC"));
+                    stateList.add(new LabelValue("Saskatchewan", "SK"));
+                    
+                    stateList.add(new LabelValue("Yukon", "YT"));
+                    
+                    form.setStateList(stateList);
+                }
+            }else{ //other country
+                if (form.getAddress().getOtherCountry().trim().isEmpty() ) {
+                   messages.addMessage(new MessageBuilder().error().source("address.otherCountry").
+                           defaultText("Please enter your country. ").build());
+                }
+                 
+                if (form.getAddress().getOtherState().trim().isEmpty() ) {
+                   messages.addMessage(new MessageBuilder().error().source("address.otherState").
+                           defaultText("Please enter your state/province. ").build());
+                }else{
+                    form.getAddress().setCountry( form.getAddress().getOtherCountry().trim() );
+                    form.getAddress().setHomeState( form.getAddress().getOtherState().trim() );
+                }
+              }
+         }
 
         if (form.getAddress().getHomeZip().trim().isEmpty() ) {
             messages.addMessage(new MessageBuilder().error().source("address.homeZip").
                     defaultText("Please enter your zip code. ").build());
         }
-
+        else{
+            String zip = form.getAddress().getHomeZip().trim();
+            zip=zip.replaceAll("[\\-]","");
+            if(!zip.matches("[0-9]+") ){
+                messages.addMessage(new MessageBuilder().error().source("address.homeZip").
+                        defaultText("Please enter valid zip code.").build());
+            }
+         }
+                
         if (form.getAddress().getHomePhone().trim().isEmpty() ) {
             messages.addMessage(new MessageBuilder().error().source("address.homePhone").
                     defaultText("Please enter your phone number. ").build());
         }
-        else{
+        else{  
             String phone = form.getAddress().getHomePhone().trim();
             phone=phone.replaceAll("[\\-]","");
             if(!phone.matches("[0-9]+") ){

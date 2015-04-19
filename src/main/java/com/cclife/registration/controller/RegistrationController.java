@@ -245,10 +245,10 @@ public class RegistrationController {
         List<LabelValue> stateList;
         stateList = new ArrayList<LabelValue>();
 
-        stateList.add(new LabelValue("Illinois", "IL"));
-        stateList.add(new LabelValue("Wisconsin", "WI"));
-        stateList.add(new LabelValue("Indiana", "IN"));
-        stateList.add(new LabelValue("--------------", "ZZ"));
+//      stateList.add(new LabelValue("Illinois", "IL"));
+//      stateList.add(new LabelValue("Wisconsin", "WI"));
+//      stateList.add(new LabelValue("Indiana", "IN"));
+//      stateList.add(new LabelValue("--------------", "ZZ"));
         stateList.add(new LabelValue("Alabama", "AL"));
         stateList.add(new LabelValue("Alaska", "AK"));
         stateList.add(new LabelValue("Alberta", "AB"));
@@ -328,6 +328,7 @@ public class RegistrationController {
 
         countryList.add(new LabelValue("United States America", "US"));
         countryList.add(new LabelValue("Canada", "CA"));
+        countryList.add(new LabelValue("Other Country", "OC"));
 
         registrationForm.setCountries(countryList);
 
