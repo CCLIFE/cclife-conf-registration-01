@@ -48,7 +48,19 @@
         <transition on="new" to="createNew"/>
         <transition on="next" to="review"/>
         <transition on="cancel" to="cancel"/>
+        <transition on="edit" to="editPerson"/>
+        <transition on="remove" to="deletePerson"/>
     </view-state>
+    
+    <action-state id="editPerson">
+        <evaluate expression="registrationController.editPerson(flowScope.form, currentEvent.attributes)" result="flowScope.registrant" />
+        <transition to="step2"/>
+    </action-state>
+    
+    <action-state id="deletePerson">
+        <evaluate expression="registrationController.deletePerson(flowScope.form, currentEvent.attributes)" />
+        <transition to="step3"/>
+    </action-state>
     
     <view-state id="review" model="form" view="cccc/review">
         <transition on="previous" to="step3" validate="false"/>

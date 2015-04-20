@@ -29,6 +29,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import javax.annotation.Resource;
 import org.joda.time.DateTime;
+import org.springframework.webflow.core.collection.LocalAttributeMap;
 
 /**
  *
@@ -54,6 +55,11 @@ public class RegistrationController {
 
     public RegistrationForm initializeForm() {
         RegistrationForm registrationForm = new RegistrationForm();
+
+        // Setup Form ID (Registration ID)
+        String generatedId = DateUtil.getDateTime("MMddHHmmss", new Date());
+        logger.debug("Generated Form ID  =" + generatedId);
+        registrationForm.setFormID(Long.valueOf(generatedId));
 
         List<LabelValue> ageGroup;
         ageGroup = new ArrayList<LabelValue>();
@@ -429,6 +435,52 @@ public class RegistrationController {
         return registrant;
     }
 
+     public Registrant editPerson(RegistrationForm form, LocalAttributeMap currentEvent) {
+
+        logger.debug("Value:" + currentEvent);
+        //Debug
+        Map<String, String> map = currentEvent.asMap();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            logger.debug(entry.getKey() + "/" + entry.getValue());
+        }
+
+        String index = null;
+        if (map.get("index") != null && isInteger(map.get("index"))) {
+            index = map.get("index");
+        } else if (map.get("_eventId_remove") != null && isInteger(map.get("_eventId_remove"))) {
+            index = map.get("_eventId_remove");
+        }
+
+        if (index != null) {
+            return form.getRegistrants().get(Integer.parseInt(index));
+        } 
+        
+        return null ;
+    }
+     
+    public Registrant deletePerson(RegistrationForm form, LocalAttributeMap currentEvent) {
+
+        logger.debug("Value:" + currentEvent);
+        //Debug
+        Map<String, String> map = currentEvent.asMap();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            logger.debug(entry.getKey() + "/" + entry.getValue());
+        }
+
+        String index = null;
+        if (map.get("index") != null && isInteger(map.get("index"))) {
+            index = map.get("index");
+        } else if (map.get("_eventId_remove") != null && isInteger(map.get("_eventId_remove"))) {
+            index = map.get("_eventId_remove");
+        }
+
+        if (index != null) {
+            return form.getRegistrants().remove(Integer.parseInt(index));
+        } 
+        
+        return null ;
+    }
+
     public Paypal createPaypalRequest(RegistrationForm form) {
 
         logger.info("createPaypalRequest entering");
@@ -509,7 +561,7 @@ public class RegistrationController {
                     } else {
                         regt.getExpense().setTotalRegistrationFee(0);
                     }
-                    
+
                     break;
                 }
             }
@@ -555,4 +607,15 @@ public class RegistrationController {
 
     }
 
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
+    }
 }
