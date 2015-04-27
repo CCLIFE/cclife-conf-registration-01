@@ -27,6 +27,21 @@
 
     <mvc:default-servlet-handler />
     
+    <bean id="messageSource"
+              class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+
+    <bean id="handlerMapping"
+          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <value>
+                /confirm.htm=confirmationController
+                /instantPaymentNotification.htm=confirmationController
+            </value>
+        </property>
+    </bean>
+    
     <!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="order" value="-1"/>

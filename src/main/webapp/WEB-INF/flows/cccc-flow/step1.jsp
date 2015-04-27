@@ -138,7 +138,7 @@
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
-                <caption><b>家庭与个人报名资料: Family and Personal Data ABC</b> </caption><tbody>
+                <caption><b>家庭与个人报名资料: Family and Personal Data</b> </caption><tbody>
                     <tr>
                         <td style="width:40%"></td>
                         <td  style="width:60%"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
