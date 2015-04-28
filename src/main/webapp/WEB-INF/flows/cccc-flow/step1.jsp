@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script type="text/javascript">
-    
+
     var countryStateArray = {
         'US': [
             ['', 'State/Province'],
@@ -67,17 +67,14 @@
             ['BC', 'British Columbia'],
             ['MB', 'Manitoba'],
             ['NB', 'New Brunswick'],
-            
             ['NL', 'Newfoundland and Labrador'],
             ['NS', 'Nova Scotia'],
             ['NT', 'Northwest Territories'],
             ['NU', 'Nunavut'],
-            
             ['ON', 'Ontario'],
             ['PE', 'Prince Edward Island'],
             ['QC', 'Quebec'],
             ['SK', 'Saskatchewan'],
-            
             ['YT', 'Yukon']
         ]
     };
@@ -98,40 +95,40 @@
             for (var i = 0; i < countryStateArray[countryValue].length; i++) {
                 var state = countryStateArray[countryValue][i];
                 opt = new Option(state[1], state[0]);
-                stateList.appendChild( opt );
+                stateList.appendChild(opt);
             }
-        } 
+        }
     }
 
-    function countrySelected( $val ){
-        
+    function countrySelected($val) {
+
         setStates();
-        setStateDiv( $val );
-        
-        if( $val == 'OC'){ 
-           document.getElementById("otherCountryDiv").style.display="block";
-           document.getElementById("usStateDiv").style.display="none";
-       }
-       else{
-           document.getElementById("otherCountryDiv").style.display="none";
-           document.getElementById("usStateDiv").style.display="block";
+        setStateDiv($val);
+
+        if ($val == 'OC') {
+            document.getElementById("otherCountryDiv").style.display = "block";
+            document.getElementById("usStateDiv").style.display = "none";
         }
-   }
-   
-   function setStateDiv( $val ){
+        else {
+            document.getElementById("otherCountryDiv").style.display = "none";
+            document.getElementById("usStateDiv").style.display = "block";
+        }
+    }
+
+    function setStateDiv($val) {
         var countryList = document.getElementById("countryId");
         var countryValue = countryList.valueOf();
 
-        if( $val == 'OC'){
-           document.getElementById("otherCountryDiv").style.display="block";
-           document.getElementById("usStateDiv").style.display="none";
-       }
-       else{
-           document.getElementById("otherCountryDiv").style.display="none";
-           document.getElementById("usStateDiv").style.display="block";
+        if ($val == 'OC') {
+            document.getElementById("otherCountryDiv").style.display = "block";
+            document.getElementById("usStateDiv").style.display = "none";
         }
-       
-   }
+        else {
+            document.getElementById("otherCountryDiv").style.display = "none";
+            document.getElementById("usStateDiv").style.display = "block";
+        }
+
+    }
 </script>
 
 
@@ -141,7 +138,7 @@
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
-                <caption><b>家庭与个人报名资料: Family and Personal Data ABC</b> </caption><tbody>
+                <caption><b>家庭与个人报名资料: Family and Personal Data</b> </caption><tbody>
                     <tr>
                         <td style="width:40%"></td>
                         <td  style="width:60%"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
@@ -170,16 +167,16 @@
                         <td>国家 Country:</td>
                         <td>
                             <form:select id="countryId" path="address.ucCountry" onchange="countrySelected(value);">
-                               <form:option value="" label="-- Select Country --" /> 
+                                <form:option value="" label="-- Select Country --" /> 
                                 <form:options items="${form.countries}" itemValue="value" itemLabel="label" />
                             </form:select>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                                         <div id="usStateDiv" style="display:block;">
+                            <div id="usStateDiv" style="display:block;">
 
-                                    <table style="text-align: left; width: 470px; border: blue;">
+                                <table style="text-align: left; width: 470px; border: blue;">
                                     <tr>
                                         <td style="width: 40%;" ></td>
                                         <td style="width: 60%;" >
@@ -202,39 +199,39 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                                         <div id="otherCountryDiv" style="display:none;">
-                                
+                            <div id="otherCountryDiv" style="display:none;">
+
                                 <table>
-                                 <tr>
-                                    <td colspan="2" align="center">若非美国和加拿大,
-                                        请填写如下信息：If other than
-                                        Canada or United States
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 40%;" ></td>
-                                    <td style="width: 60%;" >
-                                        <form:errors path="address.otherCountry" cssClass="fieldError"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>国家 Country: </td>
-                                    <td> 
-                                        <form:input path="address.otherCountry"  id="otherCountry"  size="30" maxlength="50" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 40%;" ></td>
-                                    <td style="width: 60%;" >
-                                        <form:errors path="address.otherState" cssClass="fieldError"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>州/省 State/Province: </td>
-                                    <td> 
-                                        <form:input path="address.otherState" id="otherState"  size="10" maxlength="20"  />
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="2" align="center">若非美国和加拿大,
+                                            请填写如下信息：If other than
+                                            Canada or United States
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 40%;" ></td>
+                                        <td style="width: 60%;" >
+                                            <form:errors path="address.otherCountry" cssClass="fieldError"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>国家 Country: </td>
+                                        <td> 
+                                            <form:input path="address.otherCountry"  id="otherCountry"  size="30" maxlength="50" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 40%;" ></td>
+                                        <td style="width: 60%;" >
+                                            <form:errors path="address.otherState" cssClass="fieldError"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>州/省 State/Province: </td>
+                                        <td> 
+                                            <form:input path="address.otherState" id="otherState"  size="10" maxlength="20"  />
+                                        </td>
+                                    </tr>
 
                                 </table>
                             </div>
@@ -264,7 +261,7 @@
                     </tr>
                     <tr>
                         <td>电邮 Email: </td>
-                        <td><form:input path="address.misc1" name="email" size="25" maxlength="50"/></td>
+                        <td><form:input id="email" path="address.misc1" name="email" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -272,7 +269,7 @@
                     </tr>
                     <tr>
                         <td>确认电邮 Confirm Email: </td>
-                        <td><form:input path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
+                        <td><form:input id="confirmEmail" path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
                         <td>所属教会/机构<br>
@@ -293,11 +290,11 @@
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step1', params: {fragments: "body"}}));
         </script>
     </form:form>
-                     
+
     <c:set var="ucCountryValue" value="${form.getAddress().getUcCountry()}" />
-        <script>
-            setStateDiv( "${ucCountryValue}" );
-        </script>
-       
+    <script>
+        setStateDiv("${ucCountryValue}");
+    </script>
+
 </div>
-        
+

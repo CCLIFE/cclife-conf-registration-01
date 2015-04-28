@@ -52,17 +52,16 @@ public class RegistrationForm extends BaseObject {
     private Payment payment;
     private String discountCode;
     private Expense expense;
-    
-    private PaymentMethod paymentMethod;  
-    
+
+    private PaymentMethod paymentMethod;
+    private List<Fee> fees;
+
     /** 
      * The following code is added for issue 23: Force the check box of payment.
      */
     private boolean chkPmt;
     private double donationAmt;
-    
-    private List<Fee> fees ;
-        
+
     private List<LabelValue> ageGroup;
     private List<LabelValue> countries;
     private List<LabelValue> relationshipGroup;
@@ -71,12 +70,12 @@ public class RegistrationForm extends BaseObject {
     private List<LabelValue> stateList;
 
     /**
-     * For issue5.
-     * The following part is added for language and interpret headphone.
+     * For issue5. The following part is added for language and interpret
+     * headphone.
      */
     private List<LabelValue> languages;
     private List<LabelValue> headphones;
-    
+
     /**
      * Default constructor, mainly for hibernate use.
      */
@@ -96,7 +95,6 @@ public class RegistrationForm extends BaseObject {
 //
 //        logger.debug("Exit initialize Form...");
 //    }
-
     public void validateStart(ValidationContext context) {
         logger.debug("Validate start state...");
 
@@ -443,7 +441,6 @@ public class RegistrationForm extends BaseObject {
 //                    defaultText("You have enter invalid email").build());
 //        }
 //    }
-
 //    public void validateConsent(ValidationContext context) {
 //
 //        logger.debug("Validate consent state..[" + guardianFullName + "]");
@@ -480,8 +477,6 @@ public class RegistrationForm extends BaseObject {
 //                    defaultText("The emails you entered do not match").build());
 //        }
 //    }
-    
-
 //    public boolean isConsentNeeded() {
 //        return (age == null || age.isEmpty() || age.charAt(0) != 'A')
 //                && (age2 == null || age2.isEmpty() || age2.charAt(0) != 'A')
@@ -792,7 +787,7 @@ public class RegistrationForm extends BaseObject {
      * @throws CloneNotSupportedException on error
      */
     public RegistrationForm clone() throws CloneNotSupportedException {
-        
+
         super.clone();  // keep hierarchy
         RegistrationForm copy = new RegistrationForm();
         copy.setChurchCity(this.getChurchCity());
@@ -1074,24 +1069,24 @@ public class RegistrationForm extends BaseObject {
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    
+
     /**
-     * For issue5.
-     * The following methods is getters and setters for language and interpret headphones.
+     * For issue5. The following methods is getters and setters for language and
+     * interpret headphones.
      */
-    public void setLanguages( List<LabelValue> languages ){
+    public void setLanguages(List<LabelValue> languages) {
         this.languages = languages;
     }
-    
-    public List<LabelValue> getLanguages(){
+
+    public List<LabelValue> getLanguages() {
         return this.languages;
     }
-    
-    public void setHeadphones( List<LabelValue> headphones ){
+
+    public void setHeadphones(List<LabelValue> headphones) {
         this.headphones = headphones;
     }
-    
-    public List<LabelValue> getHeadphones(){
+
+    public List<LabelValue> getHeadphones() {
         return this.headphones;
     }
 

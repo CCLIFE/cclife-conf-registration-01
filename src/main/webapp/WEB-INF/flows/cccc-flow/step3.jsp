@@ -61,9 +61,18 @@
                     <tbody>
                         <tr>
                             <td align="left"> <b>第 ${count.count} 个人的资料 Information of Person No. ${count.count} </b>
-
                             </td>
-                            <td align="right"> </td>
+                            <td align="right"> 
+                                <c:set var="v" value="${count.index}"/>
+                                <button id="edit_${v}" type="submit" name="_eventId_edit" value="${v}">Edit</button>
+                                <script type="text/javascript">
+                                    Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'edit_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
+                                </script>
+                                <button id="remove_${v}" type="submit" name="_eventId_remove" value="${v}">Delete</button>
+                                <script type="text/javascript">
+                                    Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'remove_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
+                                </script>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -76,7 +85,7 @@
                                             <td>${registrant.person.gender}</td>
                                         </tr>
                                         <tr>
-                                           <td>English Lastname:</td>
+                                            <td>English Lastname:</td>
                                             <td>${registrant.person.lastName}</td>
                                             <td>English Firstname:</td>
                                             <td>${registrant.person.firstName}</td>
@@ -102,7 +111,7 @@
                                             <td>${registrant.person.headphone}</td>
                                         </tr>
                                         <tr>
-                                           <td>事奉角色:</td>
+                                            <td>事奉角色:</td>
                                             <td colspan="3">${registrant.person.servingRole}</td>
                                         </tr>
                                         <tr>
@@ -187,6 +196,7 @@
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'previous', event: 'onclick', formId: 'step3', params: {fragments: "body"}}));
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step3', params: {fragments: "body"}}));
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'new', event: 'onclick', formId: 'step3', params: {fragments: "body"}}));
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'aaaaaaa', event: 'onclick', formId: 'step3', params: {fragments: "body"}}));
         </script>
     </form:form>
 </div>

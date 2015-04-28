@@ -9,7 +9,6 @@ package com.cclife.registration.domain;
  * @author JianxinYao
  */
 import java.io.Serializable;
-import com.cclife.registration.domain.BaseObject;
 
 /**
  * Object mapping for hibernate-handled table: tblperson.
@@ -25,7 +24,7 @@ public class Paypal extends BaseObject implements Serializable {
     private String cmd = "_ext-enter";
     private String redirect_cmd = "_xclick";
     private String business = "registration@cccm.ws";
-    private String item_name = "Grace 2011/CCCC 2011";
+    private String item_name = "";
     private String item_number = "";
     private String amount = "";
     private String custom = "";
@@ -34,7 +33,7 @@ public class Paypal extends BaseObject implements Serializable {
     private String currency_code = "USD";
     private String lc = "US";
     private String bn = "PP-BuyNowBF";
-    private String reten = "http://cccm.homeip.net/registration/confirm.html";
+    private String reten = "";
     private String rm = "2";
     private String email = "";
     private String first_name = "";
@@ -61,12 +60,12 @@ public class Paypal extends BaseObject implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 12345678;
     }
 
     /**
