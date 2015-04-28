@@ -21,6 +21,11 @@ public class FormValidator {
 
         MessageContext messages = context.getMessageContext();
 
+         if( !form.getChkPmt() ){
+           messages.addMessage(new MessageBuilder().error().source("chkPmt").
+                    defaultText("Please check the checkbox to authorize payment." ).build());
+        }
+                
         if (form.getPaymentMethod() != PaymentMethod.CREDIT_CARD && form.getPaymentMethod() != PaymentMethod.PERSONAL_CHECK) {
             messages.addMessage(new MessageBuilder().error().source("paymentMethod").
                     defaultText("Please select your payment option").build());
