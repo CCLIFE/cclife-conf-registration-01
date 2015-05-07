@@ -56,6 +56,12 @@ public class RegistrationForm extends BaseObject {
     private PaymentMethod paymentMethod;
     private List<Fee> fees;
 
+    /** 
+     * The following code is added for issue 23: Force the check box of payment.
+     */
+    private boolean chkPmt;
+    private double donationAmt;
+
     private List<LabelValue> ageGroup;
     private List<LabelValue> countries;
     private List<LabelValue> relationshipGroup;
@@ -1096,5 +1102,24 @@ public class RegistrationForm extends BaseObject {
      */
     public void setFees(List<Fee> fees) {
         this.fees = fees;
+    }
+    
+    /**
+     * The following code is added for issue23: forced the checkbox of payment.
+     * @param chkPmt checkbox of payment
+     * @param donationAmt donation amount
+     */
+    public void setChkPmt( boolean chkPmt ){
+        this.chkPmt = chkPmt;
+    }
+    public boolean getChkPmt(){
+        return chkPmt;
+    }
+    
+    public void setDonationAmt( double donationAmt ){
+        this.donationAmt = donationAmt;
+    }
+    public double getDonationAmt(){
+        return donationAmt;
     }
 }
