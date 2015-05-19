@@ -145,16 +145,16 @@ public class RegistrationController {
         List<LabelValue> relationshipGroup;
         relationshipGroup = new ArrayList<LabelValue>();
 
-        relationshipGroup.add(new LabelValue("H(\u592B)", "H")); // H(?)
-        relationshipGroup.add(new LabelValue("W(\u59BB)", "W")); // W(?)
-        relationshipGroup.add(new LabelValue("S(\u5B50)", "S")); // S(?)
-        relationshipGroup.add(new LabelValue("D(\u5973)", "D")); // D(?) 
-        relationshipGroup.add(new LabelValue("F(\u7236)", "F")); // F(?)
-        relationshipGroup.add(new LabelValue("M(\u6BCD)", "M")); // M(?)
-        relationshipGroup.add(new LabelValue("B(\u5144\u5F1F)", "B")); // B(??)
-        relationshipGroup.add(new LabelValue("T(\u59CA\u59B9)", "T")); // T(??)
-        relationshipGroup.add(new LabelValue("C(\u540C\u5B66)", "C")); // C(??)
-        relationshipGroup.add(new LabelValue("O(\u540C\u4E8B)", "O")); // O(??)
+        relationshipGroup.add(new LabelValue("H \u4e08\u592b", "H")); // H(?)
+        relationshipGroup.add(new LabelValue("W \u59bb\u5b50", "W")); // W(?)
+        relationshipGroup.add(new LabelValue("S \u5152\u5b50", "S")); // S(?)
+        relationshipGroup.add(new LabelValue("D \u5973\u5152", "D")); // D(?) 
+        relationshipGroup.add(new LabelValue("F \u7236\u89aa", "F")); // F(?)
+        relationshipGroup.add(new LabelValue("M \u6bcd\u89aa", "M")); // M(?)
+        relationshipGroup.add(new LabelValue("B \u5144\u5F1F", "B")); // B(??)
+        relationshipGroup.add(new LabelValue("T \u59CA\u59B9", "T")); // T(??)
+        relationshipGroup.add(new LabelValue("C \u540C\u5B66", "C")); // C(??)
+        relationshipGroup.add(new LabelValue("O \u540C\u4E8B", "O")); // O(??)
 
         registrationForm.setRelationshipGroup(relationshipGroup);
 
@@ -176,12 +176,12 @@ public class RegistrationController {
          * statusGroup.add(new LabelValue("O(\u5176\u4ED6)", "O"));
          *
          */
-        statusGroup.add(new LabelValue("\u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
-        statusGroup.add(new LabelValue("\u795E\u5B78\u751F", "2"));
-        statusGroup.add(new LabelValue("\u6559\u6703\u9577\u57F7 / \u5718\u5951\u540C\u5DE5", "3"));
-        statusGroup.add(new LabelValue("\u798F\u97F3\u6A5F\u69CB\u540C\u5DE5", "4"));
-        statusGroup.add(new LabelValue("\u6559\u6703\u6210\u54E1", "5"));
-        statusGroup.add(new LabelValue("\u6155\u9053\u53CB", "6"));
+        statusGroup.add(new LabelValue("P \u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
+        statusGroup.add(new LabelValue("S \u795E\u5B78\u751F", "2"));
+        statusGroup.add(new LabelValue("D \u6559\u6703\u9577\u57F7 / \u5718\u5951\u540C\u5DE5", "3"));
+        statusGroup.add(new LabelValue("O \u798F\u97F3\u6A5F\u69CB\u540C\u5DE5", "4"));
+        statusGroup.add(new LabelValue("M \u6559\u6703\u6210\u54E1", "5"));
+        statusGroup.add(new LabelValue("U \u6155\u9053\u53CB", "6"));
         /**
          * statusGroup.add(new LabelValue("-- Status(English Conf) --", ""));
          * statusGroup.add(new LabelValue("Married", "M")); statusGroup.add(new
@@ -228,24 +228,6 @@ public class RegistrationController {
         statusGroup2.add(new LabelValue("Elementary (K-5)", "EL"));
         statusGroup2.add(new LabelValue("Other", "O"));
 
-//        statusGroup2.add(new LabelValue("Married", "M"));
-//        statusGroup2.add(new LabelValue("Engaged", "EN"));
-//        statusGroup2.add(new LabelValue("Single", "S"));
-//        statusGroup2.add(new LabelValue("Graduate School", "G"));
-//        statusGroup2.add(new LabelValue("Undergrad   - Sr", "CS"));
-//        statusGroup2.add(new LabelValue("Undergrad   - Jr", "CJ"));
-//        statusGroup2.add(new LabelValue("Undergrad   - So", "CO"));
-//        statusGroup2.add(new LabelValue("Undergrad   - Fr", "CF"));
-//        statusGroup2.add(new LabelValue("Senior High - Sr", "SS"));
-//        statusGroup2.add(new LabelValue("Senior High - Jr", "SJ"));
-//        statusGroup2.add(new LabelValue("Senior High - So", "SO"));
-//        statusGroup2.add(new LabelValue("Senior High - Fr", "SF"));
-//        statusGroup2.add(new LabelValue("Junior High - 6th grade", "J6"));
-//        statusGroup2.add(new LabelValue("Junior High - 7th grade", "J7"));
-//        statusGroup2.add(new LabelValue("Junior High - 8th grade", "J8"));
-//        statusGroup2.add(new LabelValue("Toddlers (age 0-3)", "TO"));
-//        statusGroup2.add(new LabelValue("Elementary (K-5)", "EL"));
-//        statusGroup2.add(new LabelValue("Other", "O"));
         registrationForm.setStatusGroup2(statusGroup2);
 
         List<LabelValue> stateList;
@@ -342,14 +324,14 @@ public class RegistrationController {
          * The following code added for issue5.
          */
         List<LabelValue> languageList = new ArrayList<LabelValue>();
-        languageList.add(new LabelValue("Mandarin", "M"));
-        languageList.add(new LabelValue("Cantonese", "C"));
-        languageList.add(new LabelValue("English", "E"));
+        languageList.add(new LabelValue("\u666e\u901a\u8a71 Mandarin", "M"));
+        languageList.add(new LabelValue("\u5ee3\u6771\u8a71 Cantonese", "C"));
+        languageList.add(new LabelValue("\u82f1\u6587 English", "E"));
         registrationForm.setLanguages(languageList);
 
         List<LabelValue> headphoneList = new ArrayList<LabelValue>();
-        headphoneList.add(new LabelValue("Mandarin to Cantonese", "MtoC"));
-        headphoneList.add(new LabelValue("Mandarin to English", "MtoE"));
+        headphoneList.add(new LabelValue("\u7cb5\u8a9e\u8033\u6a5f (M to C)", "MtoC"));
+        headphoneList.add(new LabelValue("\u82f1\u8a9e\u8033\u6a5f (M to E)", "MtoE"));
         registrationForm.setHeadphones(headphoneList);
         /**
          * End of code for issue5.
