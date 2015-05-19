@@ -171,14 +171,29 @@ public class FormValidator {
             messages.addMessage(new MessageBuilder().error().source("address.homeZip").
                     defaultText("Please enter your zip code. ").build());
         }
-        else{
-            String zip = form.getAddress().getHomeZip().trim();
-            zip=zip.replaceAll("[\\-]","");
-            if(!zip.matches("[0-9]+") ){
-                messages.addMessage(new MessageBuilder().error().source("address.homeZip").
-                        defaultText("Please enter valid zip code.").build());
+        else{  
+            if ( !form.getAddress().getUcCountry().trim().isEmpty() ){
+
+                if( form.getAddress().getUcCountry().trim().equals("CA") ) {
+                    // validate zipcode for CA,  which should be length of 6 or 7
+                    String caZip = form.getAddress().getHomeZip().trim();
+
+                    if( caZip.length() != 6 && caZip.length() != 7){
+                        messages.addMessage(new MessageBuilder().error().source("address.homeZip").
+                            defaultText("Please enter valid zip code.").build());
+                    }
+                }
+                else if( form.getAddress().getUcCountry().trim().equals("US") ){  
+                    // zipcode for US should be numeric.
+                    String zip = form.getAddress().getHomeZip().trim();
+                    zip=zip.replaceAll("[\\-]","");
+                    if(!zip.matches("[0-9]+") ){
+                        messages.addMessage(new MessageBuilder().error().source("address.homeZip").
+                                defaultText("Please enter valid zip code.").build());
+                    }
+                }
             }
-         }
+        }
                 
         if (form.getAddress().getHomePhone().trim().isEmpty() ) {
             messages.addMessage(new MessageBuilder().error().source("address.homePhone").
