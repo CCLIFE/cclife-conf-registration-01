@@ -2,13 +2,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
-    <p class="notice">Review Registration Summary</p>
+    <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
     <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table align="center">
-                <caption><b>目前注册信息 Your Registration Summary</b> </caption> <tbody>
+                <caption> <b>地址信息 Address information</b></caption> 
+                <tbody>
                     <tr>
-                        <td>住址 Street Address1: </td>
+                        <td width="40%">住址 Street Address1: </td>
                         <td>${form.address.homeAddress} </td>
                     </tr>
                     <tr>
@@ -24,11 +25,11 @@
                         <td>${form.address.homeState}</td>
                     </tr>
                     <tr>
-                        <td align="rignt">邮政编码 Zipcode/Postal Code:</td>
+                        <td>邮政编码 Zipcode/Postal Code:</td>
                         <td>${form.address.homeZip}</td>
                     </tr>
                     <tr>
-                        <td align="rignt">国家 Country:</td>
+                        <td>国家 Country:</td>
                         <td>${form.address.country}</td>
                     </tr>
                     <tr>
@@ -60,7 +61,16 @@
                 <table style="text-align: left; margin-left: auto; margin-right: auto; border:2; width: 100%" >
                     <tbody>
                         <tr>
-                            <td align="left"> <b>第 ${count.count} 个人的资料 Information of Person No. ${count.count} </b>
+                            <td align="left"> <b>
+                                <c:set var="c" value="${count.count}"/>
+
+                                <c:if test="${c == 1}">  
+                                    第 1 个人 (主报人) 的资料   Information of Primary Person 
+                                </c:if>     
+                                <c:if test="${c != 1}">  
+                                    第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
+                                </c:if>
+                                </b>
                             </td>
                             <td align="right"> 
                                 <c:set var="v" value="${count.index}"/>
@@ -79,10 +89,10 @@
                                 <table style="width: 500px; height: 61px; text-align: left; margin-left: auto; margin-right: auto; border:2; ">
                                     <tbody>
                                         <tr>
-                                            <td>中文姓名:</td>
-                                            <td>${registrant.person.chineseName}</td>
-                                            <td>性别 Gender:</td>
-                                            <td>${registrant.person.gender}</td>
+                                            <td width="25%">sd中文姓名:</td>
+                                            <td width="25%">${registrant.person.chineseName}</td>
+                                            <td width="25%">性别 Gender:</td>
+                                            <td width="25%">${registrant.person.gender}</td>
                                         </tr>
                                         <tr>
                                             <td>English Lastname:</td>
