@@ -435,7 +435,11 @@ public class RegistrationController {
         return registrant;
     }
 
-     public Registrant editPerson(RegistrationForm form, LocalAttributeMap currentEvent) {
+    public Registrant removeNewPerson(RegistrationForm form) {
+        return form.getRegistrants().remove((form.getRegistrants().size() - 1));
+    }
+
+    public Registrant editPerson(RegistrationForm form, LocalAttributeMap currentEvent) {
 
         logger.debug("Value:" + currentEvent);
         //Debug
@@ -453,11 +457,11 @@ public class RegistrationController {
 
         if (index != null) {
             return form.getRegistrants().get(Integer.parseInt(index));
-        } 
-        
-        return null ;
+        }
+
+        return null;
     }
-     
+
     public Registrant deletePerson(RegistrationForm form, LocalAttributeMap currentEvent) {
 
         logger.debug("Value:" + currentEvent);
@@ -476,9 +480,9 @@ public class RegistrationController {
 
         if (index != null) {
             return form.getRegistrants().remove(Integer.parseInt(index));
-        } 
-        
-        return null ;
+        }
+
+        return null;
     }
 
     public Paypal createPaypalRequest(RegistrationForm form) {

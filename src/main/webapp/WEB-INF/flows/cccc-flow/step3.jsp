@@ -136,6 +136,7 @@
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='TRANSPORTATION' }"><c:set var="transportation" value="Y" /></c:if>
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='MEDICAL_SUPPORT' }"><c:set var="medical_support" value="Y" /></c:if>
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='OTHER' }"><c:set var="other" value="Y" /></c:if>
+                <c:if test="${registrant.volunteerJobs.contains(se) && se=='SMALL_GROUP_LEADER' }"><c:set var="small_group_leader" value="Y" /></c:if>
             </c:forEach>
             <div>
                 <table style="text-align: left; width: 500px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
@@ -154,6 +155,9 @@
                             <td>交通 &nbsp;${transportation}</td>
                             <td>医疗 &nbsp;${medical_support}</td>
                             <td>其他 &nbsp;${other}</td>
+                        </tr>
+                        <tr>
+                            <td>Youth group leader &nbsp;${small_group_leader}</td>
                         </tr>
                     </tbody>
                 </table>

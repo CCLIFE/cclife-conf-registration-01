@@ -161,6 +161,9 @@
                     <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
                     <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
                 </tr>
+                <tr>
+                    <td>Youth Small Group Leader &nbsp;<form:checkbox path="volunteerJobs" value="SMALL_GROUP_LEADER"/></td>
+                </tr>
             </tbody>
         </table>
         <hr style="width: 80%; height: 2px;">

@@ -35,9 +35,14 @@
     <view-state id="step2" model="registrant" view="cccc/step2">
         <transition on="previous" to="step1"/>
         <transition on="next" to="calculateFee"/> 
-        <transition on="cancel" to="cancel"/>
+        <transition on="cancel" to="removeNew" validate="false"/>
     </view-state>
     
+    <action-state id="removeNew">
+        <evaluate expression="registrationController.removeNewPerson(form)"  />
+        <transition to="step3" />
+    </action-state>
+
     <action-state id="calculateFee">
         <evaluate expression="registrationController.calculateFee(form)"  />
         <transition to="step3" />
@@ -77,7 +82,7 @@
 
     <action-state id="prepareCredit">
         <evaluate expression="registrationController.createPaypalRequest(form)"
-                  result="payObj"/>
+              result="payObj"/>
         <transition to="confirmAndPayByCredit" />
     </action-state>
 
