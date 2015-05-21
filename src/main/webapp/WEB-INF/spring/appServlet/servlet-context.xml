@@ -28,7 +28,7 @@
     <mvc:default-servlet-handler />
     
     <bean id="messageSource"
-              class="org.springframework.context.support.ResourceBundleMessageSource">
+          class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages" />
     </bean>
 
@@ -42,12 +42,15 @@
         </property>
     </bean>
     
+    <bean id="flowController" class="org.springframework.webflow.mvc.servlet.FlowController">
+        <property name="flowExecutor" ref="flowExecutor" />
+    </bean>
     <!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="order" value="-1"/>
         <property name="flowRegistry" ref="flowRegistry" />
     </bean>
-
+    
     <!-- Resolves logical view names returned by Controllers to Tiles; a view name to resolve is treated as the name of a tiles definition -->
     <bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>

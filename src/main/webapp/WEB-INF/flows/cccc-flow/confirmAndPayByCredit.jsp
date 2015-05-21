@@ -9,7 +9,7 @@
             <p>點擊”Pay Now” 進入PayPal網頁</p>
             <ul type="circle">
                 <li>信用卡支付者請選擇第二項，無須登入PayPal帳戶</li>
-                <li>付款後，請點擊 <b>return to CCCC/GRACE 2014</b> 回到CCCC/Grace 2014付款確認頁面</li>
+                <li>付款後，請點擊 <b>return to GFCC 2015</b> 回到GFCC 2015付款確認頁面</li>
                 <li>請勿點擊瀏覽器的<b>退回鍵</b>,以免丟失您所有信息。</li>
             </ul>
             <b>Pay Now with Credit Card or PayPal</b>

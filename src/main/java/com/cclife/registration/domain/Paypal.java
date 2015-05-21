@@ -23,7 +23,7 @@ public class Paypal extends BaseObject implements Serializable {
     private static final long serialVersionUID = 3832626162173359488L;
     private String cmd = "_ext-enter";
     private String redirect_cmd = "_xclick";
-    private String business = "registration@cccm.ws";
+    private String business = "cclife@sbcglobal.net";
     private String item_name = "";
     private String item_number = "";
     private String amount = "";

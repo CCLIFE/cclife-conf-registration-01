@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
     <p align="center"><span class="style2">中国福音大会 2015 报名表 </span><br/>
-        主题:《覺醒--預備迎見你的神》 讲员:饒孝楫、劉傳章、劉志雄...等牧師<br/>
-        时间: 12月27日(週六晚)開始,12月30日(週二午)結束 <br/>地点: &nbsp;The Prayer Palace Church 1111 Arrow Road. Toronto, ON M9M 3B3 Canada<br />
+        时间: 2015年12月28日至12月30日 &nbsp;大会地点: &nbsp;The Prayer Palace Church 1111 Arrow Road, Toronto, ON M9M 3B3 Canada<br />
     </p>
     <h4 class="alt"><a href="<c:url value="/"/>">Home</a></h4>
     <hr>
