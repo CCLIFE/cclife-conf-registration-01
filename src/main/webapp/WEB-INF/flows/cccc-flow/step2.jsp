@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <div id="embeddedFlow">
     <p class="notice">step 2 - Enter individual information</p>
-    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant">
+    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
