@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
     <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
-    <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form">
+    <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
         <div>
             <table align="center">
                 <caption> <b>地址信息 Address information</b></caption> 
@@ -89,7 +89,7 @@
                                 <table style="width: 500px; height: 61px; text-align: left; margin-left: auto; margin-right: auto; border:2; ">
                                     <tbody>
                                         <tr>
-                                            <td width="25%">sd中文姓名:</td>
+                                            <td width="25%">中文姓名:</td>
                                             <td width="25%">${registrant.person.chineseName}</td>
                                             <td width="25%">性别 Gender:</td>
                                             <td width="25%">${registrant.person.gender}</td>
