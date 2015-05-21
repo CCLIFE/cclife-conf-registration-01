@@ -85,6 +85,72 @@ public class FormValidator {
                     
                     form.setStateList(stateList);
                 }
+                else if ( countrySelected.equals("US")){
+                    List<LabelValue> stateList = new ArrayList<LabelValue>();
+
+                    stateList.add(new LabelValue("Alabama", "AL"));
+                    stateList.add(new LabelValue("Alaska", "AK"));
+                    stateList.add(new LabelValue("Alberta", "AB"));
+                    stateList.add(new LabelValue("American Samoa", "AS"));
+                    stateList.add(new LabelValue("Arizona", "AZ"));
+                    stateList.add(new LabelValue("Arkansas", "AR"));
+                    stateList.add(new LabelValue("British Columbia", "BC"));
+                    stateList.add(new LabelValue("California", "CA"));
+                    stateList.add(new LabelValue("Colorado", "CO"));
+                    stateList.add(new LabelValue("Connecticut", "CT"));
+                    stateList.add(new LabelValue("Delaware", "DE"));
+                    stateList.add(new LabelValue("District Of Columbia", "DC"));
+                    stateList.add(new LabelValue("Florida", "FL"));
+                    stateList.add(new LabelValue("Georgia", "GA"));
+                    stateList.add(new LabelValue("Guam", "GU"));
+                    stateList.add(new LabelValue("Hawaii", "HI"));
+                    stateList.add(new LabelValue("Idaho", "ID"));
+                    stateList.add(new LabelValue("Illinois", "IL"));
+                    stateList.add(new LabelValue("Indiana", "IN"));
+                    stateList.add(new LabelValue("Iowa", "IA"));
+                    stateList.add(new LabelValue("Kansas", "KS"));
+                    stateList.add(new LabelValue("Kentucky", "KY"));
+                    stateList.add(new LabelValue("Louisiana", "LA"));
+                    stateList.add(new LabelValue("Maine", "ME"));
+                    stateList.add(new LabelValue("Manitoba", "MB"));
+                    stateList.add(new LabelValue("Maryland", "MD"));
+                    stateList.add(new LabelValue("Massachusetts", "MA"));
+                    stateList.add(new LabelValue("Michigan", "MI"));
+                    stateList.add(new LabelValue("Minnesota", "MN"));
+                    stateList.add(new LabelValue("Mississippi", "MS"));
+                    stateList.add(new LabelValue("Missouri", "MO"));
+                    stateList.add(new LabelValue("Montana", "MT"));
+                    stateList.add(new LabelValue("Nebraska", "NE"));
+                    stateList.add(new LabelValue("Nevada", "NV"));
+                    stateList.add(new LabelValue("New Brunswick", "NB"));
+                    stateList.add(new LabelValue("New Hampshire", "NH"));
+                    stateList.add(new LabelValue("New Jersey", "NJ"));
+                    stateList.add(new LabelValue("New Mexico", "NM"));
+                    stateList.add(new LabelValue("New York", "NY"));
+                    stateList.add(new LabelValue("North Carolina", "NC"));
+                    stateList.add(new LabelValue("North Dakota", "ND"));
+                    stateList.add(new LabelValue("Ohio", "OH"));
+                    stateList.add(new LabelValue("Oklahoma", "OK"));
+                    stateList.add(new LabelValue("Ontario", "ON"));
+                    stateList.add(new LabelValue("Oregon", "OR"));
+                    stateList.add(new LabelValue("Pennsylvania", "PA"));
+                    stateList.add(new LabelValue("Rhode Island", "RI"));
+                    stateList.add(new LabelValue("South Carolina", "SC"));
+                    stateList.add(new LabelValue("South Dakota", "SD"));
+                    stateList.add(new LabelValue("Tennessee", "TN"));
+                    stateList.add(new LabelValue("Texas", "TX"));
+                    stateList.add(new LabelValue("Utah", "UT"));
+                    stateList.add(new LabelValue("Vermont", "VT"));
+                    stateList.add(new LabelValue("Virgin Islands", "VI"));
+                    stateList.add(new LabelValue("Virginia", "VA"));
+                    stateList.add(new LabelValue("Washington", "WA"));
+                    stateList.add(new LabelValue("West Virginia", "WV"));
+                    stateList.add(new LabelValue("Wisconsin", "WI"));
+                    stateList.add(new LabelValue("Wyoming", "WY"));
+                   
+                    form.setStateList(stateList);
+
+                }
             }else{ //other country
                 if (form.getAddress().getOtherCountry().trim().isEmpty() ) {
                    messages.addMessage(new MessageBuilder().error().source("address.otherCountry").
