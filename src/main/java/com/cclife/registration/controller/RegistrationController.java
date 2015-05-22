@@ -409,6 +409,14 @@ public class RegistrationController {
         Registrant registrant = new Registrant();
         Person person = new Person();
         //person.setFirstName("New");
+        if (form.getRegistrants().isEmpty()) {
+            person.setChineseName(form.getPrimaryChineseName());
+            person.setFirstName(form.getPrimaryFirstName());
+            person.setLastName(form.getPrimaryLastName());
+            person.setPhone(form.getAddress().getHomePhone());
+            person.setEmail(form.getAddress().getMisc1());
+        }
+        
         registrant.setPerson(person);
         form.getRegistrants().add(registrant);
         Mealplan mealPlan = new Mealplan();

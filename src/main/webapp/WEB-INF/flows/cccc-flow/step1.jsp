@@ -249,6 +249,30 @@
                     </tr>
                     <tr>
                         <td></td>
+                        <td> <form:errors path="primaryChineseName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td>Primary Chinese Name: </td>
+                        <td><form:input path="primaryChineseName" name="primaryChineseName" size="15" maxlength="15"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td> <form:errors path="primaryFirstName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td>Primary First Name: </td>
+                        <td><form:input path="primaryFirstName" name="primaryFirstName" size="15" maxlength="15"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td> <form:errors path="primaryLastName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td>Primary Last Name: </td>
+                        <td><form:input path="primaryLastName" name="primaryLastName" size="15" maxlength="15"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
                         <td> <form:errors path="address.homePhone" cssClass="fieldError"/></td>
                     </tr>
                     <tr>

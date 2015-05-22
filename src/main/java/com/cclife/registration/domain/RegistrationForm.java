@@ -56,6 +56,9 @@ public class RegistrationForm extends BaseObject {
     private PaymentMethod paymentMethod;
     private List<Fee> fees;
 
+    private String primaryChineseName;
+    private String primaryFirstName ;
+    private String primaryLastName ;
     /** 
      * The following code is added for issue 23: Force the check box of payment.
      */
@@ -1121,5 +1124,47 @@ public class RegistrationForm extends BaseObject {
     }
     public double getDonationAmt(){
         return donationAmt;
+    }
+
+    /**
+     * @return the primaryChineseName
+     */
+    public String getPrimaryChineseName() {
+        return primaryChineseName;
+    }
+
+    /**
+     * @param primaryChineseName the primaryChineseName to set
+     */
+    public void setPrimaryChineseName(String primaryChineseName) {
+        this.primaryChineseName = primaryChineseName;
+    }
+
+    /**
+     * @return the primaryFirstName
+     */
+    public String getPrimaryFirstName() {
+        return primaryFirstName;
+    }
+
+    /**
+     * @param primaryFirstName the primaryFirstName to set
+     */
+    public void setPrimaryFirstName(String primaryFirstName) {
+        this.primaryFirstName = primaryFirstName;
+    }
+
+    /**
+     * @return the primaryLastName
+     */
+    public String getPrimaryLastName() {
+        return primaryLastName;
+    }
+
+    /**
+     * @param primaryLastName the primaryLastName to set
+     */
+    public void setPrimaryLastName(String primaryLastName) {
+        this.primaryLastName = primaryLastName;
     }
 }
