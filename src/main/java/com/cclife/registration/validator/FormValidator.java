@@ -5,12 +5,14 @@ import com.cclife.registration.domain.RegistrationForm;
 import com.cclife.registration.domain.LabelValue;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class FormValidator {
@@ -21,11 +23,11 @@ public class FormValidator {
 
         MessageContext messages = context.getMessageContext();
 
-         if( !form.getChkPmt() ){
-           messages.addMessage(new MessageBuilder().error().source("chkPmt").
-                    defaultText("Please check the checkbox to authorize payment." ).build());
+        if (!form.getChkPmt()) {
+            messages.addMessage(new MessageBuilder().error().source("chkPmt").
+                    defaultText("Please check the checkbox to authorize payment.").build());
         }
-                
+
         if (form.getPaymentMethod() != PaymentMethod.CREDIT_CARD && form.getPaymentMethod() != PaymentMethod.PERSONAL_CHECK) {
             messages.addMessage(new MessageBuilder().error().source("paymentMethod").
                     defaultText("Please select your payment option").build());
@@ -34,58 +36,57 @@ public class FormValidator {
         logger.debug("Validate review1 state..[" + form.getPaymentMethod() + "]");
 
     }
-        
+
     public void validateStep1(RegistrationForm form, ValidationContext context) {
-        
+
         MessageContext messages = context.getMessageContext();
 
-        if (form.getAddress().getHomeAddress().trim().isEmpty() ) {
+        if (form.getAddress().getHomeAddress().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homeAddress").
-                    defaultText("Please enter your home address. ").build());
+                    code("homeAddress").build());
         }
 
-        if (form.getAddress().getHomeCity().trim().isEmpty() ) {
+        if (form.getAddress().getHomeCity().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homeCity").
                     defaultText("Please enter your city. ").build());
         }
 
-        if (form.getAddress().getUcCountry().trim().isEmpty() ) {
+        if (form.getAddress().getUcCountry().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.ucCountry").
                     defaultText("Please enter your country. ").build());
-        }else{
-             String countrySelected = form.getAddress().getUcCountry().trim();
-             if( !countrySelected.equals("OC")){  //US or Canada
-                if (form.getAddress().getUcState().trim().isEmpty() ) {
-                   messages.addMessage(new MessageBuilder().error().source("address.ucState").
-                           defaultText("Please enter your state/province. ").build());
-                }else{
-    
-                    form.getAddress().setCountry( countrySelected );
-                    form.getAddress().setHomeState( form.getAddress().getUcState().trim() );
+        } else {
+            String countrySelected = form.getAddress().getUcCountry().trim();
+            if (!countrySelected.equals("OC")) {  //US or Canada
+                if (form.getAddress().getUcState().trim().isEmpty()) {
+                    messages.addMessage(new MessageBuilder().error().source("address.ucState").
+                            defaultText("Please enter your state/province. ").build());
+                } else {
+
+                    form.getAddress().setCountry(countrySelected);
+                    form.getAddress().setHomeState(form.getAddress().getUcState().trim());
                 }
-                if( countrySelected.equals("CA")){  //if CA, then initialize the select drop down list
+                if (countrySelected.equals("CA")) {  //if CA, then initialize the select drop down list
                     List<LabelValue> stateList = new ArrayList<LabelValue>();
 
                     stateList.add(new LabelValue("Alberta", "AB"));
                     stateList.add(new LabelValue("British Columbia", "BC"));
                     stateList.add(new LabelValue("Manitoba", "MB"));
                     stateList.add(new LabelValue("New Brunswick", "NB"));
-                    
+
                     stateList.add(new LabelValue("Newfoundland and Labrador", "NL"));
                     stateList.add(new LabelValue("Nova Scotia", "NS"));
                     stateList.add(new LabelValue("Northwest Territories", "NT"));
                     stateList.add(new LabelValue("Nunavut", "NU"));
-                    
+
                     stateList.add(new LabelValue("Ontario", "ON"));
                     stateList.add(new LabelValue("rince Edward Island", "PE"));
                     stateList.add(new LabelValue("Quebec", "QC"));
                     stateList.add(new LabelValue("Saskatchewan", "SK"));
-                    
+
                     stateList.add(new LabelValue("Yukon", "YT"));
-                    
+
                     form.setStateList(stateList);
-                }
-                else if ( countrySelected.equals("US")){
+                } else if (countrySelected.equals("US")) {
                     List<LabelValue> stateList = new ArrayList<LabelValue>();
 
                     stateList.add(new LabelValue("Alabama", "AL"));
@@ -147,89 +148,83 @@ public class FormValidator {
                     stateList.add(new LabelValue("West Virginia", "WV"));
                     stateList.add(new LabelValue("Wisconsin", "WI"));
                     stateList.add(new LabelValue("Wyoming", "WY"));
-                   
+
                     form.setStateList(stateList);
 
                 }
-            }else{ //other country
-                if (form.getAddress().getOtherCountry().trim().isEmpty() ) {
-                   messages.addMessage(new MessageBuilder().error().source("address.otherCountry").
-                           defaultText("Please enter your country. ").build());
+            } else { //other country
+                if (form.getAddress().getOtherCountry().trim().isEmpty()) {
+                    messages.addMessage(new MessageBuilder().error().source("address.otherCountry").
+                            defaultText("Please enter your country. ").build());
                 }
-                 
-                if (form.getAddress().getOtherState().trim().isEmpty() ) {
-                   messages.addMessage(new MessageBuilder().error().source("address.otherState").
-                           defaultText("Please enter your state/province. ").build());
-                }else{
-                    form.getAddress().setCountry( form.getAddress().getOtherCountry().trim() );
-                    form.getAddress().setHomeState( form.getAddress().getOtherState().trim() );
-                }
-              }
-         }
 
-        if (form.getAddress().getHomeZip().trim().isEmpty() ) {
+                if (form.getAddress().getOtherState().trim().isEmpty()) {
+                    messages.addMessage(new MessageBuilder().error().source("address.otherState").
+                            defaultText("Please enter your state/province. ").build());
+                } else {
+                    form.getAddress().setCountry(form.getAddress().getOtherCountry().trim());
+                    form.getAddress().setHomeState(form.getAddress().getOtherState().trim());
+                }
+            }
+        }
+
+        if (form.getAddress().getHomeZip().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homeZip").
                     defaultText("Please enter your zip code. ").build());
-        }
-        else{  
-            if ( !form.getAddress().getUcCountry().trim().isEmpty() ){
+        } else {
+            if (!form.getAddress().getUcCountry().trim().isEmpty()) {
 
-                if( form.getAddress().getUcCountry().trim().equals("CA") ) {
+                if (form.getAddress().getUcCountry().trim().equals("CA")) {
                     // validate zipcode for CA,  which should be length of 6 or 7
                     String caZip = form.getAddress().getHomeZip().trim();
 
-                    if( caZip.length() != 6 && caZip.length() != 7){
+                    if (caZip.length() != 6 && caZip.length() != 7) {
                         messages.addMessage(new MessageBuilder().error().source("address.homeZip").
-                            defaultText("Please enter valid zip code.").build());
+                                defaultText("Please enter valid zip code.").build());
                     }
-                }
-                else if( form.getAddress().getUcCountry().trim().equals("US") ){  
+                } else if (form.getAddress().getUcCountry().trim().equals("US")) {
                     // zipcode for US should be numeric.
                     String zip = form.getAddress().getHomeZip().trim();
-                    zip=zip.replaceAll("[\\-]","");
-                    if(!zip.matches("[0-9]+") ){
+                    zip = zip.replaceAll("[\\-]", "");
+                    if (!zip.matches("[0-9]+")) {
                         messages.addMessage(new MessageBuilder().error().source("address.homeZip").
                                 defaultText("Please enter valid zip code.").build());
                     }
                 }
             }
         }
-                
-        if (form.getAddress().getHomePhone().trim().isEmpty() ) {
+
+        if (form.getAddress().getHomePhone().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homePhone").
                     defaultText("Please enter your phone number. ").build());
-        }
-        else{  
+        } else {
             String phone = form.getAddress().getHomePhone().trim();
-            phone=phone.replaceAll("[\\-]","");
-            if(!phone.matches("[0-9]+") ){
+            phone = phone.replaceAll("[\\-]", "");
+            if (!phone.matches("[0-9]+")) {
                 messages.addMessage(new MessageBuilder().error().source("address.homePhone").
                         defaultText("Please enter valid phone number.").build());
             }
         }
-        
+
         String email1 = form.getAddress().getMisc1().trim();
         String email2 = form.getAddress().getMisc2().trim();
-        if ( email1.isEmpty() || !email1.contains("@") ) {
+        if (email1.isEmpty() || !email1.contains("@")) {
             messages.addMessage(new MessageBuilder().error().source("address.misc1").
                     defaultText("Please enter valid email address. ").build());
-        }
-        else{
-            if ( email2.isEmpty() || !email2.contains("@") ) {
+        } else {
+            if (email2.isEmpty() || !email2.contains("@")) {
                 messages.addMessage(new MessageBuilder().error().source("address.misc2").
                         defaultText("Please enter valid confirm email. ").build());
-            }
-            else{
-                if( !email1.equalsIgnoreCase(email2) ){
-                     messages.addMessage(new MessageBuilder().error().source("address.misc1").
+            } else {
+                if (!email1.equalsIgnoreCase(email2)) {
+                    messages.addMessage(new MessageBuilder().error().source("address.misc1").
                             defaultText("Email and confirm email are not identical. ").build());
 
                 }
             }
         }
-            
-     logger.debug("Validate step1 state..[" + form.getAddress() + "]");
 
-        
+        logger.debug("Validate step1 state..[" + form.getAddress() + "]");
+
     }
 }

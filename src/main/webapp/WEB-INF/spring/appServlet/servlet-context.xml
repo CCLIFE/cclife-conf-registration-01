@@ -32,19 +32,6 @@
         <property name="basename" value="messages" />
     </bean>
 
-    <bean id="handlerMapping"
-          class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <value>
-                /confirm.htm=confirmationController
-                /instantPaymentNotification.htm=confirmationController
-            </value>
-        </property>
-    </bean>
-    
-    <bean id="flowController" class="org.springframework.webflow.mvc.servlet.FlowController">
-        <property name="flowExecutor" ref="flowExecutor" />
-    </bean>
     <!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="order" value="-1"/>

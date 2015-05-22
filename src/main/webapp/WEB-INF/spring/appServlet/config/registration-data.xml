@@ -26,11 +26,6 @@
         <entry key="DINNER1"       value="201501,2015-12-31T00:00:00Z,0,0,DINNER1,Dinner Fee,8.0"/>
     </util:map>
           
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="messages" />
-    </bean>
-    
     <bean id="paypalInstance" class="com.cclife.registration.domain.Paypal">
         <property name="cmd" value="${redirect_cmd}" />
         <property name="redirect_cmd" value="${redirect_cmd}" />
