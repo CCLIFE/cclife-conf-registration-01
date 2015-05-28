@@ -134,38 +134,41 @@
 
 
 <div id="embeddedFlow">
-    <p class="notice">step 1 - Enter address and family information</p>
+    <p class="notice"><b>第一步 请先输入家庭地址和主报人姓名 <br>
+         step 1 - Enter address and family information</b></p>
+        <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
+    
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
-                <caption><b>家庭与个人报名资料: Family and Personal Data</b> </caption><tbody>
+                 
+                <tbody>
                     <tr>
-                        <td style="width:40%"></td>
-                        <td  style="width:60%"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
+                         <td  colspan="2" style="text-align:center"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>住址 Street Address1: </td>
-                        <td><form:input path="address.homeAddress" name="homeAddress" size="30" maxlength="60"/></td>
+                        <td style="width:40%">住址 Street Address1: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width:60%"><form:input path="address.homeAddress" name="homeAddress" size="30" maxlength="60"/></td>
                     </tr>
                     <tr>
                         <td>住址 Street Address2: </td>
                         <td><form:input path="address.homeAddress2" name="homeAddress2" size="30" maxlength="60"/> </td>
                     </tr>
+                    
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.homeCity" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center"> <form:errors path="address.homeCity" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>城市 City: </td>
-                        <td><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="30"/> </td>
+                        <td style="width:40%">城市 City: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width:60%"><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="30"/> </td>
+                    </tr>
+                   
+                    <tr>
+                        <td colspan="2" style="text-align:center"> <form:errors path="address.ucCountry" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.ucCountry" cssClass="fieldError"/></td>
-                    </tr>
-                    <tr>
-                        <td>国家 Country:</td>
-                        <td>
+                        <td style="width:40%">国家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width:40%">
                             <form:select id="countryId" path="address.ucCountry" onchange="countrySelected(value);">
                                 <form:option value="" label="-- Select Country --" /> 
                                 <form:options items="${form.countries}" itemValue="value" itemLabel="label" />
@@ -178,14 +181,13 @@
 
                                 <table style="text-align: left; width: 470px; border: blue;">
                                     <tr>
-                                        <td style="width: 40%;" ></td>
-                                        <td style="width: 60%;" >
+                                        <td colspan="2" style="text-align:center" >
                                             <form:errors path="address.ucState" cssClass="fieldError"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>州/省 State/Province: </td>
-                                        <td>
+                                        <td style="width:40%">州/省 State/Province: <font color="red"> &nbsp;* &nbsp;</font></td>
+                                        <td style="width:60%">
                                             <form:select id="stateId" path="address.ucState" >
                                                 <form:option value="" label="-- Select State --" />
                                                 <form:options items="${form.stateList}" itemValue="value" itemLabel="label" />
@@ -203,31 +205,29 @@
 
                                 <table>
                                     <tr>
-                                        <td colspan="2" align="center">若非美国和加拿大,
+                                        <td colspan="2" style="text-align:center">若非美国和加拿大,
                                             请填写如下信息：If other than
                                             Canada or United States
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 40%;" ></td>
-                                        <td style="width: 60%;" >
+                                        <td colspan="2" style="text-align:center" >
                                             <form:errors path="address.otherCountry" cssClass="fieldError"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>国家 Country: </td>
-                                        <td> 
+                                        <td style="width: 40%;">国家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
+                                        <td style="width: 40%;"> 
                                             <form:input path="address.otherCountry"  id="otherCountry"  size="30" maxlength="50" />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 40%;" ></td>
-                                        <td style="width: 60%;" >
+                                        <td colspan="2" style="text-align:center" >
                                             <form:errors path="address.otherState" cssClass="fieldError"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>州/省 State/Province: </td>
+                                        <td>州/省 State/Province: <font color="red"> &nbsp;* &nbsp;</font></td>
                                         <td> 
                                             <form:input path="address.otherState" id="otherState"  size="10" maxlength="20"  />
                                         </td>
@@ -238,65 +238,65 @@
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.homeZip" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="address.homeZip" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>邮政编码 Zipcode/Postal Code:</td>
+                        <td style="width: 40%;">邮政编码<br>Zipcode/Postal Code: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td>
                             <form:input path="address.homeZip" name="homeZip" size="10" maxlength="15"/>
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="primaryChineseName" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryChineseName" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>Primary Chinese Name: </td>
+                        <td style="width: 40%;">主報人中文姓名<br>Primary Chinese Name: </td>
                         <td><form:input path="primaryChineseName" name="primaryChineseName" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="primaryFirstName" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryFirstName" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>Primary First Name: </td>
+                        <td style="width: 40%;">主報人英文名<br>Primary First Name: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input path="primaryFirstName" name="primaryFirstName" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="primaryLastName" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryLastName" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>Primary Last Name: </td>
+                        <td style="width: 40%;">主報人英文姓<br>Primary Last Name: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input path="primaryLastName" name="primaryLastName" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.homePhone" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="address.homePhone" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>聯絡电话 Primary Contact Phone: </td>
+                        <td style="width: 40%;">聯絡电话<br>Primary Contact Phone: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input path="address.homePhone" name="homePhone" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.misc1" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="address.misc1" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>电邮 Email: </td>
+                        <td style="width: 40%;">电邮 Email: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input id="email" path="address.misc1" name="email" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td> <form:errors path="address.misc2" cssClass="fieldError"/></td>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="address.misc2" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td>确认电邮 Confirm Email: </td>
+                        <td style="width: 40%;">确认电邮 Confirm Email: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input id="confirmEmail" path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
-                        <td>所属教会/机构<br>
+                        <td style="width: 40%;">所属教会/机构<br>
                             Church / Organization Affiliation<br>
                             （若无教会，可暂不填写<br>
                             Leave it blank, if no church right now.)</td>

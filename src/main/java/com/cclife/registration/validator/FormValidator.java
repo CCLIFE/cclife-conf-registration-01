@@ -48,18 +48,18 @@ public class FormValidator {
 
         if (form.getAddress().getHomeCity().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homeCity").
-                    defaultText("Please enter your city. ").build());
+                    code("homeCity").build());
         }
 
         if (form.getAddress().getUcCountry().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.ucCountry").
-                    defaultText("Please enter your country. ").build());
+                    code("homeCountry").build());
         } else {
             String countrySelected = form.getAddress().getUcCountry().trim();
             if (!countrySelected.equals("OC")) {  //US or Canada
                 if (form.getAddress().getUcState().trim().isEmpty()) {
                     messages.addMessage(new MessageBuilder().error().source("address.ucState").
-                            defaultText("Please enter your state/province. ").build());
+                            code("homeState").build());
                 } else {
 
                     form.getAddress().setCountry(countrySelected);
@@ -155,12 +155,12 @@ public class FormValidator {
             } else { //other country
                 if (form.getAddress().getOtherCountry().trim().isEmpty()) {
                     messages.addMessage(new MessageBuilder().error().source("address.otherCountry").
-                            defaultText("Please enter your country. ").build());
+                            code("homeCountry").build());
                 }
 
                 if (form.getAddress().getOtherState().trim().isEmpty()) {
                     messages.addMessage(new MessageBuilder().error().source("address.otherState").
-                            defaultText("Please enter your state/province. ").build());
+                            code("homeState").build());
                 } else {
                     form.getAddress().setCountry(form.getAddress().getOtherCountry().trim());
                     form.getAddress().setHomeState(form.getAddress().getOtherState().trim());
@@ -170,7 +170,7 @@ public class FormValidator {
 
         if (form.getAddress().getHomeZip().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homeZip").
-                    defaultText("Please enter your zip code. ").build());
+                    code("homeZipCode").build());
         } else {
             if (!form.getAddress().getUcCountry().trim().isEmpty()) {
 
@@ -180,7 +180,7 @@ public class FormValidator {
 
                     if (caZip.length() != 6 && caZip.length() != 7) {
                         messages.addMessage(new MessageBuilder().error().source("address.homeZip").
-                                defaultText("Please enter valid zip code.").build());
+                                code("validZipCode").build());
                     }
                 } else if (form.getAddress().getUcCountry().trim().equals("US")) {
                     // zipcode for US should be numeric.
@@ -188,21 +188,32 @@ public class FormValidator {
                     zip = zip.replaceAll("[\\-]", "");
                     if (!zip.matches("[0-9]+")) {
                         messages.addMessage(new MessageBuilder().error().source("address.homeZip").
-                                defaultText("Please enter valid zip code.").build());
+                                code("validZipCode").build());
                     }
                 }
             }
         }
 
+        if (form.getPrimaryFirstName().trim().isEmpty()) {
+            messages.addMessage(new MessageBuilder().error().source("primaryFirstName").
+                    code("primaryFirstName").build());
+        }
+
+        if (form.getPrimaryLastName().trim().isEmpty()) {
+            messages.addMessage(new MessageBuilder().error().source("primaryLastName").
+                    code("primaryLastName").build());
+        }
+
+
         if (form.getAddress().getHomePhone().trim().isEmpty()) {
             messages.addMessage(new MessageBuilder().error().source("address.homePhone").
-                    defaultText("Please enter your phone number. ").build());
+                    code("homePhone").build());
         } else {
             String phone = form.getAddress().getHomePhone().trim();
             phone = phone.replaceAll("[\\-]", "");
             if (!phone.matches("[0-9]+")) {
                 messages.addMessage(new MessageBuilder().error().source("address.homePhone").
-                        defaultText("Please enter valid phone number.").build());
+                        code("validHomePhone").build());
             }
         }
 
@@ -210,15 +221,15 @@ public class FormValidator {
         String email2 = form.getAddress().getMisc2().trim();
         if (email1.isEmpty() || !email1.contains("@")) {
             messages.addMessage(new MessageBuilder().error().source("address.misc1").
-                    defaultText("Please enter valid email address. ").build());
+                    code("validEmail").build());
         } else {
             if (email2.isEmpty() || !email2.contains("@")) {
                 messages.addMessage(new MessageBuilder().error().source("address.misc2").
-                        defaultText("Please enter valid confirm email. ").build());
+                        code("validConfirmEmail").build());
             } else {
                 if (!email1.equalsIgnoreCase(email2)) {
                     messages.addMessage(new MessageBuilder().error().source("address.misc1").
-                            defaultText("Email and confirm email are not identical. ").build());
+                            code("identicalEmail").build());
 
                 }
             }
