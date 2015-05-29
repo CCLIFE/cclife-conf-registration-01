@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div id="embeddedFlow">
-    <p class="notice"><b>第二步 请输入个人信息<br>step 2 - Enter individual information</b><br>
-        <font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br>
-        所添加人员须与主报人同一地址，并由同一人付费 (New added person need have the same address 
-        as the primary person, and pay by the same person.)
-        </font></p>
+    <p class="notice"><b>第二步 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
+        
+    <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
+    <li><font color='red'>所添加人员须与主报人同一地址，并由同一人付费 (New added person need have the same address 
+            as the primary person, and pay by the same person.)</font></li>
+        
         <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
