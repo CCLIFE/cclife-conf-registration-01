@@ -7,8 +7,6 @@
 
     <var class="com.cclife.registration.domain.RegistrationForm"
          name="form" />
-    <var class="com.cclife.registration.domain.Paypal"
-         name="payObj" />
     
     <on-start>
         <!--
@@ -69,21 +67,27 @@
     
     <view-state id="review" model="form" view="cccc/review">
         <transition on="previous" to="step3" validate="false"/>
-        <transition on="next" to="payment">
-            <evaluate expression="registrationController.submit(form)"/>
-        </transition>
+        <transition on="next" to="payment"/>
         <transition on="cancel" to="cancel"/>
     </view-state>
 
     <decision-state id="payment">
-        <if test="form.paymentMethod == form.paymentMethod.PERSONAL_CHECK" then="confirmAndPayByCheck"/>
+        <if test="form.paymentMethod == form.paymentMethod.PERSONAL_CHECK" then="prepareCheck"/>
         <if test="form.paymentMethod == form.paymentMethod.CREDIT_CARD" then="prepareCredit"/>
     </decision-state>
 
     <action-state id="prepareCredit">
-        <evaluate expression="registrationController.createPaypalRequest(form)"
-              result="payObj"/>
-        <transition to="confirmAndPayByCredit" />
+        <evaluate expression="registrationController.getPaymentProviderUrl(flowRequestContext)"
+                  result="flowScope.paymentUrl"/>
+        <transition to="confirmAndPayByCredit">
+            <evaluate expression="registrationController.createPaymentRequest(form)" result="flowScope.paymentProvider"/>
+        </transition>
+    </action-state>
+    
+    <action-state id="prepareCheck">
+        <transition to="confirmAndPayByCheck">
+            <evaluate expression="registrationController.submit(form)"/>
+        </transition>
     </action-state>
 
     <end-state id="confirmAndPayByCheck" view="cccc/confirmAndPayByCheck" />

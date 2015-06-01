@@ -55,7 +55,8 @@ public class RegistrationForm extends BaseObject {
 
     private PaymentMethod paymentMethod;
     private List<Fee> fees;
-
+    private PaymentProvider paymentProvider;
+    
     private String primaryChineseName;
     private String primaryFirstName ;
     private String primaryLastName ;
@@ -1166,5 +1167,19 @@ public class RegistrationForm extends BaseObject {
      */
     public void setPrimaryLastName(String primaryLastName) {
         this.primaryLastName = primaryLastName;
+    }
+
+    /**
+     * @return the paymentProvider
+     */
+    public PaymentProvider getPaymentProvider() {
+        return paymentProvider;
+    }
+
+    /**
+     * @param paymentProvider the paymentProvider to set
+     */
+    public void setPaymentProvider(PaymentProvider paymentProvider) {
+        this.paymentProvider = paymentProvider;
     }
 }

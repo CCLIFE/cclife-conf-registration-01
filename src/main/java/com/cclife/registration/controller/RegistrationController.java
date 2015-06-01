@@ -9,7 +9,7 @@ import com.cclife.registration.domain.Expense;
 import com.cclife.registration.domain.Fee;
 import com.cclife.registration.domain.LabelValue;
 import com.cclife.registration.domain.PaymentMethod;
-import com.cclife.registration.domain.Paypal;
+import com.cclife.registration.domain.PaymentProvider;
 import com.cclife.registration.model.Mealplan;
 import com.cclife.registration.domain.RegistrationForm;
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.springframework.webflow.core.collection.LocalAttributeMap;
+import org.springframework.webflow.execution.RequestContext;
 
 /**
  *
@@ -45,11 +46,7 @@ public class RegistrationController {
     private Map<String, String> feeMap;
 
     @Autowired
-    private Paypal paypalInstance;
-    @Autowired
-    private String confirmationUrl;
-    @Autowired
-    private String confirmationAltUrl;
+    private PaymentProvider paymentProvider;
     @Autowired
     private RegistrationService registrationService;
 
@@ -155,7 +152,7 @@ public class RegistrationController {
         relationshipGroup.add(new LabelValue("T \u59CA\u59B9", "T")); // T(??)
         relationshipGroup.add(new LabelValue("C \u540C\u5B66", "C")); // C(??)
         relationshipGroup.add(new LabelValue("O \u540C\u4E8B", "O")); // O(??)
-
+        relationshipGroup.add(new LabelValue("A \u4E3B\u62A5\u4EBA", "A")) ;
         registrationForm.setRelationshipGroup(relationshipGroup);
 
         /**
@@ -415,8 +412,9 @@ public class RegistrationController {
             person.setLastName(form.getPrimaryLastName());
             person.setPhone(form.getAddress().getHomePhone());
             person.setEmail(form.getAddress().getMisc1());
+            person.setRelationship("A");
         }
-        
+
         registrant.setPerson(person);
         form.getRegistrants().add(registrant);
         Mealplan mealPlan = new Mealplan();
@@ -475,11 +473,21 @@ public class RegistrationController {
         return null;
     }
 
-    public Paypal createPaypalRequest(RegistrationForm form) {
+    public String getPaymentProviderUrl(RequestContext context) {
+        
+        logger.info("getPaymentProviderUrl entering");
+
+        logger.debug(context.toString()) ;
+         
+        return paymentProvider.getProviderUrl();
+    }
+    
+    public PaymentProvider createPaymentRequest(RegistrationForm form) {
 
         logger.info("createPaypalRequest entering");
 
-        paypalInstance.setItem_number(String.valueOf(form.getFormID().longValue()));
+        form.setPaymentProvider(paymentProvider);
+        form.getPaymentProvider().setItem_number(String.valueOf(form.getFormID().longValue()));
 
 //        p.setCmd("_ext-enter");
 //        p.setRedirect_cmd("_xclick");
@@ -487,8 +495,8 @@ public class RegistrationController {
 //        p.setBusiness("clhoo_1288811245_biz@msn.com");
 //        p.setItem_name("CCCC/Grace 2014");
         double total = form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee();
-        paypalInstance.setAmount(String.valueOf(total));
-        paypalInstance.setCustom(String.valueOf(total));
+        form.getPaymentProvider().setAmount(String.valueOf(total));
+        form.getPaymentProvider().setCustom(String.valueOf(total));
 //        p.setNo_shipping("0");
 //        p.setNo_note("1");
 //        p.setCurrency_code("USD");
@@ -498,22 +506,22 @@ public class RegistrationController {
 //        p.setReturn("http://cccm.biz:8084/registration/confirm.htm");
 //        p.setNotify_url("http://cccm.biz:8084/registration/instantPaymentNotification.htm");
 //        p.setRm("2");
-        paypalInstance.setEmail(form.getAddress().getMisc1());
-        paypalInstance.setFirst_name("");
-        paypalInstance.setLast_name("");
-        paypalInstance.setAddress1(form.getAddress().getHomeAddress());
-        paypalInstance.setAddress2(form.getAddress().getHomeAddress2());
-        paypalInstance.setCity(form.getAddress().getHomeCity());
-        paypalInstance.setState(form.getAddress().getHomeState());
-        paypalInstance.setZip(form.getAddress().getHomeZip());
-        paypalInstance.setReturn(confirmationUrl);
+        form.getPaymentProvider().setEmail(form.getAddress().getMisc1());
+        form.getPaymentProvider().setFirst_name(form.getPrimaryFirstName());
+        form.getPaymentProvider().setLast_name(form.getPrimaryFirstName());
+        form.getPaymentProvider().setAddress1(form.getAddress().getHomeAddress());
+        form.getPaymentProvider().setAddress2(form.getAddress().getHomeAddress2());
+        form.getPaymentProvider().setCity(form.getAddress().getHomeCity());
+        form.getPaymentProvider().setState(form.getAddress().getHomeState());
+        form.getPaymentProvider().setZip(form.getAddress().getHomeZip());
+//        form.getPaymentProvider().setReturn(confirmationUrl);
 
 //        if (form.getEventID().compareTo(201403) == 0) {
 //            paypalInstance.setReturn(confirmationAltUrl);
 //        }
         logger.info("createPaypalRequest exiting");
 
-        return paypalInstance;
+        return form.getPaymentProvider();
     }
 
     public void submit(RegistrationForm form) {
