@@ -139,7 +139,7 @@
         <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
     
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
-        <div>${flowExecutionUrl}
+        <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
                  
                 <tbody>
