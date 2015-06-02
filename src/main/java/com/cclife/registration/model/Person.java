@@ -187,6 +187,15 @@ public class Person implements Serializable {
      * End of code for issue5.
      */
     
+    /**
+    * The following code is added for issue40.
+    */
+    private String healthCardNo;
+    private String allergies;
+    /**
+     * End of code for issue40.
+     */
+    
     public Person() {
     }
 
@@ -516,8 +525,27 @@ public class Person implements Serializable {
      * End of code for issue5.
      */
         
+    /**
+     * The following code is added for issue40.
+     * @return 
+     */
+    public String getHealthCardNo(){
+        return this.healthCardNo;
+    }
+    public void setHealthCardNo( String healthCardNo ){
+        this.healthCardNo = healthCardNo;
+    }
     
-            
+    public String getAllergies(){
+        return this.allergies;
+    }
+    public void setAllergies( String allergies ){
+        this.allergies = allergies;
+    }
+    /**
+     * End of code for issue40.
+     * @return 
+     */
     @Override
     public int hashCode() {
         int hash = 0;

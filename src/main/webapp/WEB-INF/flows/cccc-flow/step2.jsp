@@ -23,24 +23,21 @@
                                     <td><form:input path="person.chineseName" size="20"  /></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.firstName" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.firstName" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>English Firstname:<font color="red"> &nbsp;* &nbsp;</font></td>
                                     <td><form:input id="firstName" path="person.firstName" size="20" maxlength="30"/></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.lastName" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.lastName" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>English Lastname:<font color="red"> &nbsp;* &nbsp;</font></td>
                                     <td><form:input id="lastName" path="person.lastName" size="20" maxlength="30"/></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.gender" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.gender" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>性别 Gender:<font color="red"> &nbsp;* &nbsp;</font></td>
@@ -51,8 +48,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.age" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.age" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>年龄 Age/Age Group:<font color="red"> &nbsp;* &nbsp;</font></td>
@@ -64,8 +60,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.status" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.status" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>年级 Grade: <br> (18岁以下请填写)</td>
@@ -76,6 +71,27 @@
                                         </form:select>
                                     </td>
                                 </tr>
+                                
+                                <tr>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.healthCardNo" cssClass="fieldError"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Health Card Number<br> (18岁以下请填写)</td>
+                                    <td>
+                                        <form:input id="healthCardNo" path="person.healthCardNo" size="30" maxlength="50"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.allergies" cssClass="fieldError"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Dietary Restrictions/Allergies<br> (18岁以下请填写)</td>
+                                    <td>
+                                        <form:input id="allergies" path="person.allergies" size="30" maxlength="50"/>
+                                    </td>
+                                </tr>
+                                
                                 <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>
@@ -105,16 +121,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.email" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.email" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>电邮 &nbsp;Email:</td>
                                     <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td> <form:errors path="person.misc1" cssClass="fieldError"/></td>
+                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.misc1" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
                                     <td>确认电邮 &nbsp; Confirm Email:</td>
@@ -159,19 +173,19 @@
                     <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
                 </tr>
                 <tr>
-                    <td>招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
-                    <td>幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
-                    <td>翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
-                    <td>音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
+                    <td style="width:25%">招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
+                    <td style="width:25%">幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                    <td style="width:25%">翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                    <td style="width:25%">音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
                 </tr>
                 <tr>
-                    <td>陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
-                    <td>交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
-                    <td>医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
-                    <td>其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
+                    <td style="width:25%">陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                    <td style="width:25%">交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
+                    <td style="width:25%">医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                    <td style="width:25%">其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
                 </tr>
                 <tr>
-                    <td>Youth Small Group Leader &nbsp;<form:checkbox path="volunteerJobs" value="SMALL_GROUP_LEADER"/></td>
+                    <td colspan="4">Youth Small Group Leader &nbsp;<form:checkbox path="volunteerJobs" value="SMALL_GROUP_LEADER"/></td>
                 </tr>
             </tbody>
         </table>
@@ -185,19 +199,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>&nbsp; &nbsp;Dec. 28 &nbsp; </td>
-                    <td>&nbsp; &nbsp;Dec. 29 &nbsp; </td>
-                    <td>&nbsp; Dec. 30 &nbsp;</td>
+                    <td style="text-align:center">Dec. 28</td>
+                    <td style="text-align:center">Dec. 29</td>
+                    <td style="text-align:center">Dec. 30</td>
                 </tr>
                 <tr>
-                    <td>午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
-                    <td>午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
-                    <td>午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
+                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
+                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
+                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
                 </tr>
                 <tr>
-                    <td>晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
-                    <td>晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
+                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
+                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
+                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
                 </tr>
                 <tr>
                     <td></td>

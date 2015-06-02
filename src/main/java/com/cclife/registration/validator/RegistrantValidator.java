@@ -34,52 +34,62 @@ public class RegistrantValidator {
 
         if (registrant.getPerson().getFirstName().trim().isEmpty() ) {
             messages.addMessage(new MessageBuilder().error().source("person.firstName").
-                    defaultText("Please enter your English first name. ").build());
+                    code("personFirstName").build());
         }
         
         if (registrant.getPerson().getLastName().trim().isEmpty() ) {
             messages.addMessage(new MessageBuilder().error().source("person.lastName").
-                    defaultText("Please enter your English last name. ").build());
+                    code("personLastName").build());
         }
 
         if ( ( registrant.getPerson().getGender() == null ) || ( registrant.getPerson().getGender().trim().isEmpty() ) ){
             messages.addMessage(new MessageBuilder().error().source("person.gender").
-                    defaultText("Please enter your gender. ").build());
+                    code("personGender").build());
         }
 
+        //Age is required for all registrants
         if (registrant.getPerson().getAge().trim().isEmpty() ) { 
             messages.addMessage(new MessageBuilder().error().source("person.age").
-                    defaultText("Please select your age or age group. ").build());
-        }
+                    code("personAge").build());
+        } 
+        //Grade and Dietary restrictions are required for all under 18
         else if (  !registrant.getPerson().getAge().trim().contains("A")  ) { 
             if (registrant.getPerson().getStatus().trim().isEmpty() ) {
                messages.addMessage(new MessageBuilder().error().source("person.status").
-                       defaultText("Grade is required for youth. ").build());
+                       code("personGrade").build());
             }
-            else{
-               int ageToCheck = Integer.parseInt(registrant.getPerson().getAge().trim() );
-               if( ( ageToCheck >= 13 ) && ( ageToCheck <=18 ) ){
-                    String email1 = registrant.getPerson().getEmail().trim();
-                    String email2 = registrant.getPerson().getMisc1().trim();
-                    if ( email1.isEmpty() || !email1.contains("@") ) {
-                        messages.addMessage(new MessageBuilder().error().source("person.email").
-                                defaultText("Please enter valid email address. ").build());
-                    }
-                    else{
-                        if ( email2.isEmpty() || !email2.contains("@") ) {
-                            messages.addMessage(new MessageBuilder().error().source("person.misc1").
-                                    defaultText("Please enter valid confirm email. ").build());
-                        }
-                        else{
-                            if( !email1.equalsIgnoreCase(email2) ){
-                                 messages.addMessage(new MessageBuilder().error().source("person.email").
-                                        defaultText("Email and confirm email are not identical. ").build());
+            if (registrant.getPerson().getAllergies().trim().isEmpty() ) {
+               messages.addMessage(new MessageBuilder().error().source("person.allergies").
+                       code("personAllergies").build());
+            }
+            //Email and Health Card number are required for youth 13 to 18
+            int ageToCheck = Integer.parseInt(registrant.getPerson().getAge().trim() );
+            if( ( ageToCheck >= 13 ) && ( ageToCheck <=18 ) ){
+                if (registrant.getPerson().getHealthCardNo().trim().isEmpty() ) {
+                   messages.addMessage(new MessageBuilder().error().source("person.healthCardNo").
+                           code("personHealthCardNo").build());
+                }
+                
+                 String email1 = registrant.getPerson().getEmail().trim();
+                 String email2 = registrant.getPerson().getMisc1().trim();
+                 if ( email1.isEmpty() || !email1.contains("@") ) {
+                     messages.addMessage(new MessageBuilder().error().source("person.email").
+                             code("validEmail").build());
+                 }
+                 else{
+                     if ( email2.isEmpty() || !email2.contains("@") ) {
+                         messages.addMessage(new MessageBuilder().error().source("person.misc1").
+                                 code("validConfirmEmail").build());
+                     }
+                     else{
+                         if( !email1.equalsIgnoreCase(email2) ){
+                              messages.addMessage(new MessageBuilder().error().source("person.email").
+                                     code("identicalEmail").build());
 
-                            }
-                        }
-                    }
-               }    
-             }
+                         }
+                     }
+                 }
+            }    
         }
         
         logger.debug("Done validate step2.");
