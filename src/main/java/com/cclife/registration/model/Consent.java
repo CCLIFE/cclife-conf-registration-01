@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.cclife.registration.model;
 
 import java.io.Serializable;
@@ -41,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Consent.findByRegistrationID", query = "SELECT c FROM Consent c WHERE c.registrationID = :registrationID"),
     @NamedQuery(name = "Consent.findByRelationship", query = "SELECT c FROM Consent c WHERE c.relationship = :relationship")})
 public class Consent implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +69,10 @@ public class Consent implements Serializable {
     private Long registrationID;
     @Column(name = "relationship")
     private String relationship;
+    @Column(name = "dietaryRestriction")
+    private String dietaryRestriction;
+    @Column(name = "allergies")
+    private String allergies;
 
     public Consent() {
     }
@@ -173,6 +177,34 @@ public class Consent implements Serializable {
         this.relationship = relationship;
     }
 
+    /**
+     * @return the dietaryRestriction
+     */
+    public String getDietaryRestriction() {
+        return dietaryRestriction;
+    }
+
+    /**
+     * @param dietaryRestriction the dietaryRestriction to set
+     */
+    public void setDietaryRestriction(String dietaryRestriction) {
+        this.dietaryRestriction = dietaryRestriction;
+    }
+
+    /**
+     * @return the allergies
+     */
+    public String getAllergies() {
+        return allergies;
+    }
+
+    /**
+     * @param allergies the allergies to set
+     */
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -197,5 +229,5 @@ public class Consent implements Serializable {
     public String toString() {
         return "ws.cccm.application.model.Consent[ consentID=" + consentID + " ]";
     }
-    
+
 }
