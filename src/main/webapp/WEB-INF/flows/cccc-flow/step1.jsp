@@ -134,7 +134,7 @@
 
 
 <div id="embeddedFlow">
-    <p class="notice"><b>第一步 请先输入家庭地址和主报人姓名 <br>
+    <p class="notice"><b>第一步 请先输入主报人姓名和家庭地址 <br>
          step 1 - Enter address and family information</b></p>
         <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
     
@@ -143,6 +143,30 @@
             <table style="text-align: left; width: 470px; border-color: #009; ">
                  
                 <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryChineseName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">主報人中文姓名<br>Primary Chinese Name: </td>
+                        <td><form:input path="primaryChineseName" name="primaryChineseName" size="15" maxlength="15"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryFirstName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">主報人英文名<br>Primary First Name: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td><form:input path="primaryFirstName" name="primaryFirstName" size="15" maxlength="15"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center" >
+                            <form:errors path="primaryLastName" cssClass="fieldError"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">主報人英文姓<br>Primary Last Name: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td><form:input path="primaryLastName" name="primaryLastName" size="15" maxlength="15"/></td>
+                    </tr>
                     <tr>
                          <td  colspan="2" style="text-align:center"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
                     </tr>
@@ -246,30 +270,6 @@
                         <td>
                             <form:input path="address.homeZip" name="homeZip" size="10" maxlength="15"/>
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center" >
-                            <form:errors path="primaryChineseName" cssClass="fieldError"/></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">主報人中文姓名<br>Primary Chinese Name: </td>
-                        <td><form:input path="primaryChineseName" name="primaryChineseName" size="15" maxlength="15"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center" >
-                            <form:errors path="primaryFirstName" cssClass="fieldError"/></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">主報人英文名<br>Primary First Name: <font color="red"> &nbsp;* &nbsp;</font></td>
-                        <td><form:input path="primaryFirstName" name="primaryFirstName" size="15" maxlength="15"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center" >
-                            <form:errors path="primaryLastName" cssClass="fieldError"/></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 40%;">主報人英文姓<br>Primary Last Name: <font color="red"> &nbsp;* &nbsp;</font></td>
-                        <td><form:input path="primaryLastName" name="primaryLastName" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align:center" >
