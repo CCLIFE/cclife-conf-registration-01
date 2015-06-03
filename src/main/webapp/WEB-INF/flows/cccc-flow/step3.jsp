@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
     <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
-    <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
+            <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
         <div>
             <table align="center">
                 <caption> <b>地址信息 Address information</b></caption> 
@@ -62,14 +62,13 @@
                     <tbody>
                         <tr>
                             <td align="left"> <b>
-                                <c:set var="c" value="${count.count}"/>
-
-                                <c:if test="${c == 1}">  
-                                    第 1 个人 (主报人) 的资料   Information of Primary Person 
-                                </c:if>     
-                                <c:if test="${c != 1}">  
-                                    第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
-                                </c:if>
+                                    <c:set var="c" value="${count.count}"/>
+                                    <c:if test="${c == 1}">  
+                                        第 1 个人 (主报人) 的资料   Information of Primary Person 
+                                    </c:if>     
+                                    <c:if test="${c != 1}">  
+                                        第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
+                                    </c:if>
                                 </b>
                             </td>
                             <td align="right"> 
@@ -78,10 +77,12 @@
                                 <script type="text/javascript">
                                     Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'edit_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
                                 </script>
-                                <button id="remove_${v}" type="submit" name="_eventId_remove" value="${v}">Delete</button>
-                                <script type="text/javascript">
+                                <c:if test="${c != 1}">  
+                                    <button id="remove_${v}" type="submit" name="_eventId_remove" value="${v}">Delete</button>
+                                    <script type="text/javascript">
                                     Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'remove_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
-                                </script>
+                                    </script>
+                                </c:if>
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +115,7 @@
                                             <td>Dietary Restrictions/Allergies:</td>
                                             <td colspan="3">${registrant.person.allergies}</td>
                                         </tr>
- 
+
                                         <tr>
                                             <td>关系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
