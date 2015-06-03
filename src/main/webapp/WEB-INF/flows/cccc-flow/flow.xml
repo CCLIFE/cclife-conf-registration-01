@@ -9,15 +9,12 @@
          name="form" />
     
     <on-start>
-        <!--
-        <evaluate expression="registrationService.initializeForm()" result="form" />
-        -->
         <evaluate expression="registrationController.initializeForm()" result="form" />
     </on-start>
     
     <view-state id="step1" model="form" view="cccc/step1">
         <transition on="next" to="createNewOrSkip"/> 
-        <transition on="cancel" to="cancel"/>
+        <transition on="cancel" to="cancel" validate="false"/>
     </view-state>
     
     <decision-state id="createNewOrSkip">
@@ -32,7 +29,7 @@
     
     <view-state id="step2" model="registrant" view="cccc/step2">
         <transition on="previous" to="step1"/>
-        <transition on="next" to="calculateFee"/> 
+        <transition on="next" to="step3"/> 
         <transition on="cancel" to="removeNew" validate="false"/>
     </view-state>
     
@@ -41,15 +38,10 @@
         <transition to="step3" />
     </action-state>
 
-    <action-state id="calculateFee">
-        <evaluate expression="registrationController.calculateFee(form)"  />
-        <transition to="step3" />
-    </action-state>
-
     <view-state id="step3" model="form" view="cccc/step3">
         <transition on="previous" to="step1"/>
         <transition on="new" to="createNew"/>
-        <transition on="next" to="review"/>
+        <transition on="next" to="calculateFee"/>
         <transition on="cancel" to="cancel"/>
         <transition on="edit" to="editPerson"/>
         <transition on="remove" to="deletePerson"/>
@@ -65,10 +57,15 @@
         <transition to="step3"/>
     </action-state>
     
+    <action-state id="calculateFee">
+        <evaluate expression="registrationController.calculateFee(form)"  />
+        <transition to="review" />
+    </action-state>
+    
     <view-state id="review" model="form" view="cccc/review">
         <transition on="previous" to="step3" validate="false"/>
         <transition on="next" to="payment"/>
-        <transition on="cancel" to="cancel"/>
+        <transition on="cancel" to="cancel" validate="false"/>
     </view-state>
 
     <decision-state id="payment">
@@ -85,9 +82,8 @@
     </action-state>
     
     <action-state id="prepareCheck">
-        <transition to="confirmAndPayByCheck">
-            <evaluate expression="registrationController.submit(form)"/>
-        </transition>
+        <evaluate expression="registrationController.submit(form)"/>
+        <transition to="confirmAndPayByCheck"/>
     </action-state>
 
     <end-state id="confirmAndPayByCheck" view="cccc/confirmAndPayByCheck" />
