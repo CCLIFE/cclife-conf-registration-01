@@ -145,10 +145,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>教会参与:</td>
+                                    <td>事奉角色:</td>
                                     <td>
                                         <form:select id="status" path="person.servingRole">
-                                            <form:option value="" label="-- 服事 --" />
+                                            <form:option value="" label="-- 事奉 --" />
                                             <form:options items="${form.statusGroup}" itemValue="value" itemLabel="label" />
                                         </form:select>
                                     </td>
