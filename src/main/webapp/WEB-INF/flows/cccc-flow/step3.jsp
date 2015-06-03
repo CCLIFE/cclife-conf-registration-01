@@ -107,6 +107,15 @@
                                             <td>${registrant.person.status}</td>
                                         </tr>
                                         <tr>
+                                            <td>Health Card Number:</td>
+                                            <td colspan="3">${registrant.person.healthCardNo}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dietary Restrictions/Allergies:</td>
+                                            <td colspan="3">${registrant.person.allergies}</td>
+                                        </tr>
+ 
+                                        <tr>
                                             <td>关系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
                                             <td>信主 Beliver:</td>
@@ -155,19 +164,19 @@
                             <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
                         </tr>
                         <tr>
-                            <td>招待 &nbsp;${ushers}</td>
-                            <td>幼儿看顾 &nbsp;${nursery_helper}</td>
-                            <td>翻译 &nbsp;${interpreter}</td>
-                            <td>音影 &nbsp;${audio_visual}</td>
+                            <td style="width:25%">招待 &nbsp;${ushers}</td>
+                            <td style="width:25%">幼儿看顾 &nbsp;${nursery_helper}</td>
+                            <td style="width:25%">翻译 &nbsp;${interpreter}</td>
+                            <td style="width:25%">音影 &nbsp;${audio_visual}</td>
                         </tr>
                         <tr>
-                            <td>陪谈 &nbsp;${followup}</td>
-                            <td>交通 &nbsp;${transportation}</td>
-                            <td>医疗 &nbsp;${medical_support}</td>
-                            <td>其他 &nbsp;${other}</td>
+                            <td style="width:25%">陪谈 &nbsp;${followup}</td>
+                            <td style="width:25%">交通 &nbsp;${transportation}</td>
+                            <td style="width:25%">医疗 &nbsp;${medical_support}</td>
+                            <td style="width:25%">其他 &nbsp;${other}</td>
                         </tr>
                         <tr>
-                            <td>Youth group leader &nbsp;${small_group_leader}</td>
+                            <td colspan="4">Youth group leader &nbsp;${small_group_leader}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -181,14 +190,14 @@
                             <td colspan="3" rowspan="1"><b>订餐</b></td>
                         </tr>
                         <tr>
-                            <td>&nbsp; &nbsp;Dec. 28 &nbsp; </td>
-                            <td>&nbsp; &nbsp;Dec. 29 &nbsp; </td>
-                            <td>&nbsp; Dec. 30 &nbsp;</td>
+                            <td style="text-align:center">Dec. 28</td>
+                            <td style="text-align:center">Dec. 29</td>
+                            <td style="text-align:center">Dec. 30</td>
                         </tr>
                         <tr>
-                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch1}</td>
-                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch2}</td>
-                            <td>午餐 &nbsp;&nbsp;${registrant.mealplan.lunch3}</td>
+                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch1}</td>
+                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch2}</td>
+                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch3}</td>
                         </tr>
                         <tr>
                             <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner1}</td>

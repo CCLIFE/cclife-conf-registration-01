@@ -209,11 +209,18 @@ public class RegistrationController {
         //statusGroup2.add(new LabelValue("Married", "M"));
         //statusGroup2.add(new LabelValue("Engaged", "EN"));
         //statusGroup2.add(new LabelValue("Single", "S"));
+        
+        /**
+         * The following code is removed for issue40. 
+         * No grade info needed for undergrads and graduate students.
+         
         statusGroup2.add(new LabelValue("Graduate School", "GS"));
         statusGroup2.add(new LabelValue("Undergrad - Sr", "C4"));
         statusGroup2.add(new LabelValue("Undergrad - Jr", "C3"));
         statusGroup2.add(new LabelValue("Undergrad - So", "C2"));
         statusGroup2.add(new LabelValue("Undergrad - Fr", "C1"));
+        **/
+
         statusGroup2.add(new LabelValue("Senior High - Sr", "12th"));
         statusGroup2.add(new LabelValue("Senior High - Jr", "11th"));
         statusGroup2.add(new LabelValue("Senior High - So", "10th"));
