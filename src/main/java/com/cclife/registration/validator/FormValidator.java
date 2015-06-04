@@ -25,12 +25,12 @@ public class FormValidator {
 
         if (!form.getChkPmt()) {
             messages.addMessage(new MessageBuilder().error().source("chkPmt").
-                    defaultText("Please check the checkbox to authorize payment.").build());
+                    code("paymentAuth").build());
         }
 
         if (form.getPaymentMethod() != PaymentMethod.CREDIT_CARD && form.getPaymentMethod() != PaymentMethod.PERSONAL_CHECK) {
             messages.addMessage(new MessageBuilder().error().source("paymentMethod").
-                    defaultText("Please select your payment option").build());
+                    code("paymentOption").build());
         }
 
         logger.debug("Validate review1 state..[" + form.getPaymentMethod() + "]");
