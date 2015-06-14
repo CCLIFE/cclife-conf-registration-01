@@ -41,6 +41,10 @@
                         <td>${form.address.misc1}</td>
                     </tr>
                     <tr>
+                        <td>是否需要住宿 Need Hotel: </td>
+                        <td>${form.address.hotel}</td>
+                    </tr>
+                    <tr>
                         <td>所属教会/机构<br>
                             Church / Organization Affiliation </td>
                         <td>${form.churchName} </td>

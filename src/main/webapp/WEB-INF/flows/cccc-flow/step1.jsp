@@ -292,8 +292,16 @@
                             <form:errors path="address.misc2" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">确认电邮 Confirm Email: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">确认电邮 Confirm Email: </td>
                         <td><form:input id="confirmEmail" path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">是否需要住宿 Need Hotel: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td>
+                            需要 Yes <form:radiobutton path="address.hotel" value="Y" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            不需要 No <form:radiobutton path="address.hotel" value="N" />
+                        </td>
                     </tr>
                     <tr>
                         <td style="width: 40%;">所属教会/机构<br>
@@ -307,7 +315,7 @@
             <hr style="width: 80%; height: 2px;">
 
         </div>
-        <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
+        <button id="cancel" type="button" name="_eventId_cancel">Cancel</button>
         <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
         <script type="text/javascript">
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'next', event: 'onclick', formId: 'step1', params: {fragments: "body"}}));
