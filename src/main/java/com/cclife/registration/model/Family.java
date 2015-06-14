@@ -99,7 +99,11 @@ public class Family extends com.cclife.registration.domain.BaseObject {
      * End of code for issue21.
      */
     
-
+    /**
+     * The following code is added for issue52: a field for need of hotel.
+     */
+    private String hotel;
+    
     public Family() {
     }
 
@@ -313,4 +317,13 @@ public class Family extends com.cclife.registration.domain.BaseObject {
         this.ucState = ucState;
     }
       
+    /**
+     * The following code is added for issue52: a field for need of hotel.
+     */
+    public String getHotel(){
+        return hotel;
+    }
+    public void setHotel( String hotel ){
+        this.hotel = hotel;
+    }
 }
