@@ -80,7 +80,7 @@
                                 <c:if test="${c != 1}">  
                                     <button id="remove_${v}" type="submit" name="_eventId_remove" value="${v}">Delete</button>
                                     <script type="text/javascript">
-                                    Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'remove_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
+                                        Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'remove_${v}', event: 'onclick', formId: 'step3', params: {fragments: "body", index: "${v}"}}));
                                     </script>
                                 </c:if>
                             </td>

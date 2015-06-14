@@ -152,7 +152,7 @@ public class RegistrationController {
         relationshipGroup.add(new LabelValue("T \u59CA\u59B9", "T")); // T(??)
         relationshipGroup.add(new LabelValue("C \u540C\u5B66", "C")); // C(??)
         relationshipGroup.add(new LabelValue("O \u540C\u4E8B", "O")); // O(??)
-        relationshipGroup.add(new LabelValue("A \u4E3B\u62A5\u4EBA", "A")) ;
+        relationshipGroup.add(new LabelValue("A \u4E3B\u62A5\u4EBA", "A"));
         registrationForm.setRelationshipGroup(relationshipGroup);
 
         /**
@@ -209,18 +209,17 @@ public class RegistrationController {
         //statusGroup2.add(new LabelValue("Married", "M"));
         //statusGroup2.add(new LabelValue("Engaged", "EN"));
         //statusGroup2.add(new LabelValue("Single", "S"));
-        
         /**
-         * The following code is removed for issue40. 
-         * No grade info needed for undergrads and graduate students.
-         
-        statusGroup2.add(new LabelValue("Graduate School", "GS"));
-        statusGroup2.add(new LabelValue("Undergrad - Sr", "C4"));
-        statusGroup2.add(new LabelValue("Undergrad - Jr", "C3"));
-        statusGroup2.add(new LabelValue("Undergrad - So", "C2"));
-        statusGroup2.add(new LabelValue("Undergrad - Fr", "C1"));
-        **/
-
+         * The following code is removed for issue40. No grade info needed for
+         * undergrads and graduate students.
+         *
+         * statusGroup2.add(new LabelValue("Graduate School", "GS"));
+         * statusGroup2.add(new LabelValue("Undergrad - Sr", "C4"));
+         * statusGroup2.add(new LabelValue("Undergrad - Jr", "C3"));
+         * statusGroup2.add(new LabelValue("Undergrad - So", "C2"));
+         * statusGroup2.add(new LabelValue("Undergrad - Fr", "C1"));
+         *
+         */
         statusGroup2.add(new LabelValue("Senior High - Sr", "12th"));
         statusGroup2.add(new LabelValue("Senior High - Jr", "11th"));
         statusGroup2.add(new LabelValue("Senior High - So", "10th"));
@@ -380,6 +379,10 @@ public class RegistrationController {
                         logger.debug("description:" + fee.getDescription());
                         break;
                     case 7:
+                        fee.setCurrency(st.nextToken());
+                        logger.debug("currency:" + fee.getCurrency());
+                        break;
+                    case 8:
                         fee.setAmount(Double.valueOf(st.nextToken()));
                         logger.debug("amount:" + fee.getAmount());
                         break;
@@ -481,14 +484,14 @@ public class RegistrationController {
     }
 
     public String getPaymentProviderUrl(RequestContext context) {
-        
+
         logger.info("getPaymentProviderUrl entering");
 
-        logger.debug(context.toString()) ;
-         
+        logger.debug(context.toString());
+
         return paymentProvider.getProviderUrl();
     }
-    
+
     public PaymentProvider createPaymentRequest(RegistrationForm form) {
 
         logger.info("createPaypalRequest entering");
@@ -541,22 +544,34 @@ public class RegistrationController {
 
     public void calculateFee(RegistrationForm form) {
 
-        Iterator<Registrant> it = form.getRegistrants().iterator();
+        Iterator<Fee> it = form.getFees().iterator();
+        
+    }
+
+    private Expense createExpenseByCurrency(List<Registrant> registrants, List<Fee> fees) {
+
+        Expense expense = new Expense();
+
+        Iterator<Registrant> it = registrants.iterator();
 
         double grpTotalRegistrationFee = 0;
         double grpTotalMealFee = 0;
+
+        Double lunchFee = 0.0;
+        Double dinnerFee = 0.0;
+        Double breakfastFee = 0.0;
 
         while (it.hasNext()) {
 
             Registrant regt = it.next();
 
             if (regt.getExpense() == null) {
-                Expense expense = new Expense();
-                regt.setExpense(expense);
+                Expense exp = new Expense();
+                regt.setExpense(exp);
             }
             // >>>>>>>>>>>>>>>>>>>>> Registration fee >>>>>>>>>>>>>>>>>>>>> 
 
-            Iterator<Fee> it1 = form.getFees().iterator();
+            Iterator<Fee> it1 = fees.iterator();
             DateTime now = new DateTime();
             while (it1.hasNext()) {
                 Fee fee = it1.next();
@@ -572,6 +587,12 @@ public class RegistrationController {
                     }
 
                     break;
+                }
+                if (fee.getCodeName().contains("LUNCH")) {
+                    lunchFee = fee.getAmount();
+                }
+                if (fee.getCodeName().contains("DINNER")) {
+                    dinnerFee = fee.getAmount();
                 }
             }
             // >>>>>>>>>>>>>>>>>>>>> Meal fee >>>>>>>>>>>>>>>>>>>>>            
@@ -591,7 +612,7 @@ public class RegistrationController {
                     + (mp.getLunch4() != null ? mp.getLunch4() : 0)
                     + (mp.getLunch5() != null ? mp.getLunch5() : 0);
             regt.getExpense().setLunchCount(lunchCount);
-            regt.getExpense().setTotalLunchFee(lunchCount * 7);
+            regt.getExpense().setTotalLunchFee(lunchCount * lunchFee);
 
             Integer dinnerCount = (mp.getDinner1() != null ? mp.getDinner1() : 0)
                     + (mp.getDinner2() != null ? mp.getDinner2() : 0)
@@ -599,7 +620,7 @@ public class RegistrationController {
                     + (mp.getDinner4() != null ? mp.getDinner4() : 0)
                     + (mp.getDinner5() != null ? mp.getDinner5() : 0);
             regt.getExpense().setDinnerCount(dinnerCount);
-            regt.getExpense().setTotalDinnerFee(dinnerCount * 8);
+            regt.getExpense().setTotalDinnerFee(dinnerCount * dinnerFee);
 
             regt.getExpense().setTotalMealsFee(regt.getExpense().getTotalBreakfastFee() + regt.getExpense().getTotalLunchFee() + regt.getExpense().getTotalDinnerFee());
             // Grand total
@@ -607,13 +628,10 @@ public class RegistrationController {
             grpTotalMealFee += regt.getExpense().getTotalMealsFee();
         }
 
-        if (form.getExpense() == null) {
-            Expense fee = new Expense();
-            form.setExpense(fee);
-        }
-        form.getExpense().setTotalRegistrationFee(grpTotalRegistrationFee);
-        form.getExpense().setTotalMealsFee(grpTotalMealFee);
+        expense.setTotalRegistrationFee(grpTotalRegistrationFee);
+        expense.setTotalMealsFee(grpTotalMealFee);
 
+        return expense;
     }
 
     public static boolean isInteger(String s) {
