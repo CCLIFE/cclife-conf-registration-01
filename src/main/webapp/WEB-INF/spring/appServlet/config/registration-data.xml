@@ -19,11 +19,16 @@
     </bean>
     
     <util:map id="feeMap">
-        <entry key="REGISTRATION1" value="201501,2015-04-15T00:00:00Z,12,0,REGISTRATION1,Early bird registration fee,10.0"/>
-        <entry key="REGISTRATION2" value="201501,2015-11-15T00:00:00Z,12,0,REGISTRATION2,Regular registration fee,15.0"/>
-        <entry key="REGISTRATION3" value="201501,2015-12-10T00:00:00Z,12,0,REGISTRATION3,Late registration,15.0"/>
-        <entry key="LUNCH1"        value="201501,2015-12-31T00:00:00Z,0,0,LUNCH1,Lunch Fee,7.0"/>
-        <entry key="DINNER1"       value="201501,2015-12-31T00:00:00Z,0,0,DINNER1,Dinner Fee,8.0"/>
+        <entry key="USREGISTRATION1" value="201501,2015-09-15T00:00:00Z,12,0,REGISTRATION1,Early bird registration fee,USD,10.0"/>
+        <entry key="USREGISTRATION2" value="201501,2015-11-15T00:00:00Z,12,0,REGISTRATION2,Regular registration fee,USD,15.0"/>
+        <entry key="USREGISTRATION3" value="201501,2015-12-10T00:00:00Z,12,0,REGISTRATION3,Late registration,USD,25.0"/>
+        <entry key="USLUNCH1"        value="201501,2015-12-31T00:00:00Z,0,0,LUNCH1,Lunch Fee,USD,6.0"/>
+        <entry key="USDINNER1"       value="201501,2015-12-31T00:00:00Z,0,0,DINNER1,Dinner Fee,USD,7.0"/>
+        <entry key="CAREGISTRATION1" value="201501,2015-09-15T00:00:00Z,12,0,REGISTRATION1,Early bird registration fee,CAD,12.0"/>
+        <entry key="CAREGISTRATION2" value="201501,2015-11-15T00:00:00Z,12,0,REGISTRATION2,Regular registration fee,CAD,18.0"/>
+        <entry key="CAREGISTRATION3" value="201501,2015-12-10T00:00:00Z,12,0,REGISTRATION3,Late registration,CAD,30.0"/>
+        <entry key="CALUNCH1"        value="201501,2015-12-31T00:00:00Z,0,0,LUNCH1,Lunch Fee,CAD,7.0"/>
+        <entry key="CADINNER1"       value="201501,2015-12-31T00:00:00Z,0,0,DINNER1,Dinner Fee,CAD,8.0"/>
     </util:map>
           
     <bean id="paymentProvider" class="com.cclife.registration.domain.PaymentProvider">
@@ -41,7 +46,30 @@
         <property name="notify_url" value="${notify_url}"/>
         <property name="rm" value="${rm}"/>
     </bean>
- 
+    
+    <bean id="paymentCanadaProvider" class="com.cclife.registration.domain.PaymentProvider">
+        <property name="providerUrl" value="${providerUrl}" />
+        <property name="cmd" value="${redirect_cmd}" />
+        <property name="redirect_cmd" value="${redirect_cmd}" />
+        <property name="business" value="${business_canada}" />
+        <property name="item_name" value="${item_name}"/>
+        <property name="no_shipping" value="${no_shipping}"/>
+        <property name="no_note" value="${no_note}"/>
+        <property name="currency_code" value="${currency_code_canada}"/>
+        <property name="lc" value="${lc_canada}"/>
+        <property name="bn" value="${bn}"/>
+        <property name="return" value="${return}"/>
+        <property name="notify_url" value="${notify_url}"/>
+        <property name="rm" value="${rm}"/>
+    </bean>
+    
+    <util:map id="paymentProviderMap" scope="prototype" map-class="java.util.HashMap" 
+              key-type="java.lang.String" value-type="com.cclife.registration.domain.PaymentProvider">
+
+        <entry key="USD" value-ref="paymentProvider" />
+        <entry key="CAD" value-ref="paymentCanadaProvider" />
+    </util:map>
+    
     <bean id="confirmationUrl" class="java.lang.String">
         <constructor-arg value="${confirmationUrl}"/>
     </bean>
