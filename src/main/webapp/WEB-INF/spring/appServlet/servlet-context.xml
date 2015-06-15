@@ -32,6 +32,19 @@
         <property name="basename" value="messages" />
     </bean>
 
+
+    <!-- Enables POJO @Controllers (like CartController) -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    
+    <!-- Enables annotated methods on POJO @Controllers (like CartController) -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    
+    <!-- Maps a logical view name to a physical resource 
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean> 
+    -->
     <!-- Maps request paths to flows in the flowRegistry; e.g. a path of /hotels/booking looks for a flow with id "hotels/booking". -->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="order" value="-1"/>
