@@ -34,6 +34,7 @@ public class Expense extends BaseObject {
     private double nonAdultRegistrationFee;
 
     private double totalRegistrationFee;
+    private String currency ;
     /**
      * @return the eventID
      */
@@ -257,5 +258,19 @@ public class Expense extends BaseObject {
     @Override
     public int hashCode() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the currency
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

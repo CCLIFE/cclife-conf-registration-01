@@ -21,6 +21,7 @@ public class Fee implements Serializable {
     private String codeName;
     private String description;
     private Double amount;
+    private String currency;
 
     /**
      * @return the eventID
@@ -118,5 +119,19 @@ public class Fee implements Serializable {
      */
     public void setCodeName(String codeName) {
         this.codeName = codeName;
+    }
+
+    /**
+     * @return the currency
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * @param currency the currency to set
+     */
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

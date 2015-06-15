@@ -51,11 +51,12 @@ public class RegistrationForm extends BaseObject {
     private Boolean Misc2;
     private Payment payment;
     private String discountCode;
-    private Expense expense;
+    private Expense expenses;
 
     private PaymentMethod paymentMethod;
     private List<Fee> fees;
     private PaymentProvider paymentProvider;
+    private String paymentCurrency;
     
     private String primaryChineseName;
     private String primaryFirstName ;
@@ -685,7 +686,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: churchCity.
      *
-     * @param churchCity the churchCity value you wish to set
+     * @param ChurchCity
      */
     public void setChurchCity(String ChurchCity) {
         this.churchCity = ChurchCity;
@@ -703,7 +704,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: churchID.
      *
-     * @param churchID the churchID value you wish to set
+     * @param ChurchID
      */
     public void setChurchID(Long ChurchID) {
         this.churchID = ChurchID;
@@ -722,7 +723,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: churchState.
      *
-     * @param churchState the churchState value you wish to set
+     * @param ChurchState
      */
     public void setChurchState(String ChurchState) {
         this.churchState = ChurchState;
@@ -741,7 +742,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: coordinator.
      *
-     * @param coordinator the coordinator value you wish to set
+     * @param Coordinator
      */
     public void setCoordinator(String Coordinator) {
         this.coordinator = Coordinator;
@@ -759,7 +760,7 @@ public class RegistrationForm extends BaseObject {
     /**
      * Set the value related to the column: formID.
      *
-     * @param formID the formID value you wish to set
+     * @param FormID
      */
     public void setFormID(Long FormID) {
         this.formID = FormID;
@@ -1036,14 +1037,14 @@ public class RegistrationForm extends BaseObject {
      * @return the expense
      */
     public Expense getExpense() {
-        return expense;
+        return expenses;
     }
 
     /**
-     * @param expense the expense to set
+     * @param expenses
      */
-    public void setExpense(Expense expense) {
-        this.expense = expense;
+    public void setExpense(Expense expenses) {
+        this.expenses = expenses;
     }
 
     /**
@@ -1181,5 +1182,19 @@ public class RegistrationForm extends BaseObject {
      */
     public void setPaymentProvider(PaymentProvider paymentProvider) {
         this.paymentProvider = paymentProvider;
+    }
+
+    /**
+     * @return the paymentCurrency
+     */
+    public String getPaymentCurrency() {
+        return paymentCurrency;
+    }
+
+    /**
+     * @param paymentCurrency the paymentCurrency to set
+     */
+    public void setPaymentCurrency(String paymentCurrency) {
+        this.paymentCurrency = paymentCurrency;
     }
 }

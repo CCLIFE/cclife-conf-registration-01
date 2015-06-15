@@ -45,10 +45,12 @@ public class RegistrationController {
     @Resource(name = "feeMap")
     private Map<String, String> feeMap;
 
-    @Autowired
-    private PaymentProvider paymentProvider;
+//    @Autowired
+//    private PaymentProvider paymentProvider;
     @Autowired
     private RegistrationService registrationService;
+    @Resource(name = "paymentProviderMap")
+    private Map<String, PaymentProvider> paymentProviderMap;
 
     public RegistrationForm initializeForm() {
         RegistrationForm registrationForm = new RegistrationForm();
@@ -483,20 +485,21 @@ public class RegistrationController {
         return null;
     }
 
-    public String getPaymentProviderUrl(RequestContext context) {
+    public String getPaymentProviderUrl(RegistrationForm form) {
 
         logger.info("getPaymentProviderUrl entering");
 
-        logger.debug(context.toString());
-
-        return paymentProvider.getProviderUrl();
+        PaymentProvider provider = paymentProviderMap.get(form.getPaymentCurrency());
+//        logger.debug(context.toString());
+        form.setPaymentProvider(provider);
+        
+        return provider.getProviderUrl();
     }
 
     public PaymentProvider createPaymentRequest(RegistrationForm form) {
 
         logger.info("createPaypalRequest entering");
 
-        form.setPaymentProvider(paymentProvider);
         form.getPaymentProvider().setItem_number(String.valueOf(form.getFormID().longValue()));
 
 //        p.setCmd("_ext-enter");
@@ -544,11 +547,21 @@ public class RegistrationController {
 
     public void calculateFee(RegistrationForm form) {
 
-        Iterator<Fee> it = form.getFees().iterator();
-        
+        String currency;
+        if (form.getAddress().getCountry().equalsIgnoreCase("CA")) {
+            currency = "CAD";
+
+        } else {
+            currency = "USD";
+        }
+        form.setPaymentCurrency(currency);
+
+        Expense expense = createExpenseByCurrency(form.getRegistrants(), form.getFees(), currency);
+        form.setExpense(expense);
+
     }
 
-    private Expense createExpenseByCurrency(List<Registrant> registrants, List<Fee> fees) {
+    private Expense createExpenseByCurrency(List<Registrant> registrants, List<Fee> fees, String currency) {
 
         Expense expense = new Expense();
 
@@ -575,7 +588,7 @@ public class RegistrationController {
             DateTime now = new DateTime();
             while (it1.hasNext()) {
                 Fee fee = it1.next();
-                if (fee.getCodeName().contains("REGISTRATION") && now.isBefore(fee.getEffectiveDate())) {
+                if (fee.getCodeName().contains("REGISTRATION") && fee.getCurrency().equalsIgnoreCase(currency) && now.isBefore(fee.getEffectiveDate())) {
                     if (regt.getPerson().getAge().startsWith("A")) {
                         regt.getExpense().setTotalRegistrationFee(fee.getAmount());
                         regt.getExpense().setAdultHeadcount(1);
@@ -585,13 +598,11 @@ public class RegistrationController {
                     } else {
                         regt.getExpense().setTotalRegistrationFee(0);
                     }
-
-                    break;
                 }
-                if (fee.getCodeName().contains("LUNCH")) {
+                if (fee.getCodeName().contains("LUNCH") && fee.getCurrency().equalsIgnoreCase(currency)) {
                     lunchFee = fee.getAmount();
                 }
-                if (fee.getCodeName().contains("DINNER")) {
+                if (fee.getCodeName().contains("DINNER") && fee.getCurrency().equalsIgnoreCase(currency)) {
                     dinnerFee = fee.getAmount();
                 }
             }

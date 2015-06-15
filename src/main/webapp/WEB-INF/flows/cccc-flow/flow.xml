@@ -74,7 +74,7 @@
     </decision-state>
 
     <action-state id="prepareCredit">
-        <evaluate expression="registrationController.getPaymentProviderUrl(flowRequestContext)"
+        <evaluate expression="registrationController.getPaymentProviderUrl(form)"
                   result="flowScope.paymentUrl"/>
         <transition to="confirmAndPayByCredit">
             <evaluate expression="registrationController.createPaymentRequest(form)" result="flowScope.paymentProvider"/>

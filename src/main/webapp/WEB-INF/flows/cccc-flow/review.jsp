@@ -14,15 +14,15 @@
                     </tr>
                     <tr>
                         <td>总报名费 Total Registration Fee:</td>
-                        <td>${form.expense.totalRegistrationFee}</td>
+                        <td>${form.paymentCurrency} $${form.expense.totalRegistrationFee}</td>
                     </tr>
                     <tr>
                         <td>总餐费 Total Meal Fee:</td>
-                        <td>${form.expense.totalMealsFee}</td>
+                        <td>${form.paymentCurrency} $${form.expense.totalMealsFee}</td>
                     </tr>
                     <tr>
                         <td>总费用 Total:</td>
-                        <td>${form.expense.totalMealsFee + form.expense.totalRegistrationFee}</td>
+                        <td>${form.paymentCurrency} $${form.expense.totalMealsFee + form.expense.totalRegistrationFee}</td>
                     </tr>
                 </tbody>
             </table>
