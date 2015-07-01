@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="embeddedFlow">
     <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
-            <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
-        <div>
+        <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
+        <input type="button" onclick="return toggleDiv('addressDiv')" value="點擊顯示或隱藏地址信息 click here to show/hide address informaiton">
+        <div id="addressDiv" style="display:none">
             <table align="center">
                 <caption> <b>地址信息 Address information</b></caption> 
                 <tbody>
@@ -61,7 +62,17 @@
         </div>
         <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
             <hr style="width: 70%; height: 2px;">
-            <div>
+            <c:set var="c" value="${count.count}"/>
+            <c:if test="${c == 1}">  
+                第 1 个人 (主报人) 的资料   Information of Primary Person 
+            </c:if>     
+            <c:if test="${c != 1}">  
+                第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
+            </c:if>
+ 
+            <input type="button" onclick="return toggleDiv('registrantsDiv_${c}')" value="點擊顯示或隱藏第 ${c} 个人的资料 click here to show/hide Information of Person No. ${c}">
+            <div id="registrantsDiv_${c}" style="display:none">
+                <div>
                 <table style="text-align: left; margin-left: auto; margin-right: auto; border:2; width: 100%" >
                     <tbody>
                         <tr>
@@ -123,7 +134,7 @@
                                         <tr>
                                             <td>关系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
-                                            <td>信主 Beliver:</td>
+                                            <td>信主 Christian:</td>
                                             <td>Y </td>
                                         </tr>
                                         <tr>
@@ -212,6 +223,7 @@
                     </tbody>
                 </table>
             </div>
+            </div>
         </c:forEach>
         <hr style="width: 80%; height: 2px;">
 
@@ -228,3 +240,18 @@
         </script>
     </form:form>
 </div>
+
+<script type="text/javascript">
+    function toggleDiv( area ){
+        var toggleDivision = document.getElementById( area );
+        if( !toggleDivision )return true;
+        if( toggleDivision.style.display == "none" ){
+            toggleDivision.style.display = "block";
+        }
+        else{
+            toggleDivision.style.display="none";
+        }
+        return true;
+    }
+    
+</script>

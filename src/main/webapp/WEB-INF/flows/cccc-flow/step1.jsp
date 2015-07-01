@@ -292,11 +292,11 @@
                             <form:errors path="address.misc2" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">确认电邮 Confirm Email: </td>
+                        <td style="width: 40%;">确认电邮 Confirm Email: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input id="confirmEmail" path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">是否需要住宿 Need Hotel: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">是否需要住宿 Need Hotel: </td>
                         <td>
                             需要 Yes <form:radiobutton path="address.hotel" value="Y" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
