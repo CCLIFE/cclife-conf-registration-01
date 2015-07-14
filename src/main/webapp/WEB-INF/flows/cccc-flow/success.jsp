@@ -1,5 +1,8 @@
-<div id="embeddedFlow">
-	<p class="success">Embedded flow ended successfully!</p>
+<div class="span-2">
+    <br/>
+</div>
+<div id="embeddedFlow" class="span-18">
+	<p class="success">Registration successfully!</p>
 	<div>
 		<p>
 		<a id="startFlow" href="cccc-flow">Start Over</a>

@@ -132,16 +132,18 @@
 </script>
 
 
-
-<div id="embeddedFlow">
+<div class="span-2 colborder">
+    <br/>
+</div>
+<div id="embeddedFlow" class="span-18">
     <p class="notice"><b>第一步 请先输入主报人姓名和家庭地址 <br>
-         step 1 - Enter address and family information</b></p>
-        <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
-    
+            step 1 - Enter address and family information</b></p>
+    <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
+
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
-                 
+
                 <tbody>
                     <tr>
                         <td colspan="2" style="text-align:center" >
@@ -168,7 +170,10 @@
                         <td><form:input path="primaryLastName" name="primaryLastName" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
-                         <td  colspan="2" style="text-align:center"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
+                        <td colspan="2"><br/><hr style="width: 100%; height: 2px;"></td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2" style="text-align:center"> <form:errors path="address.homeAddress" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
                         <td style="width:40%">住址 Street Address1: <font color="red"> &nbsp;* &nbsp;</font></td>
@@ -178,7 +183,7 @@
                         <td>住址 Street Address2: </td>
                         <td><form:input path="address.homeAddress2" name="homeAddress2" size="30" maxlength="60"/> </td>
                     </tr>
-                    
+
                     <tr>
                         <td colspan="2" style="text-align:center"> <form:errors path="address.homeCity" cssClass="fieldError"/></td>
                     </tr>
@@ -186,7 +191,7 @@
                         <td style="width:40%">城市 City: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td style="width:60%"><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="30"/> </td>
                     </tr>
-                   
+
                     <tr>
                         <td colspan="2" style="text-align:center"> <form:errors path="address.ucCountry" cssClass="fieldError"/></td>
                     </tr>
@@ -298,9 +303,9 @@
                     <tr>
                         <td style="width: 40%;">是否需要住宿 Need Hotel: </td>
                         <td>
-                            需要 Yes <form:radiobutton path="address.hotel" value="Y" />
+                            需要 Yes <form:radiobutton path="address.hotel" value="true" />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            不需要 No <form:radiobutton path="address.hotel" value="N" />
+                            不需要 No <form:radiobutton path="address.hotel" value="false" />
                         </td>
                     </tr>
                     <tr>

@@ -8,11 +8,17 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
     <!-- Map paths directly to view names without controller processing. Use the view-name attribute if necessary: by convention the view name equals the path without the leading slash -->
-    <mvc:view-controller path="/" view-name="home" />
+
     <mvc:view-controller path="/embeddedFlowContainer" />
     <mvc:view-controller path="/embeddedFlowInModalDialogContainer" />
     <mvc:view-controller path="/embeddedCcccFlowContainer" />
+    <!--
+    <mvc:view-controller path="/popup" view-name="popup"/>
+    -->
 	
+    <!-- This activates post-processors for annotation-based config -->
+    <context:annotation-config/>
+    
     <context:component-scan base-package="org.springframework.samples.webflow" />
     <context:component-scan base-package="com.cclife.registration"/>
 </beans>

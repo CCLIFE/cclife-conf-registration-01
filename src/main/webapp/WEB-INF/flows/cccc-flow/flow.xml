@@ -14,8 +14,13 @@
     
     <view-state id="step1" model="form" view="cccc/step1">
         <transition on="next" to="createNewOrSkip"/> 
-        <transition on="cancel" to="cancel" validate="false"/>
+        <transition on="cancel" to="step1CancelDialog" validate="false"/>
     </view-state>
+    
+    <subflow-state id="step1CancelDialog" subflow="popup-flow">
+        <transition on="return" to="step1"/>
+        <transition on="continue" to="cancel" />
+    </subflow-state>
     
     <decision-state id="createNewOrSkip">
         <if test="form.registrants == null || form.registrants.isEmpty() " then="createNew" else="step3" />
@@ -28,11 +33,15 @@
     </action-state>
     
     <view-state id="step2" model="registrant" view="cccc/step2">
-        <transition on="previous" to="step1"/>
         <transition on="next" to="step3"/> 
-        <transition on="cancel" to="removeNew" validate="false"/>
+        <transition on="cancel" to="step2CancelDialog" validate="false"/>
     </view-state>
     
+    <subflow-state id="step2CancelDialog" subflow="popup-flow">
+        <transition on="return" to="step2"/>
+        <transition on="continue" to="removeNew"/>
+    </subflow-state>
+
     <action-state id="removeNew">
         <evaluate expression="registrationController.removeNewPerson(form)"  />
         <transition to="step3" />
@@ -42,10 +51,15 @@
         <transition on="previous" to="step1"/>
         <transition on="new" to="createNew"/>
         <transition on="next" to="calculateFee"/>
-        <transition on="cancel" to="cancel"/>
+        <transition on="cancel" to="step3CancelDialog"/>
         <transition on="edit" to="editPerson"/>
         <transition on="remove" to="deletePerson"/>
     </view-state>
+    
+    <subflow-state id="step3CancelDialog" subflow="popup-flow">
+        <transition on="return" to="step3"/>
+        <transition on="continue" to="cancel"/>
+    </subflow-state>
     
     <action-state id="editPerson">
         <evaluate expression="registrationController.editPerson(flowScope.form, currentEvent.attributes)" result="flowScope.registrant" />
@@ -65,30 +79,40 @@
     <view-state id="review" model="form" view="cccc/review">
         <transition on="previous" to="step3" validate="false"/>
         <transition on="next" to="payment"/>
-        <transition on="cancel" to="cancel" validate="false"/>
+        <transition on="cancel" to="reviewCancelDialog" validate="false"/>
+        <transition on="success" to="success"/>
     </view-state>
 
+    <subflow-state id="reviewCancelDialog" subflow="popup-flow">
+        <transition on="return" to="review"/>
+        <transition on="continue" to="cancel"/>
+    </subflow-state>
+    
     <decision-state id="payment">
         <if test="form.paymentMethod == form.paymentMethod.PERSONAL_CHECK" then="prepareCheck"/>
         <if test="form.paymentMethod == form.paymentMethod.CREDIT_CARD" then="prepareCredit"/>
     </decision-state>
 
-    <action-state id="prepareCredit">
+    <action-state id="prepareCredit">     
         <evaluate expression="registrationController.getPaymentProviderUrl(form)"
                   result="flowScope.paymentUrl"/>
         <transition to="confirmAndPayByCredit">
-            <evaluate expression="registrationController.createPaymentRequest(form)" result="flowScope.paymentProvider"/>
+            <evaluate expression="registrationController.createPaymentRequest(form,flowRequestContext)" result="flowScope.paymentProvider"/>
         </transition>
     </action-state>
     
     <action-state id="prepareCheck">
         <evaluate expression="registrationController.submit(form)"/>
-        <transition to="confirmAndPayByCheck"/>
+        <transition to="confirmAndPayByCheck">
+            <evaluate expression="registrationController.sendMail(form)"/>
+        </transition>
     </action-state>
 
     <end-state id="confirmAndPayByCheck" view="cccc/confirmAndPayByCheck" />
-    <end-state id="confirmAndPayByCredit" view="cccc/confirmAndPayByCredit" />
     
+    <view-state id="confirmAndPayByCredit" model="form" view="cccc/confirmAndPayByCredit">
+    </view-state>
+
     <end-state id="success" view="cccc/success"/>
     <end-state id="cancel" view="cccc/cancel"/>
 

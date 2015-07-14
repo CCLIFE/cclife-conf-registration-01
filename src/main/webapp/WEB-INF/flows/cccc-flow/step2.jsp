@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<div id="embeddedFlow">
+<div class="span-2">
+    <br/>
+</div>
+<div id="embeddedFlow" class="span-18">
     <p class="notice"><b>第二步 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
-        
+
     <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
     <li><font color='red'>所添加人员须与主报人同一地址，并由同一人付费 (New added person need have the same address 
-            as the primary person, and pay by the same person.)</font></li>
-        
-        <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
+        as the primary person, and pay by the same person.)</font></li>
+
+    <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
@@ -71,7 +73,7 @@
                                         </form:select>
                                     </td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.healthCardNo" cssClass="fieldError"/></td>
                                 </tr>
@@ -91,7 +93,7 @@
                                         <form:input id="allergies" path="person.allergies" size="30" maxlength="50"/>
                                     </td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>
@@ -223,12 +225,16 @@
         <hr style="width: 80%; height: 2px;">
 
         <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
+        <!--
         <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>
+        <button id="popup" type="submit" name="_eventId_popup" >Popup &gt;&gt;</button>
+        -->
         <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+
+
         <script type="text/javascript">
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'next', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
-            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'previous', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
-            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
+            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step2', popup: true, params: {fragments: "body"}}));
         </script>
 
     </form:form>
@@ -243,5 +249,4 @@
         document.getElementById("d2").checked = true;
         document.getElementById("d3").checked = true;
     }
-
 </script>

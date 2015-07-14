@@ -23,11 +23,12 @@ import java.text.ParseException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.cclife.registration.util.DateUtil;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 import org.springframework.webflow.core.collection.LocalAttributeMap;
 import org.springframework.webflow.execution.RequestContext;
@@ -490,15 +491,30 @@ public class RegistrationController {
         logger.info("getPaymentProviderUrl entering");
 
         PaymentProvider provider = paymentProviderMap.get(form.getPaymentCurrency());
-//        logger.debug(context.toString());
+        logger.debug("ServiceProvider:" + provider.getBusiness());
+
         form.setPaymentProvider(provider);
-        
+
         return provider.getProviderUrl();
     }
 
-    public PaymentProvider createPaymentRequest(RegistrationForm form) {
+    public PaymentProvider createPaymentRequest(RegistrationForm form, RequestContext context) {
 
         logger.info("createPaypalRequest entering");
+
+        this.submit(form);
+
+        // Get http request  
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getNativeRequest();
+        // Generate Spring Webflow return URL
+        String url = request.getRequestURL()
+                + ";jsessionid=" + request.getSession().getId() + "?"
+                + request.getQueryString();
+
+        String paypalCancelUrl = url + "&_eventId=cancel";
+        String paypalSuccessUrl = url + "&_eventId=success";
+        logger.debug("Approved URL:" + paypalSuccessUrl);
+        logger.debug("Cancel URL:" + paypalCancelUrl);
 
         form.getPaymentProvider().setItem_number(String.valueOf(form.getFormID().longValue()));
 
@@ -516,12 +532,12 @@ public class RegistrationController {
 //        p.setLc("US");
 //        p.setBn("PP-BuyNowBF");
 //        p.setReturn("http://localhost:9090/Registration/confirm.htm");
-//        p.setReturn("http://cccm.biz:8084/registration/confirm.htm");
+//        form.getPaymentProvider().setReturn(paypalSuccessUrl);
 //        p.setNotify_url("http://cccm.biz:8084/registration/instantPaymentNotification.htm");
 //        p.setRm("2");
         form.getPaymentProvider().setEmail(form.getAddress().getMisc1());
         form.getPaymentProvider().setFirst_name(form.getPrimaryFirstName());
-        form.getPaymentProvider().setLast_name(form.getPrimaryFirstName());
+        form.getPaymentProvider().setLast_name(form.getPrimaryLastName());
         form.getPaymentProvider().setAddress1(form.getAddress().getHomeAddress());
         form.getPaymentProvider().setAddress2(form.getAddress().getHomeAddress2());
         form.getPaymentProvider().setCity(form.getAddress().getHomeCity());
@@ -532,6 +548,9 @@ public class RegistrationController {
 //        if (form.getEventID().compareTo(201403) == 0) {
 //            paypalInstance.setReturn(confirmationAltUrl);
 //        }
+        logger.debug("Business:" + form.getPaymentProvider().getBusiness());
+        logger.debug("Currency:" + form.getPaymentProvider().getCurrency_code());
+        logger.debug("Lc:" + form.getPaymentProvider().getLc());
         logger.info("createPaypalRequest exiting");
 
         return form.getPaymentProvider();
@@ -539,7 +558,29 @@ public class RegistrationController {
 
     public void submit(RegistrationForm form) {
         try {
+
             registrationService.submit(form);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, "Submit registration form", ex);
+        }
+    }
+
+    public void sendMail(RegistrationForm form) {
+        try {
+
+            if (form.getPaymentMethod() == PaymentMethod.PERSONAL_CHECK) {
+                String template = "CCLIFE_2015_Registration_Recieved_CA.html";
+                if (form.getPaymentCurrency().equalsIgnoreCase("USD")) {
+                    template = "CCLIFE_2015_Registration_Recieved_US.html";
+                }
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("primaryName", form.getPrimaryChineseName());
+                params.put("currency", form.getPaymentCurrency());
+                params.put("registrationId", form.getAddress().getFamilyID());
+                params.put("amountPaid", form.getExpense().getTotalMealsFee() + form.getExpense().getTotalRegistrationFee());
+
+                registrationService.sendEmail(form, params, template);
+            }
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, "Submit registration form", ex);
         }
@@ -565,46 +606,52 @@ public class RegistrationController {
 
         Expense expense = new Expense();
 
-        Iterator<Registrant> it = registrants.iterator();
-
         double grpTotalRegistrationFee = 0;
         double grpTotalMealFee = 0;
 
         Double lunchFee = 0.0;
         Double dinnerFee = 0.0;
         Double breakfastFee = 0.0;
+        Double adultRegistrationFee = 0.0;
+        Double nonAdultRegistrationFee = 0.0;
+        Integer ageLevel = 0;
 
-        while (it.hasNext()) {
+        DateTime now = new DateTime();
+        DateTime effectiveDate = null;
+        for (Fee fee : fees) {
+            if (fee.getCodeName().contains("REGISTRATION") && fee.getCurrency().equalsIgnoreCase(currency) && now.isBefore(fee.getEffectiveDate())) {
 
-            Registrant regt = it.next();
+                if (effectiveDate == null || effectiveDate.isAfter(fee.getEffectiveDate())) {
+                    adultRegistrationFee = fee.getAmount();
+                    ageLevel = fee.getAgeLevel();
+                    effectiveDate = fee.getEffectiveDate();
+                }
+            }
+            if (fee.getCodeName().contains("LUNCH") && fee.getCurrency().equalsIgnoreCase(currency)) {
+                lunchFee = fee.getAmount();
+            }
+            if (fee.getCodeName().contains("DINNER") && fee.getCurrency().equalsIgnoreCase(currency)) {
+                dinnerFee = fee.getAmount();
+            }
+        }
+
+        for (Registrant regt : registrants) {
 
             if (regt.getExpense() == null) {
                 Expense exp = new Expense();
                 regt.setExpense(exp);
             }
-            // >>>>>>>>>>>>>>>>>>>>> Registration fee >>>>>>>>>>>>>>>>>>>>> 
 
-            Iterator<Fee> it1 = fees.iterator();
-            DateTime now = new DateTime();
-            while (it1.hasNext()) {
-                Fee fee = it1.next();
-                if (fee.getCodeName().contains("REGISTRATION") && fee.getCurrency().equalsIgnoreCase(currency) && now.isBefore(fee.getEffectiveDate())) {
-                    if (regt.getPerson().getAge().startsWith("A")) {
-                        regt.getExpense().setTotalRegistrationFee(fee.getAmount());
-                        regt.getExpense().setAdultHeadcount(1);
-                    } else if (Integer.parseInt(regt.getPerson().getAge()) > fee.getAgeLevel()) {
-                        regt.getExpense().setTotalRegistrationFee(fee.getAmount());
-                        regt.getExpense().setAdultHeadcount(1);
-                    } else {
-                        regt.getExpense().setTotalRegistrationFee(0);
-                    }
-                }
-                if (fee.getCodeName().contains("LUNCH") && fee.getCurrency().equalsIgnoreCase(currency)) {
-                    lunchFee = fee.getAmount();
-                }
-                if (fee.getCodeName().contains("DINNER") && fee.getCurrency().equalsIgnoreCase(currency)) {
-                    dinnerFee = fee.getAmount();
-                }
+            // >>>>>>>>>>>>>>>>>>>>> Registration fee >>>>>>>>>>>>>>>>>>>>> 
+            if (regt.getPerson().getAge().startsWith("A")) {
+                regt.getExpense().setTotalRegistrationFee(adultRegistrationFee);
+                regt.getExpense().setAdultHeadcount(1);
+            } else if (Integer.parseInt(regt.getPerson().getAge()) > ageLevel) {
+                regt.getExpense().setTotalRegistrationFee(adultRegistrationFee);
+                regt.getExpense().setAdultHeadcount(1);
+            } else {
+                regt.getExpense().setTotalRegistrationFee(nonAdultRegistrationFee);
+                regt.getExpense().setNonAdultHeadcount(1);
             }
             // >>>>>>>>>>>>>>>>>>>>> Meal fee >>>>>>>>>>>>>>>>>>>>>            
             Mealplan mp = regt.getMealplan();

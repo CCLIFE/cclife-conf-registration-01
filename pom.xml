@@ -40,6 +40,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.cclife</groupId>
+            <artifactId>Enterprise-jar</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

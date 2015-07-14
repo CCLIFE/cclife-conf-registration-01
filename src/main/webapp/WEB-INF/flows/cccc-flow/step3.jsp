@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="embeddedFlow">
+<div class="span-2">
+    <br/>
+</div>
+<div id="embeddedFlow"  class="span-18">
     <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
         <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
-        <input type="button" onclick="return toggleDiv('addressDiv')" value="點擊顯示或隱藏地址信息 click here to show/hide address informaiton">
-        <div id="addressDiv" style="display:none">
+        <div>
             <table align="center">
                 <caption> <b>地址信息 Address information</b></caption> 
                 <tbody>

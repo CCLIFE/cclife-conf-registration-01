@@ -11,7 +11,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>SpringWeb Flow Showcase</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/dijit/themes/tundra/tundra.css" />" />
         <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/screen.css" />" type="text/css" media="screen, projection" />
         <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/print.css" />" type="text/css" media="print" />
@@ -24,10 +23,6 @@
     </head>
     <body class="tundra">
         <div id="page" class="container">
-            <div align="center">
-                <h1>中国基督徒生命团契</h1>
-                <hr/>
-            </div>
             <div>
                 <tiles:insertAttribute name="body"/>
             </div>

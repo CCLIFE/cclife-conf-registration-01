@@ -4,7 +4,6 @@
  */
 package com.cclife.registration.service;
 
-import com.cclife.registration.dao.FamilyDao;
 import com.cclife.registration.dao.GenericJPADao;
 import com.cclife.registration.dao.PaymentDao;
 import com.cclife.registration.domain.Registrant;
@@ -12,6 +11,8 @@ import com.cclife.registration.domain.RegistrationForm;
 import com.cclife.registration.model.Family;
 import com.cclife.registration.model.Payment;
 import com.cclife.registration.model.Person;
+import com.cclife.registration.model.Profile;
+import com.cclife.registration.model.Mealplan;
 import com.cclife.registration.util.UID;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +40,10 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private GenericJPADao<Person> personDao;
     @Autowired
+    GenericJPADao<Profile> profileDao;
+    @Autowired
+    GenericJPADao<Mealplan> mealplanDao;
+    @Autowired
     private PaymentDao paymentDao;
     @Autowired
     private MailEngine mailEngine;
@@ -53,11 +58,24 @@ public class RegistrationServiceImpl implements RegistrationService {
         logger.debug("Number:" + fid);
 //        family.setFamilyID(fid);
         familyDao.create(family);
+        form.setFormID(fid.longValue());
+        
         logger.debug("Family ID:" + family.getFamilyID());
 
+        Mealplan mealPlan = new Mealplan();
+        mealPlan.setRegistrationID(fid.toString());
+        mealPlan.setLunch1(0) ;
+        mealPlan.setLunch2(0) ;
+        mealPlan.setLunch3(0) ;
+        mealPlan.setLunch4(0) ;
+        mealPlan.setDinner1(0) ;
+        mealPlan.setDinner2(0) ;
+        mealPlan.setDinner3(0) ;
+        mealPlan.setDinner4(0) ;
+        
         Iterator<Registrant> it = form.getRegistrants().iterator();
-
         while (it.hasNext()) {
+
             Registrant registrant = it.next();
             Person person = registrant.getPerson();
 
@@ -100,16 +118,50 @@ public class RegistrationServiceImpl implements RegistrationService {
             logger.debug("WillingToBeVolunteer:" + person.getWillingToBeVolunteer());
             logger.debug("WorkPhone:" + person.getWorkPhone());
             person.setFamilyID(family.getFamilyID());
-//            person.setPersonID(fid);
             person.setLastModified(new Date());
             personDao.create(person);
+
+            logger.debug("Person ID:" + person.getPersonID());
+            logger.debug("Family ID:" + person.getFamilyID());
+
+            Profile profile = new Profile();
+
+            profile.setPersonID(person.getPersonID());
+            profile.setFamilyID(person.getFamilyID());
+            profile.setRegistrationID(fid.toString());
+            profile.setNeedHotel(form.getAddress().getHotel());
+            profile.setLastModified(new Date());
+
+            profileDao.create(profile);
+
+            mealPlan.setLunch1(mealPlan.getLunch1() + (registrant.getMealplan().getLunch1() == null ? 0 : registrant.getMealplan().getLunch1()));
+            mealPlan.setLunch2(mealPlan.getLunch2() + (registrant.getMealplan().getLunch2() == null ? 0 : registrant.getMealplan().getLunch2()));
+            mealPlan.setLunch3(mealPlan.getLunch3() + (registrant.getMealplan().getLunch3() == null ? 0 : registrant.getMealplan().getLunch3()));
+            mealPlan.setLunch4(mealPlan.getLunch4() + (registrant.getMealplan().getLunch4() == null ? 0 : registrant.getMealplan().getLunch4()));
+
+            mealPlan.setDinner1(mealPlan.getDinner1() + (registrant.getMealplan().getDinner1() == null ? 0 : registrant.getMealplan().getDinner1()));
+            mealPlan.setDinner2(mealPlan.getDinner2() + (registrant.getMealplan().getDinner2() == null ? 0 : registrant.getMealplan().getDinner2()));
+            mealPlan.setDinner3(mealPlan.getDinner3() + (registrant.getMealplan().getDinner3() == null ? 0 : registrant.getMealplan().getDinner3()));
+            mealPlan.setDinner4(mealPlan.getDinner4() + (registrant.getMealplan().getDinner4() == null ? 0 : registrant.getMealplan().getDinner4()));
         }
 
+        mealplanDao.create(mealPlan);
+
         Payment payment = new Payment();
-        payment.setAmount(22.30);
+        payment.setAmount(form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee());
         payment.setPaymentDate(new Date());
 
         paymentDao.save(payment);
+
+        return true;
+    }
+
+    /**
+     *
+     * @param form
+     */
+    @Override
+    public void sendEmail(RegistrationForm form, Map<String, Object> params, String template) {
         try {
             logger.debug("Mail Engine:" + mailEngine.toString());
 //            SimpleMailMessage mailMessage ;
@@ -124,17 +176,12 @@ public class RegistrationServiceImpl implements RegistrationService {
             String subject = "Gospel for Chinese Christian Conference Toronto 2015";
 //            mailMessage.setSubject(subject);
 
-            Map<String, Object> params = new HashMap<String, Object>();
-            params.put("registrationId", fid);
-            params.put("amountPaid", payment.getAmount());
-
-            mailEngine.sendMessage(recipients, "cclife@gmail.com", subject, "CCLIFE_2015_Registration_Confirmation.html", params);
+            mailEngine.sendMessage(recipients, "cclife@gmail.com", subject, template, params);
 
             logger.debug("Message Sent :" + form.getAddress().getMisc1());
         } catch (MessagingException ex) {
             java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return true;
     }
 }

@@ -1,8 +1,5 @@
-<div class="span-2">
-    <br/>
-</div>
-<div id="embeddedFlow" class="span-18">
-	<p class="error">Registration canceled !</p>
+<div id="embeddedFlow">
+	<p class="error">Embedded flow popup!</p>
 	<div>
 		<p>
 		<a id="startFlow" href="cccc-flow">Start Over</a>

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<div id="embeddedFlow">
+<div class="span-2">
+    <br/>
+</div>
+<div id="embeddedFlow"  class="span-18">
     <p class="notice">Pay by CREDIT</p>
     <hr style="width: 80%; height: 2px;">
     <div id="content" align="left">
@@ -40,15 +43,11 @@
                 <p>
                     <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but06.gif" cssClass="button" key="button.pay" theme="simple"/>
                 </p>
-                ${providerUrl}
             </form:form>
         </div>
         <hr style="width: 100%; height: 2px;"/>
         <br/>
     </div>
-    <hr style="width: 80%; height: 2px;">
-    <a id="startFlow" href="cccc-flow">Start Over</a>
-    <script type="text/javascript">
-        Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: "startFlow", event: "onclick", params: {fragments: "body", mode: "embedded"}}));
-    </script>
+    
+
 </div>

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <link rel="stylesheet" href="/webflow-registration/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
-
-<div id="embeddedFlow">
+<div class="span-2">
+    <br/>
+</div>
+<div id="embeddedFlow" class="span-18">
     <p class="notice">Review Payment</p>
     <form:form id="review" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
@@ -64,10 +66,10 @@
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'review', params: {fragments: "body"}}));
         </script>
     </form:form>    
-        
+
     <script>
         showAmount();
     </script>
-    
+
 </div>
 
