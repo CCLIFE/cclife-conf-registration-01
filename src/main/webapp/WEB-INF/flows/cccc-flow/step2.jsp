@@ -97,7 +97,7 @@
                                 <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>
-                                        <form:select id="status" path="person.relationship">
+                                        <form:select id="relationship" path="person.relationship">
                                             <form:option value="" label="-- Select relationship --" />
                                             <form:options items="${form.relationshipGroup}" itemValue="value" itemLabel="label" />
                                         </form:select>
@@ -218,7 +218,7 @@
                 <tr>
                     <td></td>
                     <td><button id="selectAll" type="button" onclick="selectAllMeal();">全选 (select all)</button></td>
-                    <td></td>
+                    <td>${person.status}</td>
                 </tr>
             </tbody>
         </table>
@@ -231,7 +231,7 @@
         -->
         <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
 
-
+        
         <script type="text/javascript">
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'next', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step2', popup: true, params: {fragments: "body"}}));
@@ -248,5 +248,11 @@
         document.getElementById("d1").checked = true;
         document.getElementById("d2").checked = true;
         document.getElementById("d3").checked = true;
+    }
+    
+    var e = document.getElementById("relationship");
+    var value = e.options[e.selectedIndex].value;
+    if (value === "A") {
+        e.disabled = true ;
     }
 </script>
