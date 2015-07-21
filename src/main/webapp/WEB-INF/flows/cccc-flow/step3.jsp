@@ -5,7 +5,9 @@
     <br/>
 </div>
 <div id="embeddedFlow"  class="span-18">
-    <p class="notice"><b>您目前输入的注册信息，请核对。<br> Your current registration summary, please check.</b> </p>
+    <p class="notice"><b>請先核對您已經輸入的信息，如需添加人員請按頁面下方的【+add】鍵 。<br> 
+            Please double check the information you entered.  If you have more people to add to this transaction, 
+            press the 【+add】button at the bottom of this page.</b> </p>
         <form:form id="step3" action="${flowExecutionUrl}" modelAttribute="form" acceptCharset="UTF-8">
         <div>
             <table align="center">
@@ -36,7 +38,7 @@
                         <td>${form.address.country}</td>
                     </tr>
                     <tr>
-                        <td>聯絡电话 Primary Contact Phone:</td>
+                        <td>聯絡电话 Primary Contact Phone#:</td>
                         <td>${form.address.homePhone}</td>
                     </tr>
                     <tr>
@@ -49,7 +51,7 @@
                     </tr>
                     <tr>
                         <td>所属教会/机构<br>
-                            Church / Organization Affiliation </td>
+                            Church or Organization </td>
                         <td>${form.churchName} </td>
                     </tr>
                     <!--
@@ -64,15 +66,15 @@
         </div>
         <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
             <hr style="width: 70%; height: 2px;">
-            <c:set var="c" value="${count.count}"/>
+            <c:set var="c" value="${count.count}"/><b>
             <c:if test="${c == 1}">  
-                第 1 个人 (主报人) 的资料   Information of Primary Person 
+                第 1 个人的信息  Primary registrant Information
             </c:if>     
             <c:if test="${c != 1}">  
-                第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
+                第 ${count.count} 个人的信息   Information of Person No. ${count.count} 
             </c:if>
- 
-            <input type="button" onclick="return toggleDiv('registrantsDiv_${c}')" value="點擊顯示或隱藏第 ${c} 个人的资料 click here to show/hide Information of Person No. ${c}">
+            </b>
+            <input type="button" onclick="return toggleDiv('registrantsDiv_${c}')" value="點擊顯示或隱藏个人信息 click to show/hide Information">
             <div id="registrantsDiv_${c}" style="display:none">
                 <div>
                 <table style="text-align: left; margin-left: auto; margin-right: auto; border:2; width: 100%" >
@@ -128,16 +130,12 @@
                                             <td>Health Card Number:</td>
                                             <td colspan="3">${registrant.person.healthCardNo}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Dietary Restrictions/Allergies:</td>
-                                            <td colspan="3">${registrant.person.allergies}</td>
-                                        </tr>
 
                                         <tr>
                                             <td>关系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
                                             <td>信主 Christian:</td>
-                                            <td>Y </td>
+                                            <td>${registrant.person.acceptedChrist}</td>
                                         </tr>
                                         <tr>
                                             <td>语言 Language:</td>
@@ -163,7 +161,19 @@
                 </table>                 
             </div>
             <hr style="width: 70%; height: 2px;">
+            
+            <c:set var="ushers" value=" " />
+            <c:set var="nursery_helper" value=" " />
+            <c:set var="interpreter" value=" " />
+            <c:set var="audio_visual" value=" " />
+            <c:set var="followup" value=" " />
+            <c:set var="transportation" value=" " />
+            <c:set var="medical_support" value=" " />
+            <c:set var="other" value=" " />
+            <c:set var="small_group_leader" value=" " />
+
             <c:set var="serve" value="<%=com.cclife.registration.domain.Server.values()%>" />
+
             <c:forEach items="${serve}" var="se">
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='USHERS' }"><c:set var="ushers" value="Y" /></c:if>
                 <c:if test="${registrant.volunteerJobs.contains(se) && se=='NURSERY_HELPER' }"><c:set var="nursery_helper" value="Y" /></c:if>
@@ -201,8 +211,7 @@
             </div>
             <hr style="width: 70%; height: 2px;">
             <div>
-                <table
-                    style="text-align: center; margin-left: auto; margin-right: auto;">
+                <table style="text-align: left; width: 500px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
                     <tbody>
                         <tr>
                             <td colspan="3" rowspan="1"><b>订餐</b></td>
@@ -213,14 +222,14 @@
                             <td style="text-align:center">Dec. 30</td>
                         </tr>
                         <tr>
-                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch1}</td>
-                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch2}</td>
-                            <td style="width:33%">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch3}</td>
+                            <td style="width:33%;text-align:center">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch1}</td>
+                            <td style="width:33%;text-align:center">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch2}</td>
+                            <td style="width:33%;text-align:center">午餐 &nbsp;&nbsp;${registrant.mealplan.lunch3}</td>
                         </tr>
                         <tr>
-                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner1}</td>
-                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner2}</td>
-                            <td>晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner3}</td>
+                            <td style="width:33%;text-align:center">晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner1}</td>
+                            <td style="width:33%;text-align:center">晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner2}</td>
+                            <td style="width:33%;text-align:center">晚餐 &nbsp;&nbsp;${registrant.mealplan.dinner3}</td>
                         </tr>
                     </tbody>
                 </table>

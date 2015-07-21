@@ -6,6 +6,8 @@
 package com.cclife.registration.validator;
 
 import com.cclife.registration.domain.Registrant;
+import com.cclife.registration.domain.RegistrationForm;
+
 import org.apache.log4j.Logger;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -58,18 +60,30 @@ public class RegistrantValidator {
                messages.addMessage(new MessageBuilder().error().source("person.status").
                        code("personGrade").build());
             }
+            
+            /**dietary restriction/allergies is not include in the page any more, so this part is commented out.
             if (registrant.getPerson().getAllergies().trim().isEmpty() ) {
                messages.addMessage(new MessageBuilder().error().source("person.allergies").
                        code("personAllergies").build());
             }
-            //Email and Health Card number are required for youth 13 to 18
+            */
+            //Email and Health Card number(Canaian only) are required for youth 13 to 18
             int ageToCheck = Integer.parseInt(registrant.getPerson().getAge().trim() );
             if( ( ageToCheck >= 13 ) && ( ageToCheck <=18 ) ){
-                if (registrant.getPerson().getHealthCardNo().trim().isEmpty() ) {
-                   messages.addMessage(new MessageBuilder().error().source("person.healthCardNo").
-                           code("personHealthCardNo").build());
-                }
                 
+                if( !registrant.getCountryVal().isEmpty() && registrant.getCountryVal().trim().equals("CA")){
+                    if (registrant.getPerson().getHealthCardNo().trim().isEmpty() ) {
+                       messages.addMessage(new MessageBuilder().error().source("person.healthCardNo").
+                               code("personHealthCardNo").build());
+                    }
+                }
+                 String email1 = registrant.getPerson().getEmail().trim();
+                 if ( email1.isEmpty() || !email1.contains("@") ) {
+                     messages.addMessage(new MessageBuilder().error().source("person.email").
+                             code("validEmail").build());
+                 }
+
+                 /** comfirm email is not necessary, so this part is commented out.
                  String email1 = registrant.getPerson().getEmail().trim();
                  String email2 = registrant.getPerson().getMisc1().trim();
                  if ( email1.isEmpty() || !email1.contains("@") ) {
@@ -89,6 +103,7 @@ public class RegistrantValidator {
                          }
                      }
                  }
+                 * */
             }    
         }
         

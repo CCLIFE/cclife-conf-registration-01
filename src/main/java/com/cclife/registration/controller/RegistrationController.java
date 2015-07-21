@@ -64,11 +64,11 @@ public class RegistrationController {
         List<LabelValue> ageGroup;
         ageGroup = new ArrayList<LabelValue>();
 
-        ageGroup.add(new LabelValue("18-29", "A2"));
-        ageGroup.add(new LabelValue("30-39", "A3"));
-        ageGroup.add(new LabelValue("40-49", "A4"));
-        ageGroup.add(new LabelValue("50-59", "A5"));
-        ageGroup.add(new LabelValue("60+", "A6"));
+        ageGroup.add(new LabelValue("18-30", "A2"));
+        ageGroup.add(new LabelValue("31-40", "A3"));
+        ageGroup.add(new LabelValue("41-50", "A4"));
+        ageGroup.add(new LabelValue("51-60", "A5"));
+        ageGroup.add(new LabelValue("61+", "A6"));
         ageGroup.add(new LabelValue("17", "17"));
         ageGroup.add(new LabelValue("16", "16"));
         ageGroup.add(new LabelValue("15", "15"));
@@ -93,20 +93,6 @@ public class RegistrationController {
         List<LabelValue> months;
         months = new ArrayList<LabelValue>();
 
-//        months.add(new LabelValue("January", "01"));
-//        months.add(new LabelValue("February", "02"));
-//        months.add(new LabelValue("March", "03"));
-//        months.add(new LabelValue("April", "04"));
-//        months.add(new LabelValue("May", "05"));
-//        months.add(new LabelValue("June", "06"));
-//        months.add(new LabelValue("July", "07"));
-//        months.add(new LabelValue("August", "08"));
-//        months.add(new LabelValue("September", "09"));
-//        months.add(new LabelValue("October", "10"));
-//        months.add(new LabelValue("November", "11"));
-//        months.add(new LabelValue("December", "12"));
-//
-//        registrationForm.setMonths(months);
         List<LabelValue> days;
         days = new ArrayList<LabelValue>();
         days.add(new LabelValue("1", "01"));
@@ -155,7 +141,7 @@ public class RegistrationController {
         relationshipGroup.add(new LabelValue("T \u59CA\u59B9", "T")); // T(??)
         relationshipGroup.add(new LabelValue("C \u540C\u5B66", "C")); // C(??)
         relationshipGroup.add(new LabelValue("O \u540C\u4E8B", "O")); // O(??)
-        relationshipGroup.add(new LabelValue("A \u4E3B\u62A5\u4EBA", "A"));
+        //relationshipGroup.add(new LabelValue("P \u4E3B\u62A5\u4EBA", "P"));  //P is not selectable, will be added on dynamically
         registrationForm.setRelationshipGroup(relationshipGroup);
 
         /**
@@ -164,113 +150,58 @@ public class RegistrationController {
         List<LabelValue> statusGroup;
         statusGroup = new ArrayList<LabelValue>();
 
-        /**
-         * statusGroup.add(new LabelValue("F(\u5168\u8077\u50B3\u9053)", "F"));
-         * statusGroup.add(new LabelValue("P(\u6559\u6703\u7267\u8005)", "P"));
-         * statusGroup.add(new LabelValue("T(\u795E\u5B78\u751F)", "T"));
-         * statusGroup.add(new LabelValue("N(\u6A5F\u69CB\u540C\u5DE5)", "N"));
-         * statusGroup.add(new LabelValue("C(\u6821\u5712\u540C\u5DE5)", "C"));
-         * statusGroup.add(new LabelValue("E(\u6559\u6703\u9577\u57F7)", "E"));
-         * statusGroup.add(new
-         * LabelValue("S(\u5C0F\u7D44\u6216\u5718\u5951\u540C\u5DE5)", "S"));
-         * statusGroup.add(new LabelValue("O(\u5176\u4ED6)", "O"));
-         *
-         */
         statusGroup.add(new LabelValue("P \u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
         statusGroup.add(new LabelValue("S \u795E\u5B78\u751F", "2"));
         statusGroup.add(new LabelValue("D \u6559\u6703\u9577\u57F7 / \u5718\u5951\u540C\u5DE5", "3"));
         statusGroup.add(new LabelValue("O \u798F\u97F3\u6A5F\u69CB\u540C\u5DE5", "4"));
         statusGroup.add(new LabelValue("M \u6559\u6703\u6210\u54E1", "5"));
         statusGroup.add(new LabelValue("U \u6155\u9053\u53CB", "6"));
-        /**
-         * statusGroup.add(new LabelValue("-- Status(English Conf) --", ""));
-         * statusGroup.add(new LabelValue("Married", "M")); statusGroup.add(new
-         * LabelValue("Engaged", "EN")); statusGroup.add(new
-         * LabelValue("Single", "S")); statusGroup.add(new LabelValue("Graduate
-         * School", "GS")); statusGroup.add(new LabelValue("Undergrad - Sr",
-         * "C4")); statusGroup.add(new LabelValue("Undergrad - Jr", "C3"));
-         * statusGroup.add(new LabelValue("Undergrad - So", "C2"));
-         * statusGroup.add(new LabelValue("Undergrad - Fr", "C1"));
-         * statusGroup.add(new LabelValue("Senior High - Sr", "12th"));
-         * statusGroup.add(new LabelValue("Senior High - Jr", "11th"));
-         * statusGroup.add(new LabelValue("Senior High - So", "10th"));
-         * statusGroup.add(new LabelValue("Senior High - Fr", "9th"));
-         * statusGroup.add(new LabelValue("Junior High - 6th grade", "6th"));
-         * statusGroup.add(new LabelValue("Junior High - 7th grade", "7th"));
-         * statusGroup.add(new LabelValue("Junior High - 8th grade", "8th"));
-         * statusGroup.add(new LabelValue("Toddlers (age 0-3)", "TO"));
-         * statusGroup.add(new LabelValue("Elementary (K-5)", "EL"));
-         * statusGroup.add(new LabelValue("Other", "O"));
-         *
-         */
 
         registrationForm.setStatusGroup(statusGroup);
 
         List<LabelValue> statusGroup2;
         statusGroup2 = new ArrayList<LabelValue>();
 
-        //statusGroup2.add(new LabelValue("Married", "M"));
-        //statusGroup2.add(new LabelValue("Engaged", "EN"));
-        //statusGroup2.add(new LabelValue("Single", "S"));
-        /**
-         * The following code is removed for issue40. No grade info needed for
-         * undergrads and graduate students.
-         *
-         * statusGroup2.add(new LabelValue("Graduate School", "GS"));
-         * statusGroup2.add(new LabelValue("Undergrad - Sr", "C4"));
-         * statusGroup2.add(new LabelValue("Undergrad - Jr", "C3"));
-         * statusGroup2.add(new LabelValue("Undergrad - So", "C2"));
-         * statusGroup2.add(new LabelValue("Undergrad - Fr", "C1"));
-         *
-         */
-        statusGroup2.add(new LabelValue("Senior High - Sr", "12th"));
-        statusGroup2.add(new LabelValue("Senior High - Jr", "11th"));
-        statusGroup2.add(new LabelValue("Senior High - So", "10th"));
-        statusGroup2.add(new LabelValue("Senior High - Fr", "9th"));
-        statusGroup2.add(new LabelValue("Junior High - 6th grade", "6th"));
-        statusGroup2.add(new LabelValue("Junior High - 7th grade", "7th"));
-        statusGroup2.add(new LabelValue("Junior High - 8th grade", "8th"));
-        statusGroup2.add(new LabelValue("Toddlers (age 0-3)", "TO"));
-        statusGroup2.add(new LabelValue("Elementary (K-5)", "EL"));
-        statusGroup2.add(new LabelValue("Other", "O"));
+        statusGroup2.add(new LabelValue("Senior High - Sr \u5341\u4e8c\u5e74\u7d1a", "12th"));
+        statusGroup2.add(new LabelValue("Senior High - Jr \u5341\u4e00\u5e74\u7d1a", "11th"));
+        statusGroup2.add(new LabelValue("Senior High - So \u5341\u5e74\u7d1a", "10th"));
+        statusGroup2.add(new LabelValue("Senior High - Fr \u4e5d\u5e74\u7d1a", "9th"));
+        statusGroup2.add(new LabelValue("Junior High - 8th grade \u516b\u5e74\u7d1a", "8th"));
+        statusGroup2.add(new LabelValue("Junior High - 7th grade \u4e03\u5e74\u7d1a", "7th"));
+        statusGroup2.add(new LabelValue("Junior High - 6th grade \u516d\u5e74\u7d1a", "6th"));
+        statusGroup2.add(new LabelValue("Elementary (K-5) \u5c0f\u5b78\u751f", "EL"));
+        statusGroup2.add(new LabelValue("Toddlers (age 1-3) \u5e7c\u5152", "TO"));
+        statusGroup2.add(new LabelValue("Other \u5176\u4ed6", "O"));
 
         registrationForm.setStatusGroup2(statusGroup2);
 
         List<LabelValue> stateList;
         stateList = new ArrayList<LabelValue>();
 
-//      stateList.add(new LabelValue("Illinois", "IL"));
-//      stateList.add(new LabelValue("Wisconsin", "WI"));
-//      stateList.add(new LabelValue("Indiana", "IN"));
-//      stateList.add(new LabelValue("--------------", "ZZ"));
         stateList.add(new LabelValue("Alabama", "AL"));
         stateList.add(new LabelValue("Alaska", "AK"));
-        stateList.add(new LabelValue("Alberta", "AB"));
-        stateList.add(new LabelValue("American Samoa", "AS"));
         stateList.add(new LabelValue("Arizona", "AZ"));
         stateList.add(new LabelValue("Arkansas", "AR"));
-//        stateList.add(new LabelValue("Armed Forces (AE)", "AE"));
-//        stateList.add(new LabelValue("Armed Forces Americas", "AA"));
-//        stateList.add(new LabelValue("Armed Forces Pacific", "AP"));
-        stateList.add(new LabelValue("British Columbia", "BC"));
+
         stateList.add(new LabelValue("California", "CA"));
         stateList.add(new LabelValue("Colorado", "CO"));
         stateList.add(new LabelValue("Connecticut", "CT"));
+        
         stateList.add(new LabelValue("Delaware", "DE"));
-        stateList.add(new LabelValue("District Of Columbia", "DC"));
         stateList.add(new LabelValue("Florida", "FL"));
         stateList.add(new LabelValue("Georgia", "GA"));
-        stateList.add(new LabelValue("Guam", "GU"));
         stateList.add(new LabelValue("Hawaii", "HI"));
+        
         stateList.add(new LabelValue("Idaho", "ID"));
         stateList.add(new LabelValue("Illinois", "IL"));
         stateList.add(new LabelValue("Indiana", "IN"));
         stateList.add(new LabelValue("Iowa", "IA"));
+        
         stateList.add(new LabelValue("Kansas", "KS"));
         stateList.add(new LabelValue("Kentucky", "KY"));
         stateList.add(new LabelValue("Louisiana", "LA"));
+        
         stateList.add(new LabelValue("Maine", "ME"));
-        stateList.add(new LabelValue("Manitoba", "MB"));
         stateList.add(new LabelValue("Maryland", "MD"));
         stateList.add(new LabelValue("Massachusetts", "MA"));
         stateList.add(new LabelValue("Michigan", "MI"));
@@ -278,42 +209,34 @@ public class RegistrationController {
         stateList.add(new LabelValue("Mississippi", "MS"));
         stateList.add(new LabelValue("Missouri", "MO"));
         stateList.add(new LabelValue("Montana", "MT"));
+        
         stateList.add(new LabelValue("Nebraska", "NE"));
         stateList.add(new LabelValue("Nevada", "NV"));
-        stateList.add(new LabelValue("New Brunswick", "NB"));
         stateList.add(new LabelValue("New Hampshire", "NH"));
         stateList.add(new LabelValue("New Jersey", "NJ"));
         stateList.add(new LabelValue("New Mexico", "NM"));
         stateList.add(new LabelValue("New York", "NY"));
-//        stateList.add(new LabelValue("Newfoundland", "NF"));
         stateList.add(new LabelValue("North Carolina", "NC"));
         stateList.add(new LabelValue("North Dakota", "ND"));
-//        stateList.add(new LabelValue("Northwest Territories", "NT"));
-//        stateList.add(new LabelValue("Nova Scotia", "NS"));
-//        stateList.add(new LabelValue("Nunavut", "NU"));
+        
         stateList.add(new LabelValue("Ohio", "OH"));
         stateList.add(new LabelValue("Oklahoma", "OK"));
-        stateList.add(new LabelValue("Ontario", "ON"));
         stateList.add(new LabelValue("Oregon", "OR"));
+        
         stateList.add(new LabelValue("Pennsylvania", "PA"));
-//        stateList.add(new LabelValue("Prince Edward Island", "PE"));
-//        stateList.add(new LabelValue("Puerto Rico", "PR"));
-//        stateList.add(new LabelValue("Quebec", "PQ"));
         stateList.add(new LabelValue("Rhode Island", "RI"));
-//        stateList.add(new LabelValue("Saskatchewan", "SK"));
         stateList.add(new LabelValue("South Carolina", "SC"));
         stateList.add(new LabelValue("South Dakota", "SD"));
         stateList.add(new LabelValue("Tennessee", "TN"));
         stateList.add(new LabelValue("Texas", "TX"));
+        
         stateList.add(new LabelValue("Utah", "UT"));
         stateList.add(new LabelValue("Vermont", "VT"));
-        stateList.add(new LabelValue("Virgin Islands", "VI"));
         stateList.add(new LabelValue("Virginia", "VA"));
         stateList.add(new LabelValue("Washington", "WA"));
         stateList.add(new LabelValue("West Virginia", "WV"));
         stateList.add(new LabelValue("Wisconsin", "WI"));
         stateList.add(new LabelValue("Wyoming", "WY"));
-//        stateList.add(new LabelValue("Yukon Territory", "YT"));
 
         registrationForm.setStateList(stateList);
 
@@ -330,9 +253,9 @@ public class RegistrationController {
          * The following code added for issue5.
          */
         List<LabelValue> languageList = new ArrayList<LabelValue>();
-        languageList.add(new LabelValue("\u666e\u901a\u8a71 Mandarin", "M"));
-        languageList.add(new LabelValue("\u5ee3\u6771\u8a71 Cantonese", "C"));
-        languageList.add(new LabelValue("\u82f1\u6587 English", "E"));
+        languageList.add(new LabelValue("Mandarin \u666e\u901a\u8a71", "M"));
+        languageList.add(new LabelValue("Cantonese \u5ee3\u6771\u8a71", "C"));
+        languageList.add(new LabelValue("English \u82f1\u6587", "E"));
         registrationForm.setLanguages(languageList);
 
         List<LabelValue> headphoneList = new ArrayList<LabelValue>();
