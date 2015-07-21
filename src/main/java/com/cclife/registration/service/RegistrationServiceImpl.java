@@ -48,22 +48,28 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private MailEngine mailEngine;
 
+    /**
+     *
+     * @param form
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean submit(RegistrationForm form) throws Exception {
 
         Family family = form.getAddress();
         logger.debug(family.getHomeAddress());
 
-        Integer fid = UID.generateUniqueId();
-        logger.debug("Number:" + fid);
+//        Integer fid = UID.generateUniqueId();
+//        logger.debug("Number:" + fid);
 //        family.setFamilyID(fid);
         familyDao.create(family);
-        form.setFormID(fid.longValue());
+//        form.setFormID(fid.longValue());
         
         logger.debug("Family ID:" + family.getFamilyID());
 
         Mealplan mealPlan = new Mealplan();
-        mealPlan.setRegistrationID(fid.toString());
+        mealPlan.setRegistrationID(form.getFormID().toString());
         mealPlan.setLunch1(0) ;
         mealPlan.setLunch2(0) ;
         mealPlan.setLunch3(0) ;
@@ -128,7 +134,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             profile.setPersonID(person.getPersonID());
             profile.setFamilyID(person.getFamilyID());
-            profile.setRegistrationID(fid.toString());
+            profile.setRegistrationID(form.getFormID().toString());
             profile.setNeedHotel(form.getAddress().getHotel());
             profile.setLastModified(new Date());
 
@@ -159,6 +165,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     /**
      *
      * @param form
+     * @param params
+     * @param template
      */
     @Override
     public void sendEmail(RegistrationForm form, Map<String, Object> params, String template) {
