@@ -15,10 +15,8 @@
             ['CO', 'Colorado'],
             ['CT', 'Connecticut'],
             ['DE', 'Delaware'],
-            ['DC', 'District Of Columbia'],
             ['FL', 'Florida'],
             ['GA', 'Georgia'],
-            ['GU', 'Guam'],
             ['HI', 'Hawaii'],
             ['IA', 'Iowa'],
             ['ID', 'Idaho'],
@@ -27,20 +25,20 @@
             ['KS', 'Kansas'],
             ['KY', 'Kentucky'],
             ['LA', 'Louisiana'],
-            ['MA', 'Massachusetts'],
-            ['MD', 'Maryland'],
             ['ME', 'Maine'],
+            ['MD', 'Maryland'],
+            ['MA', 'Massachusetts'],
             ['MI', 'Michigan'],
             ['MN', 'Minnesota'],
-            ['MO', 'Missouri'],
             ['MS', 'Mississippi'],
+            ['MO', 'Missouri'],
             ['MT', 'Montana'],
             ['NE', 'Nebraska'],
+            ['NV', 'Nevada'],
             ['NH', 'New Hampshire'],
             ['NJ', 'New Jersey'],
             ['NM', 'New Mexico'],
             ['NY', 'New York'],
-            ['NV', 'Nevada'],
             ['NC', 'North Carolina'],
             ['ND', 'North Dakota'],
             ['OH', 'Ohio'],
@@ -54,7 +52,6 @@
             ['TX', 'Texas'],
             ['UT', 'Utah'],
             ['VT', 'Vermont'],
-            ['VI', 'Virgin Islands'],
             ['VA', 'Virginia'],
             ['WA', 'Washington'],
             ['WV', 'West Virginia'],
@@ -136,9 +133,9 @@
     <br/>
 </div>
 <div id="embeddedFlow" class="span-18">
-    <p class="notice"><b>第一步 请先输入主报人姓名和家庭地址 <br>
+    <p class="notice"><b>1. 请输入主报人的姓名和家庭地址 （第一位輸入的人為主報人） <br>
             step 1 - Enter address and family information</b></p>
-    <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
+    <li><font color='red'>有 * 號的攔目務必填寫 (* indicates required field) <br></font></li>
 
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
@@ -311,7 +308,7 @@
                     <tr>
                         <td style="width: 40%;">所属教会/机构<br>
                             Church / Organization Affiliation<br>
-                            （若无教会，可暂不填写<br>
+                            （若无教会，可不填写<br>
                             Leave it blank, if no church right now.)</td>
                         <td><form:input path="churchName" name="churchName" size="20" maxlength="50"/></td>
                     </tr>

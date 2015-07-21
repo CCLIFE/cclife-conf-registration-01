@@ -5,13 +5,20 @@
     <br/>
 </div>
 <div id="embeddedFlow" class="span-18">
-    <p class="notice"><b>第二步 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
+    <p class="notice"><b>2. 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
 
-    <li><font color='red'>有 * 标志的项目请务必填写 (* indicates required field) <br></font></li>
-    <li><font color='red'>所添加人员须与主报人同一地址，并由同一人付费 (New added person need have the same address 
-        as the primary person, and pay by the same person.)</font></li>
+    <li><font color='red'>有 * 號的攔目務必填寫 (* indicates required field) <br></font></li>
+    <li><font color='red'>所添加人员须与主报人同一地址，并由同一人付费 (Newly added registrant needs to have the same mailing 
+        address as the primary person, and all fees are paid by the same person.)</font></li>
 
     <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
+        <form:hidden  path="countryVal" id="country" />
+        <form:hidden  path="person.relationship" id="relationValue" />
+
+        <script>
+            document.getElementById("country").value = "${form.address.country}";
+        </script>
+        
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
@@ -67,7 +74,7 @@
                                 <tr>
                                     <td>年级 Grade: <br> (18岁以下请填写)</td>
                                     <td>
-                                        <form:select id="status" path="person.status">
+                                        <form:select id="gradeStatus" path="person.status">
                                             <form:option value="" label="-- Select Status --" />
                                             <form:options items="${form.statusGroup2}" itemValue="value" itemLabel="label" />
                                         </form:select>
@@ -78,31 +85,59 @@
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.healthCardNo" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
-                                    <td>Health Card Number<br> (18岁以下请填写)</td>
+                                    <td>Health Card Number <font color="red"> &nbsp;* &nbsp;</font><br>（加拿大 18 歲以下請必須填寫）</td>
                                     <td>
                                         <form:input id="healthCardNo" path="person.healthCardNo" size="30" maxlength="50"/>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.allergies" cssClass="fieldError"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Dietary Restrictions/Allergies<br> (18岁以下请填写)</td>
-                                    <td>
-                                        <form:input id="allergies" path="person.allergies" size="30" maxlength="50"/>
-                                    </td>
-                                </tr>
-
-                                <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
-                                    <td>
-                                        <form:select id="relationship" path="person.relationship">
-                                            <form:option value="" label="-- Select relationship --" />
-                                            <form:options items="${form.relationshipGroup}" itemValue="value" itemLabel="label" />
-                                        </form:select>
+                                    <td>                                  
+                                        <select id="relationStatus" onchange="setRelationValue();"> 
+                                            <option value="" label="-- Select relationship --" />
+                                            <option value="H" label="H 丈夫" />
+                                            <option value="W" label="W 妻子" />
+                                            <option value="S" label="S 兒子" />
+                                            <option value="D" label="D 女兒" />
+                                            <option value="F" label="F 父親" />
+                                            <option value="M" label="M 母親" />
+                                            <option value="B" label="B 兄弟" />
+                                            <option value="T" label="T 姊妹" />
+                                            <option value="C" label="C 同学" />
+                                            <option value="O" label="O 同事" />
+                                        <select>
                                     </td>
                                 </tr>
+                                <script type="text/javascript">
+                                    function setRelationValue(){
+                                        var rel = document.getElementById( "relationStatus" );
+                                        var relVal = rel.options[rel.selectedIndex].value;
+
+                                        document.getElementById( "relationValue").value=relVal;
+                                    }
+                                    function setPrimary(){
+                                        var size = "${form.registrants.size()}";
+                                        var relVal = document.getElementById( "relationStatus" ).value;
+
+                                        if(( size==1 ) || ( relVal == "P" )){
+                                            var relList = document.getElementById( "relationStatus" );
+                                            var opt = new Option("P 主報人", "P");               
+
+                                            relList.appendChild(opt);
+                                            relList.value="P";
+                                            relList.disabled=true;
+
+                                            document.getElementById( "relationValue").value = "P";
+                                        }
+                                        else{
+                                            document.getElementById( "relationStatus").value = "${registrant.person.relationship}";
+                                        }
+                                    }
+                                    setPrimary();
+                                </script>
+                                    
+                                
                                 <tr>
                                     <td>语言 Language:</td>
                                     <td>
@@ -129,13 +164,7 @@
                                     <td>电邮 &nbsp;Email:</td>
                                     <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
                                 </tr>
-                                <tr>
-                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.misc1" cssClass="fieldError"/></td>
-                                </tr>
-                                <tr>
-                                    <td>确认电邮 &nbsp; Confirm Email:</td>
-                                    <td><form:input id="confirmEmail" path="person.misc1" size="30" maxlength="50"/></td>
-                                </tr>
+
                                 <tr>
                                     <td>信主 Christian:</td>
                                     <td>
@@ -197,7 +226,7 @@
             <tbody>
                 <tr>
                     <td colspan="3">
-                        <b>我需要订餐<br></b>(大会提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7;晚餐美金$7/加元$8,沒有兒童餐。)
+                        <b>我需要订餐<br></b>(大会提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7，晚餐美金$7/加元$8，沒有兒童餐。12 月 10 日後，若退餐，餐费恕無法退還。)
                     </td>
                 </tr>
                 <tr>
@@ -206,14 +235,14 @@
                     <td style="text-align:center">Dec. 30</td>
                 </tr>
                 <tr>
-                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
-                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
-                    <td style="width:33%">午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
+                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
+                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
+                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
                 </tr>
                 <tr>
-                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
-                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
-                    <td style="width:33%">晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
+                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
+                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
+                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
                 </tr>
                 <tr>
                     <td></td>

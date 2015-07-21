@@ -20,8 +20,14 @@ public class Registrant extends BaseObject {
     private Set<Server> volunteerJobs;
     private Expense expense;
     private Consent consent;
-    /**
-     * @return the person
+    
+    /** 
+     * The following code is added for issue: "health card No is mandatory for Canadian".
+     */
+    private String countryVal;
+    
+
+     /* @return the person
      */
     public Person getPerson() {
         return person;
@@ -61,6 +67,17 @@ public class Registrant extends BaseObject {
     public void setVolunteerJobs(Set<Server> volunteerJobs) {
         this.volunteerJobs = volunteerJobs;
     }
+    
+    /** 
+     * The following code is added for issue: "health card No is mandatory for Canadian".
+     */
+    public void setCountryVal(String countryVal){
+        this.countryVal = countryVal;
+    }
+    public String getCountryVal(){
+        return this.countryVal;
+    }
+
 
     @Override
     public String toString() {
