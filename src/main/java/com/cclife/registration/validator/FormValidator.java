@@ -23,11 +23,12 @@ public class FormValidator {
 
         MessageContext messages = context.getMessageContext();
 
+        /** the following code is commented out for issue83
         if (!form.getChkPmt()) {
             messages.addMessage(new MessageBuilder().error().source("chkPmt").
                     code("paymentAuth").build());
         }
-
+        */
         if (form.getPaymentMethod() != PaymentMethod.CREDIT_CARD && form.getPaymentMethod() != PaymentMethod.PERSONAL_CHECK) {
             messages.addMessage(new MessageBuilder().error().source("paymentMethod").
                     code("paymentOption").build());
