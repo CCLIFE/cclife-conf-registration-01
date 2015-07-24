@@ -193,7 +193,7 @@
                         <td colspan="2" style="text-align:center"> <form:errors path="address.ucCountry" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width:40%">国家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width:40%">國家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td style="width:40%">
                             <form:select id="countryId" path="address.ucCountry" onchange="countrySelected(value);">
                                 <form:option value="" label="-- Select Country --" /> 
@@ -231,8 +231,8 @@
 
                                 <table>
                                     <tr>
-                                        <td colspan="2" style="text-align:center">若非美国和加拿大,
-                                            请填写如下信息：If other than
+                                        <td colspan="2" style="text-align:center">若非美國和加拿大,
+                                            請填寫如下信息,：If other than
                                             Canada or United States
                                         </td>
                                     </tr>
@@ -242,7 +242,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 40%;">国家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
+                                        <td style="width: 40%;">國家 Country: <font color="red"> &nbsp;* &nbsp;</font></td>
                                         <td style="width: 40%;"> 
                                             <form:input path="address.otherCountry"  id="otherCountry"  size="30" maxlength="50" />
                                         </td>
@@ -268,7 +268,7 @@
                             <form:errors path="address.homeZip" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">邮政编码<br>Zipcode/Postal Code: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">郵政編碼<br>Zipcode/Postal Code: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td>
                             <form:input path="address.homeZip" name="homeZip" size="10" maxlength="15"/>
                         </td>
@@ -278,7 +278,7 @@
                             <form:errors path="address.homePhone" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">聯絡电话<br>Primary Contact Phone: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">聯絡電話<br>Primary Contact Phone: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input path="address.homePhone" name="homePhone" size="15" maxlength="15"/></td>
                     </tr>
                     <tr>
@@ -286,7 +286,7 @@
                             <form:errors path="address.misc1" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">电邮 Email: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">電郵 Email: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input id="email" path="address.misc1" name="email" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
@@ -294,7 +294,7 @@
                             <form:errors path="address.misc2" cssClass="fieldError"/></td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">确认电邮 Confirm Email: <font color="red"> &nbsp;* &nbsp;</font></td>
+                        <td style="width: 40%;">確認電郵 Confirm Email: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td><form:input id="confirmEmail" path="address.misc2" name="emailConfirm" size="25" maxlength="50"/></td>
                     </tr>
                     <tr>
@@ -306,9 +306,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 40%;">所属教会/机构<br>
+                        <td style="width: 40%;">所屬教會/機構<br>
                             Church / Organization Affiliation<br>
-                            （若无教会，可不填写<br>
+                            （若無教會，可不填寫<br>
                             Leave it blank, if no church right now.)</td>
                         <td><form:input path="churchName" name="churchName" size="20" maxlength="50"/></td>
                     </tr>

@@ -25,7 +25,7 @@
     <body class="tundra">
         <div id="page" class="container">
             <div align="center">
-                <h1>中国基督徒生命团契</h1>
+                <h1>2015 福音大會報名</h1>
                 <hr/>
             </div>
             <div>

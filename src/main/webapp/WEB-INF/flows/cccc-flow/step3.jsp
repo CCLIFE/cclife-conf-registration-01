@@ -30,19 +30,19 @@
                         <td>${form.address.homeState}</td>
                     </tr>
                     <tr>
-                        <td>邮政编码 Zipcode/Postal Code:</td>
+                        <td>郵政編碼 Zipcode/Postal Code:</td>
                         <td>${form.address.homeZip}</td>
                     </tr>
                     <tr>
-                        <td>国家 Country:</td>
+                        <td>國家 Country:</td>
                         <td>${form.address.country}</td>
                     </tr>
                     <tr>
-                        <td>聯絡电话 Primary Contact Phone#:</td>
+                        <td>聯絡電話 Primary Contact Phone#:</td>
                         <td>${form.address.homePhone}</td>
                     </tr>
                     <tr>
-                        <td>电邮 Email: </td>
+                        <td>電郵 Email: </td>
                         <td>${form.address.misc1}</td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                         <td>${form.address.hotel}</td>
                     </tr>
                     <tr>
-                        <td>所属教会/机构<br>
+                        <td>所屬教會/機構<br>
                             Church or Organization </td>
                         <td>${form.churchName} </td>
                     </tr>
@@ -68,13 +68,13 @@
             <hr style="width: 70%; height: 2px;">
             <c:set var="c" value="${count.count}"/><b>
             <c:if test="${c == 1}">  
-                第 1 个人的信息  Primary registrant Information
+                第 1 個人的信息  Primary registrant Information
             </c:if>     
             <c:if test="${c != 1}">  
-                第 ${count.count} 个人的信息   Information of Person No. ${count.count} 
+                第 ${count.count} 個人的信息   Information of Person No. ${count.count} 
             </c:if>
             </b>
-            <input type="button" onclick="return toggleDiv('registrantsDiv_${c}')" value="點擊顯示或隱藏个人信息 click to show/hide Information">
+            <input type="button" onclick="return toggleDiv('registrantsDiv_${c}')" value="點擊顯示或隱藏個人信息 click to show/hide Information">
             <div id="registrantsDiv_${c}" style="display:none">
                 <div>
                 <table style="text-align: left; margin-left: auto; margin-right: auto; border:2; width: 100%" >
@@ -83,10 +83,10 @@
                             <td align="left"> <b>
                                     <c:set var="c" value="${count.count}"/>
                                     <c:if test="${c == 1}">  
-                                        第 1 个人 (主报人) 的资料   Information of Primary Person 
+                                        第 1 個人 (主報人) 的信息   Information of Primary Person 
                                     </c:if>     
                                     <c:if test="${c != 1}">  
-                                        第 ${count.count} 个人的资料   Information of Person No. ${count.count} 
+                                        第 ${count.count} 個人的资料   Information of Person No. ${count.count} 
                                     </c:if>
                                 </b>
                             </td>
@@ -111,7 +111,7 @@
                                         <tr>
                                             <td width="25%">中文姓名:</td>
                                             <td width="25%">${registrant.person.chineseName}</td>
-                                            <td width="25%">性别 Gender:</td>
+                                            <td width="25%">性別 Gender:</td>
                                             <td width="25%">${registrant.person.gender}</td>
                                         </tr>
                                         <tr>
@@ -121,9 +121,9 @@
                                             <td>${registrant.person.firstName}</td>
                                         </tr>
                                         <tr>
-                                            <td>年龄 Age/Age Group:</td>
+                                            <td>年齡 Age/Age Group:</td>
                                             <td>${registrant.person.age}</td>
-                                            <td>年级 Grade:</td>
+                                            <td>年級 Grade:</td>
                                             <td>${registrant.person.status}</td>
                                         </tr>
                                         <tr>
@@ -132,16 +132,16 @@
                                         </tr>
 
                                         <tr>
-                                            <td>关系 夫妻/子女等:</td>
+                                            <td>關系 夫妻/子女等:</td>
                                             <td>${registrant.person.relationship}</td>
                                             <td>信主 Christian:</td>
                                             <td>${registrant.person.acceptedChrist}</td>
                                         </tr>
                                         <tr>
-                                            <td>语言 Language:</td>
+                                            <td>語言 Language:</td>
                                             <td>${registrant.person.preferredLanguage}</td>
 
-                                            <td>翻译耳机 <br>
+                                            <td>翻譯耳機 <br>
                                                 Interpreter Headphone: </td>
                                             <td>${registrant.person.headphone}</td>
                                         </tr>
@@ -150,7 +150,7 @@
                                             <td colspan="3">${registrant.person.servingRole}</td>
                                         </tr>
                                         <tr>
-                                            <td>电邮 &nbsp;Email:</td>
+                                            <td>電郵 &nbsp;Email:</td>
                                             <td colspan="3">${registrant.person.email}</td>
                                         </tr>
                                     </tbody>
@@ -189,18 +189,18 @@
                 <table style="text-align: left; width: 500px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
                     <tbody>
                         <tr>
-                            <td colspan="4" rowspan="1" align="center"><b>大会义工</b></td>
+                            <td colspan="4" rowspan="1" align="center"><b>大會義工</b></td>
                         </tr>
                         <tr>
                             <td style="width:25%">招待 &nbsp;${ushers}</td>
-                            <td style="width:25%">幼儿看顾 &nbsp;${nursery_helper}</td>
-                            <td style="width:25%">翻译 &nbsp;${interpreter}</td>
+                            <td style="width:25%">幼兒看顧 &nbsp;${nursery_helper}</td>
+                            <td style="width:25%">翻譯 &nbsp;${interpreter}</td>
                             <td style="width:25%">音影 &nbsp;${audio_visual}</td>
                         </tr>
                         <tr>
-                            <td style="width:25%">陪谈 &nbsp;${followup}</td>
+                            <td style="width:25%">陪談 &nbsp;${followup}</td>
                             <td style="width:25%">交通 &nbsp;${transportation}</td>
-                            <td style="width:25%">医疗 &nbsp;${medical_support}</td>
+                            <td style="width:25%">醫療 &nbsp;${medical_support}</td>
                             <td style="width:25%">其他 &nbsp;${other}</td>
                         </tr>
                         <tr>
@@ -214,7 +214,7 @@
                 <table style="text-align: left; width: 500px; height: 62px;" align="center" border="0" cellpadding="2" cellspacing="2">
                     <tbody>
                         <tr>
-                            <td colspan="3" rowspan="1"><b>订餐</b></td>
+                            <td colspan="3" rowspan="1"><b>訂餐</b></td>
                         </tr>
                         <tr>
                             <td style="text-align:center">Dec. 28</td>
