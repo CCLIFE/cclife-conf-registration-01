@@ -77,12 +77,16 @@ public class RegistrantValidator {
                                code("personHealthCardNo").build());
                     }
                 }
+                /**
+                 * the following code is commented out for issue90: take out the restrictions for this email input.
+                 
                  String email1 = registrant.getPerson().getEmail().trim();
                  if ( email1.isEmpty() || !email1.contains("@") ) {
                      messages.addMessage(new MessageBuilder().error().source("person.email").
                              code("validEmail").build());
                  }
-
+                 */
+                
                  /** comfirm email is not necessary, so this part is commented out.
                  String email1 = registrant.getPerson().getEmail().trim();
                  String email2 = registrant.getPerson().getMisc1().trim();
