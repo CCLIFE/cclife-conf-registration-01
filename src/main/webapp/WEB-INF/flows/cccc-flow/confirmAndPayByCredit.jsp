@@ -7,15 +7,26 @@
     <p class="notice">Pay by CREDIT</p>
     <hr style="width: 80%; height: 2px;">
     <div id="content" align="left">
-        <h3>付款方式：信用卡或PayPal</h3>
+        <h3>Pay by CREDIT CARD or PayPal 付款方式：信用卡或PayPal</h3>
         <div>
-            <p>點擊”Pay Now” 進入PayPal網頁</p>
+            <table>
+                <tr>
+                    <td>
+                        <b>I authorize CCLiFe to collet $${form.expense.totalMealsFee + form.expense.totalRegistrationFee} from my account.</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        我授權生命季刊從我的賬號中支取下述金額：$${form.expense.totalMealsFee + form.expense.totalRegistrationFee}
+                    </td>
+                </tr>
+            </table>
+            <p>在您點擊“Pay Now”進入下一頁前，請閱讀有關下一頁的註意事項：</p>
             <ul type="circle">
-                <li>信用卡支付者請選擇第二項，無須登入PayPal帳戶</li>
-                <li>付款後，請點擊 <b>return to GFCC 2015</b> 回到GFCC 2015付款確認頁面</li>
-                <li>請勿點擊瀏覽器的<b>退回鍵</b>,以免丟失您所有信息。</li>
+                <li>如果您使用信用卡付款，請點擊” Don’t have a PayPal account” 按鈕，無須登錄PayPal賬戶。</li>
+                <li>請勿點擊瀏覽器的退回鍵，以免丟失您的所有信息。</li>
             </ul>
-            <b>Pay Now with Credit Card or PayPal ${paymentUrl}</b>
+            <b>Pay now with credit card or PayPal 點擊下方按鈕付款</b>
             <form:form method="post" modelAttribute="paymentProvider" action="${paymentUrl}">
                 <form:hidden path="cmd"/>
                 <form:hidden path="redirect_cmd"/>
