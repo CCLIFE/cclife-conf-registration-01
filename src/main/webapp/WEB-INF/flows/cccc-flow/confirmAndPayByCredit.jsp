@@ -17,16 +17,16 @@
                 </tr>
                 <tr>
                     <td>
-                        我授權生命季刊從我的賬號中支取下述金額：$${form.expense.totalMealsFee + form.expense.totalRegistrationFee}
+                        我授权生命季刊从我的账号中支取下述金额：$${form.expense.totalMealsFee + form.expense.totalRegistrationFee}
                     </td>
                 </tr>
             </table>
-            <p>在您點擊“Pay Now”進入下一頁前，請閱讀有關下一頁的註意事項：</p>
+            <p>在您点击“Pay Now”进入下一页前，请阅读有以下的注意事项：</p>
             <ul type="circle">
-                <li>如果您使用信用卡付款，請點擊” Don’t have a PayPal account” 按鈕，無須登錄PayPal賬戶。</li>
-                <li>請勿點擊瀏覽器的退回鍵，以免丟失您的所有信息。</li>
+                <li>如果您使用信用卡付款，请点击” Don’t have a PayPal account” 按钮，无须登录PayPal账户。</li>
+                <li>请勿点击浏览器的退回键，以免丢失您的所有信息。</li>
             </ul>
-            <b>Pay now with credit card or PayPal 點擊下方按鈕付款</b>
+            <b>Pay now with credit card or PayPal 点击下方图标付款</b>
             <form:form method="post" modelAttribute="paymentProvider" action="${paymentUrl}">
                 <form:hidden path="cmd"/>
                 <form:hidden path="redirect_cmd"/>

@@ -150,28 +150,28 @@ public class RegistrationController {
         List<LabelValue> statusGroup;
         statusGroup = new ArrayList<LabelValue>();
 
-        statusGroup.add(new LabelValue("P \u7267\u5E2B / \u4F20\u9053\u4EBA", "1"));
-        statusGroup.add(new LabelValue("S \u795E\u5B78\u751F", "2"));
-        statusGroup.add(new LabelValue("D \u6559\u6703\u9577\u57F7 / \u5718\u5951\u540C\u5DE5", "3"));
-        statusGroup.add(new LabelValue("O \u798F\u97F3\u6A5F\u69CB\u540C\u5DE5", "4"));
-        statusGroup.add(new LabelValue("M \u6559\u6703\u6210\u54E1", "5"));
-        statusGroup.add(new LabelValue("U \u6155\u9053\u53CB", "6"));
+        statusGroup.add(new LabelValue("P \u7267\u5e08 / \u4f20\u9053\u4eba", "1"));
+        statusGroup.add(new LabelValue("S \u795e\u5b66\u751f", "2"));
+        statusGroup.add(new LabelValue("D \u6559\u4f1a\u957f\u6267 / \u56e2\u5951\u540c\u5de5", "3"));
+        statusGroup.add(new LabelValue("O \u798f\u97f3\u673a\u6784\u540c\u5de5", "4"));
+        statusGroup.add(new LabelValue("M \u6559\u4f1a\u6210\u5458", "5"));
+        statusGroup.add(new LabelValue("U \u6155\u9053\u53cb", "6"));
 
         registrationForm.setStatusGroup(statusGroup);
 
         List<LabelValue> statusGroup2;
         statusGroup2 = new ArrayList<LabelValue>();
 
-        statusGroup2.add(new LabelValue("Senior High - Sr \u5341\u4e8c\u5e74\u7d1a", "12th"));
-        statusGroup2.add(new LabelValue("Senior High - Jr \u5341\u4e00\u5e74\u7d1a", "11th"));
-        statusGroup2.add(new LabelValue("Senior High - So \u5341\u5e74\u7d1a", "10th"));
-        statusGroup2.add(new LabelValue("Senior High - Fr \u4e5d\u5e74\u7d1a", "9th"));
-        statusGroup2.add(new LabelValue("Junior High - 8th grade \u516b\u5e74\u7d1a", "8th"));
-        statusGroup2.add(new LabelValue("Junior High - 7th grade \u4e03\u5e74\u7d1a", "7th"));
-        statusGroup2.add(new LabelValue("Junior High - 6th grade \u516d\u5e74\u7d1a", "6th"));
-        statusGroup2.add(new LabelValue("Elementary (K-5) \u5c0f\u5b78\u751f", "EL"));
-        statusGroup2.add(new LabelValue("Toddlers (age 1-3) \u5e7c\u5152", "TO"));
-        statusGroup2.add(new LabelValue("Other \u5176\u4ed6", "O"));
+        statusGroup2.add(new LabelValue("Senior High - Sr \u5341\u4e8c\u5e74\u7ea7", "12th"));
+        statusGroup2.add(new LabelValue("Senior High - Jr \u5341\u4e00\u5e74\u7ea7", "11th"));
+        statusGroup2.add(new LabelValue("Senior High - So \u5341\u5e74\u7ea7", "10th"));
+        statusGroup2.add(new LabelValue("Senior High - Fr \u4e5d\u5e74\u7ea7", "9th"));
+        statusGroup2.add(new LabelValue("Junior High - 8th grade \u516b\u5e74\u7ea7", "8th"));
+        statusGroup2.add(new LabelValue("Junior High - 7th grade \u4e03\u5e74\u7ea7", "7th"));
+        statusGroup2.add(new LabelValue("Junior High - 6th grade \u516d\u5e74\u7ea7", "6th"));
+        statusGroup2.add(new LabelValue("Elementary (EL)(K-5) \u5c0f\u5b66\u751f", "EL"));
+        statusGroup2.add(new LabelValue("Toddlers (TO)(age 1-3) \u5e7c\u513f", "TO"));
+        statusGroup2.add(new LabelValue("Other (O) \u5176\u4ed6", "O"));
 
         registrationForm.setStatusGroup2(statusGroup2);
 
@@ -253,14 +253,14 @@ public class RegistrationController {
          * The following code added for issue5.
          */
         List<LabelValue> languageList = new ArrayList<LabelValue>();
-        languageList.add(new LabelValue("Mandarin \u666e\u901a\u8a71", "M"));
-        languageList.add(new LabelValue("Cantonese \u5ee3\u6771\u8a71", "C"));
+        languageList.add(new LabelValue("Mandarin \u666e\u901a\u8bdd", "M"));
+        languageList.add(new LabelValue("Cantonese \u5e7f\u4e1c\u8bdd", "C"));
         languageList.add(new LabelValue("English \u82f1\u6587", "E"));
         registrationForm.setLanguages(languageList);
 
         List<LabelValue> headphoneList = new ArrayList<LabelValue>();
-        headphoneList.add(new LabelValue("\u7cb5\u8a9e\u8033\u6a5f (M to C)", "MtoC"));
-        headphoneList.add(new LabelValue("\u82f1\u8a9e\u8033\u6a5f (M to E)", "MtoE"));
+        headphoneList.add(new LabelValue("\u7ca4\u8bed\u8033\u673a (M to C)", "MtoC"));
+        headphoneList.add(new LabelValue("\u82f1\u8bed\u8033\u673a (M to E)", "MtoE"));
         registrationForm.setHeadphones(headphoneList);
         /**
          * End of code for issue5.

@@ -11,53 +11,64 @@
             <table align="center">
                 <tbody>
                     <tr>
-                        <td>總報名人數 Number of persons:</td>
+                        <td>总报名人数 Number of persons:</td>
                         <td>${form.registrants.size()}</td>
                     </tr>
                     <tr>
-                        <td>總報名費 Total Registration Fee:</td>
+                        <td>总报名费 Total Registration Fee:</td>
                         <td>${form.paymentCurrency} $${form.expense.totalRegistrationFee}</td>
                     </tr>
                     <tr>
-                        <td>總餐費 Total Meal Fee:</td>
+                        <td>总餐费 Total Meal Fee:</td>
                         <td>${form.paymentCurrency} $${form.expense.totalMealsFee}</td>
                     </tr>
                     <tr>
-                        <td>總費用 Total:</td>
+                        <td>总费用 Total:</td>
                         <td>${form.paymentCurrency} $${form.expense.totalMealsFee + form.expense.totalRegistrationFee}</td>
                     </tr>
                 </tbody>
             </table>
             <hr style="width: 80%; height: 2px;" />
             
-            <table>
+            <table align="center">
                 <tr>
-                    <td>1. 報名費（報名截止日期 12 月 10 日；報名費恕不退還）</td>
+                    <td style="text-align:center">
+                        <font style="font-size:12pt">
+                        <b>
+                            关于大会费用
+                        </b>
+                        </font>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>1. 报名费（报名截止日期 12 月 10 日；报名费恕不退还）</td>
                 </tr>
                <tr>
-                   <td>&nbsp;&nbsp;&nbsp;請按 2015年 12 月 28日的年齡計算，12歲以上均需交報名費， 12 歲以下免費。</td>
+                   <td>&nbsp;&nbsp;&nbsp;请按 2015年 12 月 28日的年龄计算，12岁以上均需交报名费， 12 岁以下免费。</td>
                 </tr>
             </table>
             <table style="border:1px solid black">
                 <tr>
-                    <td style="text-align:center; border:1px solid black">年齡</td>
+                    <td style="text-align:center; border:1px solid black">年龄</td>
                     <td style="text-align:center; border:1px solid black">9/15 日前</td>
                     <td style="text-align:center; border:1px solid black">11/15 日前</td>
                     <td style="text-align:center; border:1px solid black">12/10 日前</td>
                 </tr>
                 <tr>
-                    <td style="text-align:center; border:1px solid black">12 歲以上</td>
-                    <td style="text-align:center; border:1px solid black">美元 10/加幣 12</td>
-                    <td style="text-align:center; border:1px solid black">美元 15/加幣 18</td>
-                    <td style="text-align:center; border:1px solid black">美元 25/加幣 30</td>
+                    <td style="text-align:center; border:1px solid black">12 岁以上</td>
+                    <td style="text-align:center; border:1px solid black">美元 10/加币 12</td>
+                    <td style="text-align:center; border:1px solid black">美元 15/加币 18</td>
+                    <td style="text-align:center; border:1px solid black">美元 25/加币 30</td>
                 </tr>
             </table>
             <table>
                 <tr>
-                    <td>2.  餐費（12 月 10 日後恕無法退還;現場訂餐有限,餐費會更貴）</td>
+                    <td>2.  餐费（12 月 10 日后恕无法退还;现场订餐有限,餐费会更贵）</td>
                 </tr>
                <tr>
-                   <td>&nbsp;&nbsp;&nbsp;午餐美金$6/加元$7；晚餐美金$7/加元$8，沒有兒童餐.</td>
+                   <td>&nbsp;&nbsp;&nbsp;午餐美金$6/加元$7；晚餐美金$7/加元$8，没有儿童餐.</td>
                 </tr>
             </table>
             <hr style="width: 80%; height: 2px;" />

@@ -5,10 +5,10 @@
     <br/>
 </div>
 <div id="embeddedFlow" class="span-18">
-    <p class="notice"><b>2. 請輸入個人信息<br>step 2 - Enter individual information</b><br></p>
+    <p class="notice"><b>2. 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
 
-    <li><font color='red'>有 * 號的攔目務必填寫 (* indicates required field) <br></font></li>
-    <li><font color='red'>所添加人員須與主報人同一地址，並由同一人付費 (Newly added registrant needs to have the same mailing 
+    <li><font color='red'>有 * 号的拦目务必填写 (* indicates required field) <br></font></li>
+    <li><font color='red'>所添加人员须与主报人同一地址，并由同一人付费 (Newly added registrant needs to have the same mailing 
         address as the primary person, and all fees are paid by the same person.)</font></li>
 
     <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
@@ -60,7 +60,7 @@
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.age" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
-                                    <td>年齡 Age/Age Group:<font color="red"> &nbsp;* &nbsp;</font></td>
+                                    <td>年龄/年龄段 Age/Age Group:<font color="red"> &nbsp;* &nbsp;</font></td>
                                     <td>
                                         <form:select id="age" path="person.age">
                                             <form:option value="" label="-- Select Age --" />
@@ -72,7 +72,7 @@
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.status" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
-                                    <td>年级 Grade: <br> (18歲以下請填寫)</td>
+                                    <td>年级 Grade: <br> (18岁以下请填写)</td>
                                     <td>
                                         <form:select id="gradeStatus" path="person.status">
                                             <form:option value="" label="-- Select Status --" />
@@ -85,26 +85,26 @@
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.healthCardNo" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
-                                    <td>Health Card Number <font color="red"> &nbsp;* &nbsp;</font><br>（加拿大 18 歲以下請必須填寫）</td>
+                                    <td>Health Card Number <font color="red"> &nbsp;* &nbsp;</font><br>（加拿大 18 岁以下请必须填写）</td>
                                     <td>
                                         <form:input id="healthCardNo" path="person.healthCardNo" size="30" maxlength="50"/>
                                     </td>
                                 </tr>
 
                                 <tr>
-                                    <td>與主報人關系 <br>Relationship with <br>primary person</td>
+                                    <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>                                  
                                         <select id="relationStatus" onchange="setRelationValue();"> 
                                             <option value="" label="-- Select relationship --" />
                                             <option value="H" label="H 丈夫" />
                                             <option value="W" label="W 妻子" />
-                                            <option value="S" label="S 兒子" />
-                                            <option value="D" label="D 女兒" />
-                                            <option value="F" label="F 父親" />
-                                            <option value="M" label="M 母親" />
+                                            <option value="S" label="S 儿子" />
+                                            <option value="D" label="D 女儿" />
+                                            <option value="F" label="F 父亲" />
+                                            <option value="M" label="M 母亲" />
                                             <option value="B" label="B 兄弟" />
                                             <option value="T" label="T 姊妹" />
-                                            <option value="C" label="C 同學" />
+                                            <option value="C" label="C 同学" />
                                             <option value="O" label="O 同事" />
                                         <select>
                                     </td>
@@ -139,7 +139,7 @@
                                     
                                 
                                 <tr>
-                                    <td>語言 Language:</td>
+                                    <td>语言 Language:</td>
                                     <td>
                                         <form:select id="language" path="person.preferredLanguage">
                                             <form:options items="${form.languages}" itemValue="value" itemLabel="label" />
@@ -147,9 +147,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>翻譯耳機 
+                                    <td>翻译耳机 
                                         Interpreter Headphone: <br>
-                                        (如果您聽不懂普通話， <br>可以選擇翻譯耳機)</td>
+                                        (若您听不懂普通话， <br>可以选择翻译耳机)</td>
                                     <td>                                       
                                         <form:select id="headphone" path="person.headphone">
                                             <form:option value="" label="-- 不需要 (No Need) --" />
@@ -161,7 +161,7 @@
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.email" cssClass="fieldError"/></td>
                                 </tr>
                                 <tr>
-                                    <td>電郵 &nbsp;Email:</td>
+                                    <td>电邮 &nbsp;Email:</td>
                                     <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
                                 </tr>
 
@@ -197,7 +197,7 @@
                align="center" border="0" cellpadding="2" cellspacing="2">
             <tbody>
                 <tr>
-                    <td colspan="4" rowspan="1" align="center"><b>我願意做義工，參與大會事奉</b></td>
+                    <td colspan="4" rowspan="1" align="center"><b>我愿意做义工，参与大会事奉</b></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -205,14 +205,14 @@
                 </tr>
                 <tr>
                     <td style="width:25%">招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
-                    <td style="width:25%">幼兒看顧 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
-                    <td style="width:25%">翻譯 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                    <td style="width:25%">幼儿看顾 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                    <td style="width:25%">翻译 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
                     <td style="width:25%">音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
                 </tr>
                 <tr>
-                    <td style="width:25%">陪談 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                    <td style="width:25%">陪谈 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
                     <td style="width:25%">交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
-                    <td style="width:25%">醫療 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                    <td style="width:25%">医疗 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
                     <td style="width:25%">其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
                 </tr>
                 <tr>
@@ -226,7 +226,7 @@
             <tbody>
                 <tr>
                     <td colspan="3">
-                        <b>我需要訂餐<br></b>(大會提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7，晚餐美金$7/加元$8，沒有兒童餐。12 月 10 日後，若退餐，餐费恕無法退還。)
+                        <b>我需要订餐<br></b>(大会提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7，晚餐美金$7/加元$8，没有儿童餐。12 月 10 日后，若退餐，餐费恕无法退还。)
                     </td>
                 </tr>
                 <tr>
@@ -246,7 +246,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button id="selectAll" type="button" onclick="selectAllMeal();">全選 (select all)</button></td>
+                    <td><button id="selectAll" type="button" onclick="selectAllMeal();">全选 (select all)</button></td>
                     <td>${person.status}</td>
                 </tr>
             </tbody>
