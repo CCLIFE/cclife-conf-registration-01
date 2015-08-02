@@ -8,6 +8,7 @@ import com.cclife.registration.dao.GenericJPADao;
 import com.cclife.registration.dao.PaymentDao;
 import com.cclife.registration.domain.Registrant;
 import com.cclife.registration.domain.RegistrationForm;
+import com.cclife.registration.domain.Server;
 import com.cclife.registration.model.Family;
 import com.cclife.registration.model.Payment;
 import com.cclife.registration.model.Person;
@@ -65,20 +66,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 //        family.setFamilyID(fid);
         familyDao.create(family);
 //        form.setFormID(fid.longValue());
-        
+
         logger.debug("Family ID:" + family.getFamilyID());
 
         Mealplan mealPlan = new Mealplan();
         mealPlan.setRegistrationID(form.getFormID().toString());
-        mealPlan.setLunch1(0) ;
-        mealPlan.setLunch2(0) ;
-        mealPlan.setLunch3(0) ;
-        mealPlan.setLunch4(0) ;
-        mealPlan.setDinner1(0) ;
-        mealPlan.setDinner2(0) ;
-        mealPlan.setDinner3(0) ;
-        mealPlan.setDinner4(0) ;
-        
+        mealPlan.setLunch1(0);
+        mealPlan.setLunch2(0);
+        mealPlan.setLunch3(0);
+        mealPlan.setLunch4(0);
+        mealPlan.setDinner1(0);
+        mealPlan.setDinner2(0);
+        mealPlan.setDinner3(0);
+        mealPlan.setDinner4(0);
+
         Iterator<Registrant> it = form.getRegistrants().iterator();
         while (it.hasNext()) {
 
@@ -125,17 +126,31 @@ public class RegistrationServiceImpl implements RegistrationService {
             logger.debug("WorkPhone:" + person.getWorkPhone());
             person.setFamilyID(family.getFamilyID());
             person.setLastModified(new Date());
+
             personDao.create(person);
 
             logger.debug("Person ID:" + person.getPersonID());
             logger.debug("Family ID:" + person.getFamilyID());
 
             Profile profile = new Profile();
-
+            
+            profile.setWorkshop1(form.getChurchName());
             profile.setPersonID(person.getPersonID());
             profile.setFamilyID(person.getFamilyID());
             profile.setRegistrationID(form.getFormID().toString());
             profile.setNeedHotel(form.getAddress().getHotel());
+            for (Server serve : registrant.getVolunteerJobs()) {
+
+                if (profile.getVolunteerJobs()== null || profile.getVolunteerJobs().isEmpty()) {
+                    profile.setVolunteerJobs(serve.name());
+                } else {
+                    String volunteerJobs = profile.getVolunteerJobs();
+                    volunteerJobs += "|";
+                    volunteerJobs += serve.name();
+                    profile.setVolunteerJobs(volunteerJobs);
+                }
+            }
+            profile.setRegisteredDate(form.getRegistrationDate());
             profile.setLastModified(new Date());
 
             profileDao.create(profile);
@@ -153,12 +168,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         mealplanDao.create(mealPlan);
 
-        Payment payment = new Payment();
-        payment.setAmount(form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee());
-        payment.setPaymentDate(new Date());
-
-        paymentDao.save(payment);
-
+//        Payment payment = new Payment();
+//        payment.setAmount(form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee());
+//        payment.setPaymentDate(new Date());
+//
+//        paymentDao.save(payment);
         return true;
     }
 

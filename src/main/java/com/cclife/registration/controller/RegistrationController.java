@@ -466,11 +466,8 @@ public class RegistrationController {
         form.getPaymentProvider().setCity(form.getAddress().getHomeCity());
         form.getPaymentProvider().setState(form.getAddress().getHomeState());
         form.getPaymentProvider().setZip(form.getAddress().getHomeZip());
-//        form.getPaymentProvider().setReturn(confirmationUrl);
+        form.getPaymentProvider().setReturn(paypalSuccessUrl);
 
-//        if (form.getEventID().compareTo(201403) == 0) {
-//            paypalInstance.setReturn(confirmationAltUrl);
-//        }
         logger.debug("Business:" + form.getPaymentProvider().getBusiness());
         logger.debug("Currency:" + form.getPaymentProvider().getCurrency_code());
         logger.debug("Lc:" + form.getPaymentProvider().getLc());
