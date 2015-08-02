@@ -4,7 +4,7 @@
 <div class="span-2">
     <br/>
 </div>
-<div id="embeddedFlow" class="span-18">
+<div id="embeddedFlow" class="span-18"> 
     <p class="notice"><b>2. 请输入个人信息<br>step 2 - Enter individual information</b><br></p>
 
     <li><font color='red'>有 * 号的拦目务必填写 (* indicates required field) <br></font></li>
@@ -80,7 +80,6 @@
                                         </form:select>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td  colspan="2" style="text-align:center"> <form:errors path="person.healthCardNo" cssClass="fieldError"/></td>
                                 </tr>
@@ -90,7 +89,6 @@
                                         <form:input id="healthCardNo" path="person.healthCardNo" size="30" maxlength="50"/>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>                                  
@@ -136,8 +134,7 @@
                                     }
                                     setPrimary();
                                 </script>
-                                    
-                                
+                                       
                                 <tr>
                                     <td>语言 Language:</td>
                                     <td>
@@ -164,7 +161,6 @@
                                     <td>电邮 &nbsp;Email:</td>
                                     <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
                                 </tr>
-
                                 <tr>
                                     <td>信主 Christian:</td>
                                     <td>

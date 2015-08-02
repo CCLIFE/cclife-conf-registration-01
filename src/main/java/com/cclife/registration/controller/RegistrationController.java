@@ -249,7 +249,7 @@ public class RegistrationController {
 
         registrationForm.setCountries(countryList);
 
-        /**
+        /** 
          * The following code added for issue5.
          */
         List<LabelValue> languageList = new ArrayList<LabelValue>();

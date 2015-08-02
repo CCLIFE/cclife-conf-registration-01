@@ -21,7 +21,7 @@
                     </td>
                 </tr>
             </table>
-            <p>在您点击“Pay Now”进入下一页前，请阅读有以下的注意事项：</p>
+            <p>在您点击“Pay Now”进入下一页前，请阅读有以下的注意事项：</p> 
             <ul type="circle">
                 <li>如果您使用信用卡付款，请点击” Don’t have a PayPal account” 按钮，无须登录PayPal账户。</li>
                 <li>请勿点击浏览器的退回键，以免丢失您的所有信息。</li>

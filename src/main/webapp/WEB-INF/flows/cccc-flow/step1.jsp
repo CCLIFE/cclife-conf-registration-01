@@ -76,7 +76,7 @@
         ]
     };
 
-    function setStates() {
+    function setStates() { 
 
         var stateList = document.getElementById("stateId");
 
@@ -140,7 +140,6 @@
     <form:form id="step1" action="${flowExecutionUrl}" modelAttribute="form">
         <div>
             <table style="text-align: left; width: 470px; border-color: #009; ">
-
                 <tbody>
                     <tr>
                         <td colspan="2" style="text-align:center" >
@@ -188,7 +187,6 @@
                         <td style="width:40%">城市 City: <font color="red"> &nbsp;* &nbsp;</font></td>
                         <td style="width:60%"><form:input path="address.homeCity" name="homeCity"  size="30" maxlength="30"/> </td>
                     </tr>
-
                     <tr>
                         <td colspan="2" style="text-align:center"> <form:errors path="address.ucCountry" cssClass="fieldError"/></td>
                     </tr>
@@ -315,7 +313,6 @@
                 </tbody>
             </table>
             <hr style="width: 80%; height: 2px;">
-
         </div>
         <button id="cancel" type="button" name="_eventId_cancel">Cancel</button>
         <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>

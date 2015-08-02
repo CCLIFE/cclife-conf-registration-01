@@ -24,7 +24,7 @@
                     <tr>
                         <td>城市 City: </td>
                         <td>${form.address.homeCity}</td>
-                    </tr>
+                    </tr> 
                     <tr>
                         <td>州/省 State/Province: </td>
                         <td>${form.address.homeState}</td>
@@ -54,12 +54,6 @@
                             Church or Organization </td>
                         <td>${form.churchName} </td>
                     </tr>
-                    <!--
-                    <tr>
-                        <td colspan="2" align="center"> <input name="fixAddress"
-                                                               value="更正地址错误 Correct Address" type="submit"></td>
-                    </tr>
-                    -->
                 </tbody>
             </table>
 
