@@ -18,7 +18,7 @@
         <script>
             document.getElementById("country").value = "${form.address.country}";
         </script>
-        
+
         <table
             style="text-align: left; margin-left: auto; margin-right: auto;">
             <tbody>
@@ -106,182 +106,182 @@
                                             <option value="T" label="T 姊妹" />
                                             <option value="C" label="C 同學" />
                                             <option value="O" label="O 同事" />
-                                        <select>
-                                    </td>
-                                </tr>
-                                <script type="text/javascript">
-                                    function setRelationValue(){
-                                        var rel = document.getElementById( "relationStatus" );
-                                        var relVal = rel.options[rel.selectedIndex].value;
+                                            <select>
+                                                </td>
+                                                </tr>
+                                                <script type="text/javascript">
+                                                    function setRelationValue() {
+                                                        var rel = document.getElementById("relationStatus");
+                                                        var relVal = rel.options[rel.selectedIndex].value;
 
-                                        document.getElementById( "relationValue").value=relVal;
-                                    }
-                                    function setPrimary(){
-                                        var size = "${form.registrants.size()}";
-                                        var relVal = document.getElementById( "relationStatus" ).value;
+                                                        document.getElementById("relationValue").value = relVal;
+                                                    }
+                                                    function setPrimary() {
+                                                        var size = "${form.registrants.size()}";
+                                                        var relVal = document.getElementById("relationStatus").value;
 
-                                        if(( size==1 ) || ( relVal == "P" )){
-                                            var relList = document.getElementById( "relationStatus" );
-                                            var opt = new Option("P 主報人", "P");               
+                                                        if ((size == 1) || (relVal == "P")) {
+                                                            var relList = document.getElementById("relationStatus");
+                                                            var opt = new Option("P 主報人", "P");
 
-                                            relList.appendChild(opt);
-                                            relList.value="P";
-                                            relList.disabled=true;
+                                                            relList.appendChild(opt);
+                                                            relList.value = "P";
+                                                            relList.disabled = true;
 
-                                            document.getElementById( "relationValue").value = "P";
-                                        }
-                                        else{
-                                            document.getElementById( "relationStatus").value = "${registrant.person.relationship}";
-                                        }
-                                    }
-                                    setPrimary();
-                                </script>
-                                    
-                                
-                                <tr>
-                                    <td>語言 Language:</td>
-                                    <td>
-                                        <form:select id="language" path="person.preferredLanguage">
-                                            <form:options items="${form.languages}" itemValue="value" itemLabel="label" />
-                                        </form:select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>翻譯耳機 
-                                        Interpreter Headphone: <br>
-                                        (如果您聽不懂普通話， <br>可以選擇翻譯耳機)</td>
-                                    <td>                                       
-                                        <form:select id="headphone" path="person.headphone">
-                                            <form:option value="" label="-- 不需要 (No Need) --" />
-                                            <form:options items="${form.headphones}" itemValue="value" itemLabel="label" />
-                                        </form:select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.email" cssClass="fieldError"/></td>
-                                </tr>
-                                <tr>
-                                    <td>電郵 &nbsp;Email:</td>
-                                    <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
-                                </tr>
-
-                                <tr>
-                                    <td>信主 Christian:</td>
-                                    <td>
-
-                                        是 Yes <form:radiobutton path="person.acceptedChrist" value="1"/>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        否 No<form:radiobutton path="person.acceptedChrist" value="0"/> <br>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>事奉角色:</td>
-                                    <td>
-                                        <form:select id="status" path="person.servingRole">
-                                            <form:option value="" label="-- 事奉 --" />
-                                            <form:options items="${form.statusGroup}" itemValue="value" itemLabel="label" />
-                                        </form:select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="width: 80%; height: 2px;">
+                                                            document.getElementById("relationValue").value = "P";
+                                                        }
+                                                        else {
+                                                            document.getElementById("relationStatus").value = "${registrant.person.relationship}";
+                                                        }
+                                                    }
+                                                    setPrimary();
+                                                </script>
 
 
-        <table style="text-align: left; width: 500px; height: 62px;"
-               align="center" border="0" cellpadding="2" cellspacing="2">
-            <tbody>
-                <tr>
-                    <td colspan="4" rowspan="1" align="center"><b>我願意做義工，參與大會事奉</b></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
-                </tr>
-                <tr>
-                    <td style="width:25%">招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
-                    <td style="width:25%">幼兒看顧 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
-                    <td style="width:25%">翻譯 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
-                    <td style="width:25%">音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
-                </tr>
-                <tr>
-                    <td style="width:25%">陪談 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
-                    <td style="width:25%">交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
-                    <td style="width:25%">醫療 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
-                    <td style="width:25%">其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
-                </tr>
-                <tr>
-                    <td colspan="4">Youth Small Group Leader &nbsp;<form:checkbox path="volunteerJobs" value="SMALL_GROUP_LEADER"/></td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="width: 80%; height: 2px;">
-        <table
-            style="text-align: center; margin-left: auto; margin-right: auto;">
-            <tbody>
-                <tr>
-                    <td colspan="3">
-                        <b>我需要訂餐<br></b>(大會提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7，晚餐美金$7/加元$8，沒有兒童餐。12 月 10 日後，若退餐，餐费恕無法退還。)
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align:center">Dec. 28</td>
-                    <td style="text-align:center">Dec. 29</td>
-                    <td style="text-align:center">Dec. 30</td>
-                </tr>
-                <tr>
-                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
-                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
-                    <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
-                </tr>
-                <tr>
-                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
-                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
-                    <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button id="selectAll" type="button" onclick="selectAllMeal();">全選 (select all)</button></td>
-                    <td>${person.status}</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr style="width: 80%; height: 2px;">
+                                                <tr>
+                                                    <td>語言 Language:</td>
+                                                    <td>
+                                                        <form:select id="language" path="person.preferredLanguage">
+                                                            <form:options items="${form.languages}" itemValue="value" itemLabel="label" />
+                                                        </form:select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>翻譯耳機 
+                                                        Interpreter Headphone: <br>
+                                                        (如果您聽不懂普通話， <br>可以選擇翻譯耳機)</td>
+                                                    <td>                                       
+                                                        <form:select id="headphone" path="person.headphone">
+                                                            <form:option value="" label="-- 不需要 (No Need) --" />
+                                                            <form:options items="${form.headphones}" itemValue="value" itemLabel="label" />
+                                                        </form:select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td  colspan="2" style="text-align:center"> <form:errors path="person.email" cssClass="fieldError"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>電郵 &nbsp;Email:</td>
+                                                    <td><form:input id="email" path="person.email" size="30" maxlength="50"/></td>
+                                                </tr>
 
-        <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
-        <!--
-        <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>
-        <button id="popup" type="submit" name="_eventId_popup" >Popup &gt;&gt;</button>
-        -->
-        <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+                                                <tr>
+                                                    <td>信主 Christian:</td>
+                                                    <td>
 
-        
-        <script type="text/javascript">
-            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'next', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
-            Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step2', popup: true, params: {fragments: "body"}}));
-        </script>
+                                                        是 Yes <form:radiobutton path="person.acceptedChrist" value="1"/>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        否 No<form:radiobutton path="person.acceptedChrist" value="0"/> <br>
 
-    </form:form>
-</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>事奉角色:</td>
+                                                    <td>
+                                                        <form:select id="status" path="person.servingRole">
+                                                            <form:option value="" label="-- 事奉 --" />
+                                                            <form:options items="${form.statusGroup}" itemValue="value" itemLabel="label" />
+                                                        </form:select>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                </table>
+                                                </td>
+                                                </tr>
+                                                </tbody>
+                                                </table>
+                                                <hr style="width: 80%; height: 2px;">
 
-<script type="text/javascript">
-    function selectAllMeal() {
-        document.getElementById("l1").checked = true;
-        document.getElementById("l2").checked = true;
-        document.getElementById("l3").checked = true;
-        document.getElementById("d1").checked = true;
-        document.getElementById("d2").checked = true;
-        document.getElementById("d3").checked = true;
-    }
-    
-    var e = document.getElementById("relationship");
-    var value = e.options[e.selectedIndex].value;
-    if (value === "A") {
-        e.disabled = true ;
-    }
-</script>
+
+                                                <table style="text-align: left; width: 500px; height: 62px;"
+                                                       align="center" border="0" cellpadding="2" cellspacing="2">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="4" rowspan="1" align="center"><b>我願意做義工，參與大會事奉</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td> <form:errors path="volunteerJobs" cssClass="fieldError"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:25%">招待 &nbsp;<form:checkbox path="volunteerJobs" value="USHERS"/></td>
+                                                            <td style="width:25%">幼兒看顧 &nbsp;<form:checkbox path="volunteerJobs" value="NURSERY_HELPER"/></td>
+                                                            <td style="width:25%">翻譯 &nbsp;<form:checkbox path="volunteerJobs" value="INTERPRETER"/></td>
+                                                            <td style="width:25%">音影 &nbsp;<form:checkbox path="volunteerJobs" value="AUDIO_VISUAL"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:25%">陪談 &nbsp;<form:checkbox path="volunteerJobs" value="FOLLOWUP"/></td>
+                                                            <td style="width:25%">交通 &nbsp;<form:checkbox path="volunteerJobs" value="TRANSPORTATION"/></td>
+                                                            <td style="width:25%">醫療 &nbsp;<form:checkbox path="volunteerJobs" value="MEDICAL_SUPPORT"/></td>
+                                                            <td style="width:25%">其他 &nbsp;<form:checkbox path="volunteerJobs" value="OTHER"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4">Youth Small Group Leader &nbsp;<form:checkbox path="volunteerJobs" value="SMALL_GROUP_LEADER"/></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr style="width: 80%; height: 2px;">
+                                                <table
+                                                    style="text-align: center; margin-left: auto; margin-right: auto;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="3">
+                                                                <b>我需要訂餐<br></b>(大會提供28，29，30日三天的午餐和晚餐。午餐美金$6/加元$7，晚餐美金$7/加元$8，沒有兒童餐。12 月 10 日後，若退餐，餐费恕無法退還。)
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align:center">Dec. 28</td>
+                                                            <td style="text-align:center">Dec. 29</td>
+                                                            <td style="text-align:center">Dec. 30</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l1" path="mealplan.lunch1" value="1"/></td>
+                                                            <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l2" path="mealplan.lunch2" value="1"/></td>
+                                                            <td style="width:33%;text-align:center">午餐 &nbsp;<form:checkbox id="l3" path="mealplan.lunch3" value="1"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d1" path="mealplan.dinner1" value="1"/></td>
+                                                            <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d2" path="mealplan.dinner2" value="1"/></td>
+                                                            <td style="width:33%;text-align:center">晚餐 &nbsp;<form:checkbox id="d3" path="mealplan.dinner3" value="1"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td><button id="selectAll" type="button" onclick="selectAllMeal();">全選 (select all)</button></td>
+                                                            <td>${person.status}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <hr style="width: 80%; height: 2px;">
+
+                                                <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
+                                                <!--
+                                                <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>
+                                                <button id="popup" type="submit" name="_eventId_popup" >Popup &gt;&gt;</button>
+                                                -->
+                                                <button id="next" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+
+
+                                                <script type="text/javascript">
+                                                    Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'next', event: 'onclick', formId: 'step2', params: {fragments: "body"}}));
+                                                    Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'cancel', event: 'onclick', formId: 'step2', popup: true, params: {fragments: "body"}}));
+                                                </script>
+
+                                            </form:form>
+                                            </div>
+
+                                            <script type="text/javascript">
+                                                function selectAllMeal() {
+                                                    document.getElementById("l1").checked = true;
+                                                    document.getElementById("l2").checked = true;
+                                                    document.getElementById("l3").checked = true;
+                                                    document.getElementById("d1").checked = true;
+                                                    document.getElementById("d2").checked = true;
+                                                    document.getElementById("d3").checked = true;
+                                                }
+
+                                                var e = document.getElementById("relationship");
+                                                var value = e.options[e.selectedIndex].value;
+                                                if (value === "A") {
+                                                    e.disabled = true;
+                                                }
+                                            </script>
