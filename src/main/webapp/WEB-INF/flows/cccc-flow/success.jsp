@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="span-2">
     <br/>
 </div>
@@ -25,21 +26,26 @@
         <p class="MsoNormal"
            style="margin-bottom: 0.0001pt; line-height: normal;"><span
                 style="font-size: 12pt; font-family: SimHei; color: blue;"><o:p>&nbsp;</o:p></span></p>
-        <p class="MsoNormal"
-           style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">主
-                报人：</span><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;">XXX<o:p></o:p></span></p>
-        <p class="MsoNormal"
-           style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">妻
-                子：</span><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;">XX<o:p></o:p></span></p>
-        <p class="MsoNormal"
-           style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">儿
-                子：</span><span
-                style="font-size: 12pt; font-family: SimHei; color: blue;">XX<o:p></o:p></span></p>
+        <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
+
+            <p class="MsoNormal"
+               style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
+                    style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN"> 
+                    <c:set var="vrelation2" value="${registrant.person.relationship}" />
+                    <c:if test= "${vrelation2 == 'P' }" > <c:set var="vrelation2" value="主报人" /></c:if>
+                    <c:if test= "${vrelation2 == 'H' }" > <c:set var="vrelation2" value="丈夫" /></c:if>
+                    <c:if test= "${vrelation2 == 'W' }" > <c:set var="vrelation2" value="妻子" /></c:if>
+                    <c:if test= "${vrelation2 == 'S' }" > <c:set var="vrelation2" value="儿子" /></c:if>
+                    <c:if test= "${vrelation2 == 'D' }" > <c:set var="vrelation2" value="女儿" /></c:if>
+                    <c:if test= "${vrelation2 == 'F' }" > <c:set var="vrelation2" value="父亲" /></c:if>
+                    <c:if test= "${vrelation2 == 'M' }" > <c:set var="vrelation2" value="母亲" /></c:if>
+                    <c:if test= "${vrelation2 == 'B' }" > <c:set var="vrelation2" value="兄弟" /></c:if>
+                    <c:if test= "${vrelation2 == 'T' }" > <c:set var="vrelation2" value="姊妹" /></c:if>
+                    <c:if test= "${vrelation2 == 'C' }" > <c:set var="vrelation2" value="同学" /></c:if>
+                    <c:if test= "${vrelation2 == 'O' }" > <c:set var="vrelation2" value="同事" /></c:if>
+                    ${vrelation2}: ${registrant.person.chineseName} ${registrant.person.firstName} ${registrant.person.lastName}</span>
+            </p>
+        </c:forEach>
         <p class="MsoNormal"
            style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
                 style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">餐
@@ -134,7 +140,7 @@
         <p class="MsoNormal"><span
                 style="font-size: 12pt; line-height: 115%; font-family: SimHei; color: blue;"
                 lang="ZH-CN">敬请您为大会代祷，愿神借着这次大会使我们“回归圣经、活出圣洁、火热宣教、教会复兴”！愿神祝福你！</span><span
-                    style="font-size: 12pt; line-height: 115%; font-family: SimHei; color: blue;"><o:p></o:p></span></p><br/>
+                style="font-size: 12pt; line-height: 115%; font-family: SimHei; color: blue;"><o:p></o:p></span></p><br/>
         <p class="MsoNormal"
            style="margin-bottom: 0.0001pt; line-height: normal;"><span
                 style="font-size: 12pt; font-family: SimHei;" lang="ZH-CN">生命季刊同工</span><span

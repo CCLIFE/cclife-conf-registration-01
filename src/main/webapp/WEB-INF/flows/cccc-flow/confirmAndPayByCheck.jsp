@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="span-2">
     <br/>
 </div>
@@ -21,29 +22,31 @@
                             谢谢您报名参加</span></span></span><span style=""><span style=""><span
                             style="font-size: 12pt; font-family: SimHei; color: blue;">2015<span
                                 lang="ZH-CN">年中国福音大会，您在网上报名的大会</span>ID<span lang="ZH-CN">为：</span><b
-                                style="">1111111.</b><span lang="ZH-CN">您注册的详细资料如下：</span><b style=""><o:p></o:p></b></span></span></span></p>
+                                style="">${form.formID}</b><span lang="ZH-CN">您注册的详细资料如下：</span><b style=""><o:p></o:p></b></span></span></span></p>
             <p class="MsoNormal"
                style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
                     style=""><span style=""><span
                             style="font-size: 12pt; font-family: SimHei; color: blue;"><o:p>&nbsp;</o:p></span></span></span></p>
-            <p class="MsoNormal"
-               style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                    style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">主
-                            报人：</span></span></span><span style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;">XXX<o:p></o:p></span></span></span></p>
-            <p class="MsoNormal"
-               style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                    style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">妻
-                            子：</span></span></span><span style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;">XX<o:p></o:p></span></span></span></p>
-            <p class="MsoNormal"
-               style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
-                    style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">儿
-                            子：</span></span></span><span style=""><span style=""><span
-                            style="font-size: 12pt; font-family: SimHei; color: blue;">XX<o:p></o:p></span></span></span></p>
+            <c:forEach items="${form.registrants}" var="registrant" varStatus="count">
+
+                <p class="MsoNormal"
+                   style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
+                        style="font-size: 12pt; font-family: SimHei; color: blue;" lang="ZH-CN">
+                        <c:set var="vrelation1" value="${registrant.person.relationship}" />
+                        <c:if test= "${vrelation1 == 'P' }" > <c:set var="vrelation1" value="主报人" /></c:if>
+                        <c:if test= "${vrelation1 == 'H' }" > <c:set var="vrelation1" value="丈夫" /></c:if>
+                        <c:if test= "${vrelation1 == 'W' }" > <c:set var="vrelation1" value="妻子" /></c:if>
+                        <c:if test= "${vrelation1 == 'S' }" > <c:set var="vrelation1" value="儿子" /></c:if>
+                        <c:if test= "${vrelation1 == 'D' }" > <c:set var="vrelation1" value="女儿" /></c:if>
+                        <c:if test= "${vrelation1 == 'F' }" > <c:set var="vrelation1" value="父亲" /></c:if>
+                        <c:if test= "${vrelation1 == 'M' }" > <c:set var="vrelation1" value="母亲" /></c:if>
+                        <c:if test= "${vrelation1 == 'B' }" > <c:set var="vrelation1" value="兄弟" /></c:if>
+                        <c:if test= "${vrelation1 == 'T' }" > <c:set var="vrelation1" value="姊妹" /></c:if>
+                        <c:if test= "${vrelation1 == 'C' }" > <c:set var="vrelation1" value="同学" /></c:if>
+                        <c:if test= "${vrelation1 == 'O' }" > <c:set var="vrelation1" value="同事" /></c:if>
+                        ${vrelation1}: ${registrant.person.chineseName} ${registrant.person.firstName} ${registrant.person.lastName}</span>
+                </p>
+            </c:forEach>
             <p class="MsoNormal"
                style="margin: 0in 0in 0.0001pt 0.5in; line-height: normal;"><span
                     style=""><span style=""><span
