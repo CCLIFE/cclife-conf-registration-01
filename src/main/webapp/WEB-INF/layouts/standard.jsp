@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>SpringWeb Flow Showcase</title>
+        <title>中国福音大会2015 网上报名</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/resources/dijit/themes/tundra/tundra.css" />" />
         <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/screen.css" />" type="text/css" media="screen, projection" />
         <link rel="stylesheet" href="<c:url value="/resources/styles/blueprint/print.css" />" type="text/css" media="print" />
@@ -25,7 +25,8 @@
     <body class="tundra">
         <div id="page" class="container">
             <div align="center">
-                <h1>中国福音大会2015 网上报名</h1>
+                <img src="<c:url value="/resources/styles/images/gfccbanner.jpg" />" width="800" height="155" alt="中国福音大会2015 网上报名"/>
+                <br/>
                 <hr/>
             </div>
             <div>
