@@ -70,6 +70,7 @@ public class Registrant extends BaseObject {
     
     /** 
      * The following code is added for issue: "health card No is mandatory for Canadian".
+     * @param countryVal
      */
     public void setCountryVal(String countryVal){
         this.countryVal = countryVal;

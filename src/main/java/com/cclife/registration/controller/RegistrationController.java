@@ -12,10 +12,13 @@ import com.cclife.registration.domain.PaymentMethod;
 import com.cclife.registration.domain.PaymentProvider;
 import com.cclife.registration.domain.Registrant;
 import com.cclife.registration.domain.RegistrationForm;
+import com.cclife.registration.model.Event;
 import com.cclife.registration.model.Mealplan;
 import com.cclife.registration.model.Person;
 import com.cclife.registration.service.RegistrationService;
 import com.cclife.registration.util.DateUtil;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,10 +55,17 @@ public class RegistrationController {
     private Map<String, PaymentProvider> paymentProviderMap;
 
     public RegistrationForm initializeForm() {
+
         RegistrationForm registrationForm = new RegistrationForm();
 
+        Event event = new Event();
+        event.setName("Gospel for Chinese Christian Conference Toronto 2015");
+        event.setContactEmail("cclife@sbcglobal.net");
+        registrationForm.setEvent(event);
+        
+        Date today = new Date();
         // Setup Form ID (Registration ID)
-        String generatedId = DateUtil.getDateTime("MMddHHmmss", new Date());
+        String generatedId = DateUtil.getDateTime("MMddHHmmss", today);
         logger.debug("Generated Form ID  =" + generatedId);
         registrationForm.setFormID(Long.valueOf(generatedId));
 
@@ -184,21 +194,21 @@ public class RegistrationController {
         stateList.add(new LabelValue("California", "CA"));
         stateList.add(new LabelValue("Colorado", "CO"));
         stateList.add(new LabelValue("Connecticut", "CT"));
-        
+
         stateList.add(new LabelValue("Delaware", "DE"));
         stateList.add(new LabelValue("Florida", "FL"));
         stateList.add(new LabelValue("Georgia", "GA"));
         stateList.add(new LabelValue("Hawaii", "HI"));
-        
+
         stateList.add(new LabelValue("Idaho", "ID"));
         stateList.add(new LabelValue("Illinois", "IL"));
         stateList.add(new LabelValue("Indiana", "IN"));
         stateList.add(new LabelValue("Iowa", "IA"));
-        
+
         stateList.add(new LabelValue("Kansas", "KS"));
         stateList.add(new LabelValue("Kentucky", "KY"));
         stateList.add(new LabelValue("Louisiana", "LA"));
-        
+
         stateList.add(new LabelValue("Maine", "ME"));
         stateList.add(new LabelValue("Maryland", "MD"));
         stateList.add(new LabelValue("Massachusetts", "MA"));
@@ -207,7 +217,7 @@ public class RegistrationController {
         stateList.add(new LabelValue("Mississippi", "MS"));
         stateList.add(new LabelValue("Missouri", "MO"));
         stateList.add(new LabelValue("Montana", "MT"));
-        
+
         stateList.add(new LabelValue("Nebraska", "NE"));
         stateList.add(new LabelValue("Nevada", "NV"));
         stateList.add(new LabelValue("New Hampshire", "NH"));
@@ -216,18 +226,18 @@ public class RegistrationController {
         stateList.add(new LabelValue("New York", "NY"));
         stateList.add(new LabelValue("North Carolina", "NC"));
         stateList.add(new LabelValue("North Dakota", "ND"));
-        
+
         stateList.add(new LabelValue("Ohio", "OH"));
         stateList.add(new LabelValue("Oklahoma", "OK"));
         stateList.add(new LabelValue("Oregon", "OR"));
-        
+
         stateList.add(new LabelValue("Pennsylvania", "PA"));
         stateList.add(new LabelValue("Rhode Island", "RI"));
         stateList.add(new LabelValue("South Carolina", "SC"));
         stateList.add(new LabelValue("South Dakota", "SD"));
         stateList.add(new LabelValue("Tennessee", "TN"));
         stateList.add(new LabelValue("Texas", "TX"));
-        
+
         stateList.add(new LabelValue("Utah", "UT"));
         stateList.add(new LabelValue("Vermont", "VT"));
         stateList.add(new LabelValue("Virginia", "VA"));
@@ -247,7 +257,7 @@ public class RegistrationController {
 
         registrationForm.setCountries(countryList);
 
-        /** 
+        /**
          * The following code added for issue5.
          */
         List<LabelValue> languageList = new ArrayList<LabelValue>();
@@ -316,19 +326,11 @@ public class RegistrationController {
             fees.add(fee);
         }
         registrationForm.setFees(fees);
-
-        try {
-            Date d = DateUtil.getToday().getTime();
-            //        registrationForm.setQuantity(1);
-            registrationForm.setRegistrationDate(d);
-
-        } catch (ParseException ex) {
-            logger.error("Error generating Registration ID");
-        }
-        
+        registrationForm.setRegistrationDate(today);
         registrationForm.setPaymentMethod(PaymentMethod.WAIVED);
+
         logger.info("initialize Form exiting");
-        
+
         return registrationForm;
     }
 
@@ -414,6 +416,7 @@ public class RegistrationController {
         logger.info("getPaymentProviderUrl entering");
 
         PaymentProvider provider = paymentProviderMap.get(form.getPaymentCurrency());
+
         logger.debug("ServiceProvider:" + provider.getBusiness());
 
         form.setPaymentProvider(provider);
@@ -467,7 +470,7 @@ public class RegistrationController {
         form.getPaymentProvider().setState(form.getAddress().getHomeState());
         form.getPaymentProvider().setZip(form.getAddress().getHomeZip());
         form.getPaymentProvider().setReturn(paypalSuccessUrl);
-        
+
         logger.debug("Business:" + form.getPaymentProvider().getBusiness());
         logger.debug("Currency:" + form.getPaymentProvider().getCurrency_code());
         logger.debug("Lc:" + form.getPaymentProvider().getLc());
@@ -478,10 +481,12 @@ public class RegistrationController {
 
     public void submit(RegistrationForm form) {
         try {
-
             registrationService.submit(form);
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, "Submit registration form", ex);
+            StringWriter sw = new StringWriter();
+            ex.printStackTrace(new PrintWriter(sw));
+            String stacktrace = sw.toString();
+            logger.fatal("Submit registration form Fatal: [" + ex + "] " + stacktrace);
         }
     }
 

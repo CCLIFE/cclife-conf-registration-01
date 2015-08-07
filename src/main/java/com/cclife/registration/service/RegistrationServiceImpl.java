@@ -10,21 +10,16 @@ import com.cclife.registration.domain.Registrant;
 import com.cclife.registration.domain.RegistrationForm;
 import com.cclife.registration.domain.Server;
 import com.cclife.registration.model.Family;
-import com.cclife.registration.model.Payment;
 import com.cclife.registration.model.Person;
 import com.cclife.registration.model.Profile;
 import com.cclife.registration.model.Mealplan;
-import com.cclife.registration.util.UID;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
-import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 /**
@@ -61,13 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         Family family = form.getAddress();
         logger.debug(family.getHomeAddress());
 
-//        Integer fid = UID.generateUniqueId();
-//        logger.debug("Number:" + fid);
-//        family.setFamilyID(fid);
         familyDao.create(family);
-//        form.setFormID(fid.longValue());
-
-        logger.debug("Family ID:" + family.getFamilyID());
 
         Mealplan mealPlan = new Mealplan();
         mealPlan.setRegistrationID(form.getFormID().toString());
@@ -133,21 +122,27 @@ public class RegistrationServiceImpl implements RegistrationService {
             logger.debug("Family ID:" + person.getFamilyID());
 
             Profile profile = new Profile();
-            
-            profile.setWorkshop1(form.getChurchName());
+
+            if (form.getChurchName() != null) {
+                profile.setChucrhName(form.getChurchName());
+            }
             profile.setPersonID(person.getPersonID());
             profile.setFamilyID(person.getFamilyID());
             profile.setRegistrationID(form.getFormID().toString());
-            profile.setNeedHotel(form.getAddress().getHotel());
-            for (Server serve : registrant.getVolunteerJobs()) {
+            if (form.getAddress().getHotel() != null) {
+                profile.setNeedHotel(form.getAddress().getHotel());
+            }
 
-                if (profile.getVolunteerJobs()== null || profile.getVolunteerJobs().isEmpty()) {
-                    profile.setVolunteerJobs(serve.name());
-                } else {
-                    String volunteerJobs = profile.getVolunteerJobs();
-                    volunteerJobs += "|";
-                    volunteerJobs += serve.name();
-                    profile.setVolunteerJobs(volunteerJobs);
+            if (registrant.getVolunteerJobs() != null) {
+                for (Server serve : registrant.getVolunteerJobs()) {
+                    if (profile.getVolunteerJobs() == null || profile.getVolunteerJobs().isEmpty()) {
+                        profile.setVolunteerJobs(serve.name());
+                    } else {
+                        String volunteerJobs = profile.getVolunteerJobs();
+                        volunteerJobs += "|";
+                        volunteerJobs += serve.name();
+                        profile.setVolunteerJobs(volunteerJobs);
+                    }
                 }
             }
             profile.setRegisteredDate(form.getRegistrationDate());
@@ -186,21 +181,15 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void sendEmail(RegistrationForm form, Map<String, Object> params, String template) {
         try {
             logger.debug("Mail Engine:" + mailEngine.toString());
-//            SimpleMailMessage mailMessage ;
-//            mailMessage = new SimpleMailMessage();
-//
-//            mailMessage.setFrom("cclife@gmail.com");
-//            mailMessage.setBcc("cheh.cccm@gmail.com");
-//            mailMessage.setTo(form.getAddress().getMisc1());
 
             String recipients[] = new String[1];
             recipients[0] = form.getAddress().getMisc1();
-            String subject = "Gospel for Chinese Christian Conference Toronto 2015";
+            String subject = form.getEvent().getName();
 //            mailMessage.setSubject(subject);
+            logger.debug("Message Sender :" + form.getEvent().getContactEmail());
+            mailEngine.sendMessage(recipients, form.getEvent().getContactEmail(), subject, template, params);
 
-            mailEngine.sendMessage(recipients, "cclife@gmail.com", subject, template, params);
-
-            logger.debug("Message Sent :" + form.getAddress().getMisc1());
+            logger.debug("Message Recipient :" + recipients[0]);
         } catch (MessagingException ex) {
             java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
