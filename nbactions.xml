@@ -9,8 +9,5 @@
                 <goal>clean</goal>
                 <goal>install</goal>
             </goals>
-            <properties>
-                <includePropertiesFile>true</includePropertiesFile>
-            </properties>
         </action>
     </actions>
