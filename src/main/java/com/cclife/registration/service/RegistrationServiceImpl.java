@@ -6,6 +6,7 @@ package com.cclife.registration.service;
 
 import com.cclife.registration.dao.GenericJPADao;
 import com.cclife.registration.dao.PaymentDao;
+import com.cclife.registration.domain.PaymentMethod;
 import com.cclife.registration.domain.Registrant;
 import com.cclife.registration.domain.RegistrationForm;
 import com.cclife.registration.domain.Server;
@@ -13,6 +14,7 @@ import com.cclife.registration.model.Family;
 import com.cclife.registration.model.Person;
 import com.cclife.registration.model.Profile;
 import com.cclife.registration.model.Mealplan;
+import com.cclife.registration.model.Payment;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -163,11 +165,27 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         mealplanDao.create(mealPlan);
 
-//        Payment payment = new Payment();
-//        payment.setAmount(form.getExpense().getTotalRegistrationFee() + form.getExpense().getTotalMealsFee());
-//        payment.setPaymentDate(new Date());
-//
-//        paymentDao.save(payment);
+        Payment payment = new Payment();
+        
+        payment.setCash(Boolean.FALSE);
+        payment.setCreditCard(Boolean.FALSE);
+        payment.setPersonalCheck(Boolean.FALSE);
+        payment.setPaidByConference(Boolean.FALSE);
+        payment.setRefund(Boolean.FALSE);
+        payment.setAmount(0.0);
+        
+        if (form.getPaymentMethod() == PaymentMethod.CREDIT_CARD) {
+            payment.setCreditCard(Boolean.TRUE);
+        } else if (form.getPaymentMethod() == PaymentMethod.PERSONAL_CHECK) {
+            payment.setPersonalCheck(Boolean.TRUE);
+        }
+        
+        payment.setRegistrationFee(form.getExpense().getTotalRegistrationFee());
+        payment.setMealFee(form.getExpense().getTotalMealsFee());
+        payment.setRegistrationID(form.getFormID());
+
+        paymentDao.save(payment);
+
         return true;
     }
 

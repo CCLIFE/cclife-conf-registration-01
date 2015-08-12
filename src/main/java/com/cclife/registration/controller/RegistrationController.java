@@ -62,7 +62,7 @@ public class RegistrationController {
         event.setName("Gospel for Chinese Christian Conference Toronto 2015");
         event.setContactEmail("cclife@sbcglobal.net");
         registrationForm.setEvent(event);
-        
+
         Date today = new Date();
         // Setup Form ID (Registration ID)
         String generatedId = DateUtil.getDateTime("MMddHHmmss", today);
@@ -494,15 +494,42 @@ public class RegistrationController {
         try {
 
             if (form.getPaymentMethod() == PaymentMethod.PERSONAL_CHECK) {
-                String template = "CCLIFE_2015_Registration_Recieved_CA.html";
-                if (form.getPaymentCurrency().equalsIgnoreCase("USD")) {
-                    template = "CCLIFE_2015_Registration_Recieved_US.html";
+                String template = "CCLIFE_2015_Registration_Acknowledgement.html";
+//                if (form.getPaymentCurrency().equalsIgnoreCase("USD")) {
+//                    template = "CCLIFE_2015_Registration_Recieved_US.html";
+//                }
+
+                Map<String, String> relationshipMap = new HashMap<String, String>();
+
+                relationshipMap.put("H", "\u4e08\u592b");
+                relationshipMap.put("W", "\u59bb\u5b50");
+                relationshipMap.put("S", "\u5152\u5b50");
+                relationshipMap.put("D", "\u5973\u5152");
+                relationshipMap.put("F", "\u7236\u89aa");
+                relationshipMap.put("M", "\u6bcd\u89aa");
+                relationshipMap.put("B", "\u5144\u5F1F");
+                relationshipMap.put("T", "\u59CA\u59B9");
+                relationshipMap.put("C", "\u540C\u5B66");
+                relationshipMap.put("O", "\u540C\u4E8B");
+                relationshipMap.put("P", "\u4E3B\u62A5\u4EBA");
+
+                String names = "";
+                for (Registrant registrant : form.getRegistrants()) {
+                    if (!names.isEmpty()) {
+                        names += "<br/>";
+                    }
+                    String rel = relationshipMap.get(registrant.getPerson().getRelationship());
+                    names += rel;
+                    names += ":";
+                    names += registrant.getPerson().getChineseName();
                 }
                 Map<String, Object> params = new HashMap<String, Object>();
-                params.put("primaryName", form.getPrimaryChineseName());
+                params.put("names", names);
                 params.put("currency", form.getPaymentCurrency());
                 params.put("registrationId", form.getFormID());
                 params.put("amountPaid", form.getExpense().getTotalMealsFee() + form.getExpense().getTotalRegistrationFee());
+                params.put("registrationFee", form.getExpense().getTotalRegistrationFee());
+                params.put("mealFee", form.getExpense().getTotalMealsFee());
 
                 registrationService.sendEmail(form, params, template);
             }
