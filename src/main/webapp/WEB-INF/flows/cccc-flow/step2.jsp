@@ -13,7 +13,6 @@
 
     <form:form id="step2" action="${flowExecutionUrl}" modelAttribute="registrant" acceptCharset="UTF-8">
         <form:hidden  path="countryVal" id="country" />
-        <form:hidden  path="person.relationship" id="relationValue" />
 
         <script>
             document.getElementById("country").value = "${form.address.country}";
@@ -92,44 +91,39 @@
                                 <tr>
                                     <td>与主报人关系 <br>Relationship with <br>primary person</td>
                                     <td>                                  
-                                        <select id="relationStatus" onchange="setRelationValue();"> 
-                                            <option value="" label="-- Select relationship --" />
-                                            <option value="H" label="H 丈夫" />
-                                            <option value="W" label="W 妻子" />
-                                            <option value="S" label="S 儿子" />
-                                            <option value="D" label="D 女儿" />
-                                            <option value="F" label="F 父亲" />
-                                            <option value="M" label="M 母亲" />
-                                            <option value="B" label="B 兄弟" />
-                                            <option value="T" label="T 姊妹" />
-                                            <option value="C" label="C 同学" />
-                                            <option value="O" label="O 同事" />
-                                        <select>
+                                        <form:select id="relationStatus" path="person.relationship">
+                                            <form:option value="" label="-- Select Relationship --" />
+                                        </form:select>
                                     </td>
                                 </tr>
                                 <script type="text/javascript">
-                                    function setRelationValue(){
-                                        var rel = document.getElementById( "relationStatus" );
-                                        var relVal = rel.options[rel.selectedIndex].value;
-
-                                        document.getElementById( "relationValue").value=relVal;
-                                    }
                                     function setPrimary(){
                                         var size = "${form.registrants.size()}";
-                                        var relVal = document.getElementById( "relationStatus" ).value;
+                                        var relVal = "${registrant.person.relationship}";
 
                                         if(( size==1 ) || ( relVal == "P" )){
-                                            var relList = document.getElementById( "relationStatus" );
-                                            var opt = new Option("P 主報人", "P");               
-
-                                            relList.appendChild(opt);
-                                            relList.value="P";
-                                            relList.disabled=true;
-
-                                            document.getElementById( "relationValue").value = "P";
+                                            var relList1 = document.getElementById( "relationStatus" );
+                                            var opt = new Option("P 主报人", "P");               
+                                            
+                                            relList1.options.length = 0;
+                                            relList1.appendChild(opt);
+                                            relList1.value="P";
                                         }
                                         else{
+                                             var relList2 = document.getElementById( "relationStatus" );
+                                            
+                                            relList2.appendChild( new Option("H 丈夫", "H" ) ); 
+                                            relList2.appendChild( new Option("W 妻子", "W" ) );
+                                            relList2.appendChild( new Option("S 儿子", "S" ) );
+                                            relList2.appendChild( new Option("D 女儿", "D" ) );
+                                            relList2.appendChild( new Option("F 父亲", "F" ) );
+                                            relList2.appendChild( new Option("M 母亲", "M" ) );
+                                            relList2.appendChild( new Option("B 兄弟", "B" ) );
+                                            relList2.appendChild( new Option("T 姊妹", "T" ) );
+                                            relList2.appendChild( new Option("C 同学", "C" ) );
+                                            relList2.appendChild( new Option("O 同事", "O" ) );
                                             document.getElementById( "relationStatus").value = "${registrant.person.relationship}";
+                                            
                                         }
                                     }
                                     setPrimary();
