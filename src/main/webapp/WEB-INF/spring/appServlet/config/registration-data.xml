@@ -102,6 +102,7 @@
         <property name="mailSender" ref="mailSender"/>
         <property name="velocityEngine" ref="velocityEngine"/>
         <property name="from" value="${mail.default.from}"/>
+        <property name="BCC" value="${mail.default.bcc}"/>
     </bean>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
