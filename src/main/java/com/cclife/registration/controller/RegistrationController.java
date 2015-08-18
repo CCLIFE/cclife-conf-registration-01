@@ -519,9 +519,15 @@ public class RegistrationController {
                         names += "<br/>";
                     }
                     String rel = relationshipMap.get(registrant.getPerson().getRelationship());
-                    names += rel;
-                    names += ":";
+                    if (rel != null) {
+                        names += rel;
+                        names += ":";
+                    }
                     names += registrant.getPerson().getChineseName();
+                    names += " ";
+                    names += registrant.getPerson().getFirstName();
+                    names += " ";
+                    names += registrant.getPerson().getLastName();
                 }
                 Map<String, Object> params = new HashMap<String, Object>();
                 params.put("names", names);
