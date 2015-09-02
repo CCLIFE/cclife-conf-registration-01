@@ -47,7 +47,7 @@
                    <td>&nbsp;&nbsp;&nbsp;请按 2015年 12 月 28日的年龄计算，12岁以上均需交报名费， 12 岁以下免费。</td>
                 </tr>
             </table>
-            <table style="border:1px solid black">
+            <table  style="border:1px solid black; alignment-adjust:central; margin-left:auto; margin-right:auto">
                 <tr>
                     <td style="text-align:center; border:1px solid black">年龄</td>
                     <td style="text-align:center; border:1px solid black">9/15 日前</td>
@@ -87,22 +87,37 @@
                     </tr>  
                     -->
                     <tr>
-                        <td>
+                        <td style="text-align:center">
                             <form:errors path="paymentMethod" cssClass="fieldError"/>
                         </td>
                     </tr>
                     <tr>
-                        <td>Payment methods 付款方式  <form:radiobutton id="creditcard" path="paymentMethod" value="CREDIT_CARD"/>Debit/Credit
+                        <td style="text-align:center">Payment methods 付款方式  <form:radiobutton id="creditcard" path="paymentMethod" value="CREDIT_CARD"/>Debit/Credit
                             Card&nbsp;&nbsp; <form:radiobutton id="check" path="paymentMethod" value="PERSONAL_CHECK"/>check </td>
                     </tr>
+                    <tr><td></td></tr>
+                    <tr>
+                        <td style="text-align:center">请仔细核对，确认信息正确后，按 ”Next“</td>
+                    </tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
                 </tbody>
             </table>
         </div>
+                    
         <hr style="width: 80%; height: 2px;">
 
-        <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
-        <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>
-        <button id="payment" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+        <table align="center" style="width:100%;">
+            <tr>
+                <td style="width:30%"></td>
+                <td style="width:40%; text-align:center;">
+                    <button id="cancel" type="submit" name="_eventId_cancel">Cancel</button>
+                    <button id="previous" type="submit" name="_eventId_previous">&lt;&lt; Previous</button>
+                    <button id="payment" type="submit" name="_eventId_next">Next &gt;&gt;</button>
+                </td>
+                <td style="width:30%"></td>
+            </tr>
+        </table>
         <script type="text/javascript">
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'payment', event: 'onclick', formId: 'review', params: {fragments: "body"}}));
             Spring.addDecoration(new Spring.AjaxEventDecoration({elementId: 'previous', event: 'onclick', formId: 'review', params: {fragments: "body"}}));
