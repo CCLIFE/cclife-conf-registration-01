@@ -536,6 +536,8 @@ public class RegistrationController {
                 params.put("amountPaid", form.getExpense().getTotalMealsFee() + form.getExpense().getTotalRegistrationFee());
                 params.put("registrationFee", form.getExpense().getTotalRegistrationFee());
                 params.put("mealFee", form.getExpense().getTotalMealsFee());
+                params.put("headCount", String.valueOf(form.getRegistrants().size()));
+                params.put("mealCount", form.getExpense().getLunchCount() + form.getExpense().getDinnerCount() );
 
                 registrationService.sendEmail(form, params, template);
             }
@@ -562,7 +564,7 @@ public class RegistrationController {
 
     private Expense createExpenseByCurrency(List<Registrant> registrants, List<Fee> fees, String currency) {
 
-        Expense expense = new Expense();
+        Expense totalExpense = new Expense();
 
         double grpTotalRegistrationFee = 0;
         double grpTotalMealFee = 0;
@@ -622,6 +624,9 @@ public class RegistrationController {
             regt.getExpense().setBreakfastCount(breakfastCount);
             regt.getExpense().setTotalBreakfastFee(breakfastCount * 0);
 
+            totalExpense.setBreakfastCount(totalExpense.getBreakfastCount() + breakfastCount);
+            totalExpense.setTotalBreakfastFee(totalExpense.getTotalBreakfastFee() + regt.getExpense().getTotalBreakfastFee());
+            
             Integer lunchCount = (mp.getLunch1() != null ? mp.getLunch1() : 0)
                     + (mp.getLunch2() != null ? mp.getLunch2() : 0)
                     + (mp.getLunch3() != null ? mp.getLunch3() : 0)
@@ -629,6 +634,9 @@ public class RegistrationController {
                     + (mp.getLunch5() != null ? mp.getLunch5() : 0);
             regt.getExpense().setLunchCount(lunchCount);
             regt.getExpense().setTotalLunchFee(lunchCount * lunchFee);
+            
+            totalExpense.setLunchCount(totalExpense.getLunchCount() + lunchCount);
+            totalExpense.setTotalLunchFee(totalExpense.getTotalLunchFee() + regt.getExpense().getTotalLunchFee());
 
             Integer dinnerCount = (mp.getDinner1() != null ? mp.getDinner1() : 0)
                     + (mp.getDinner2() != null ? mp.getDinner2() : 0)
@@ -638,16 +646,19 @@ public class RegistrationController {
             regt.getExpense().setDinnerCount(dinnerCount);
             regt.getExpense().setTotalDinnerFee(dinnerCount * dinnerFee);
 
+            totalExpense.setDinnerCount(totalExpense.getDinnerCount() + dinnerCount);
+            totalExpense.setTotalDinnerFee(totalExpense.getTotalDinnerFee() + regt.getExpense().getTotalDinnerFee());
+            
             regt.getExpense().setTotalMealsFee(regt.getExpense().getTotalBreakfastFee() + regt.getExpense().getTotalLunchFee() + regt.getExpense().getTotalDinnerFee());
             // Grand total
             grpTotalRegistrationFee += regt.getExpense().getTotalRegistrationFee();
             grpTotalMealFee += regt.getExpense().getTotalMealsFee();
         }
 
-        expense.setTotalRegistrationFee(grpTotalRegistrationFee);
-        expense.setTotalMealsFee(grpTotalMealFee);
+        totalExpense.setTotalRegistrationFee(grpTotalRegistrationFee);
+        totalExpense.setTotalMealsFee(grpTotalMealFee);
 
-        return expense;
+        return totalExpense;
     }
 
     public static boolean isInteger(String s) {

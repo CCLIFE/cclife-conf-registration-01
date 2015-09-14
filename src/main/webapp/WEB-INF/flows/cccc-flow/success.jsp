@@ -48,7 +48,7 @@
         <p class="MsoNormal" style=
            "margin: 0in 0in 0.0001pt 0.5in; line-height: normal;">
             <span lang="ZH-CN" style="font-size: 12pt; font-family: SimHei; color: blue;">
-                餐费：${form.paymentCurrency} $${form.expense.totalMealsFee}</span>
+                用餐：${form.registrants.size()}人${form.expense.lunchCount + form.expense.dinnerCount}餐</span>
         </p>
         <br/>
         <p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;">
