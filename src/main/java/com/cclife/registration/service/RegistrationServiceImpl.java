@@ -62,6 +62,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         Mealplan mealPlan = new Mealplan();
         mealPlan.setRegistrationID(form.getFormID().toString());
+        mealPlan.setBreakfast1(0);
+        mealPlan.setBreakfast2(0);
+        mealPlan.setBreakfast3(0);
+        mealPlan.setBreakfast4(0);
         mealPlan.setLunch1(0);
         mealPlan.setLunch2(0);
         mealPlan.setLunch3(0);
@@ -166,20 +170,20 @@ public class RegistrationServiceImpl implements RegistrationService {
         mealplanDao.create(mealPlan);
 
         Payment payment = new Payment();
-        
+
         payment.setCash(Boolean.FALSE);
         payment.setCreditCard(Boolean.FALSE);
         payment.setPersonalCheck(Boolean.FALSE);
         payment.setPaidByConference(Boolean.FALSE);
         payment.setRefund(Boolean.FALSE);
         payment.setAmount(0.0);
-        
+
         if (form.getPaymentMethod() == PaymentMethod.CREDIT_CARD) {
             payment.setCreditCard(Boolean.TRUE);
         } else if (form.getPaymentMethod() == PaymentMethod.PERSONAL_CHECK) {
             payment.setPersonalCheck(Boolean.TRUE);
         }
-        
+
         payment.setRegistrationFee(form.getExpense().getTotalRegistrationFee());
         payment.setMealFee(form.getExpense().getTotalMealsFee());
         payment.setRegistrationID(form.getFormID());
@@ -212,5 +216,9 @@ public class RegistrationServiceImpl implements RegistrationService {
             java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void cancel(String registrationID) {
+        
     }
 }

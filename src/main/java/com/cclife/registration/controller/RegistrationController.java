@@ -31,6 +31,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Interval;
+import org.joda.time.Period;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.webflow.core.collection.LocalAttributeMap;
@@ -54,7 +59,7 @@ public class RegistrationController {
     @Resource(name = "paymentProviderMap")
     private Map<String, PaymentProvider> paymentProviderMap;
 
-    public RegistrationForm initializeForm() {
+    public RegistrationForm initializeForm() throws ParseException {
 
         RegistrationForm registrationForm = new RegistrationForm();
 
@@ -282,6 +287,8 @@ public class RegistrationController {
             StringTokenizer st = new StringTokenizer(entry.getValue(), ",");
             int count = 0;
             Fee fee = new Fee();
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             while (st.hasMoreTokens()) {
 
                 count++;
@@ -292,31 +299,36 @@ public class RegistrationController {
                         logger.debug("event id:" + fee.getEventID());
                         break;
                     case 2:
-                        DateTime dt = new DateTime(st.nextToken());
+                        DateTime dt = new DateTime(formatter.parseDateTime(st.nextToken()));
                         fee.setEffectiveDate(dt);
                         logger.debug("effective date:" + fee.getEffectiveDate());
                         break;
-                    case 3:
+                    case 3:             
+                        DateTime dt0 = new DateTime(formatter.parseDateTime(st.nextToken()));
+                        fee.setExpirationDate(dt0);
+                        logger.debug("expiration date:" + fee.getExpirationDate());
+                        break;
+                    case 4:
                         fee.setAgeLevel(Integer.parseInt(st.nextToken()));
                         logger.debug("age level:" + fee.getAgeLevel());
                         break;
-                    case 4:
+                    case 5:
                         fee.setPriority(Integer.parseInt(st.nextToken()));
                         logger.debug("priority:" + fee.getPriority());
                         break;
-                    case 5:
+                    case 6:
                         fee.setCodeName(st.nextToken());
                         logger.debug("code name:" + fee.getCodeName());
                         break;
-                    case 6:
+                    case 7:
                         fee.setDescription(st.nextToken());
                         logger.debug("description:" + fee.getDescription());
                         break;
-                    case 7:
+                    case 8:
                         fee.setCurrency(st.nextToken());
                         logger.debug("currency:" + fee.getCurrency());
                         break;
-                    case 8:
+                    case 9:
                         fee.setAmount(Double.valueOf(st.nextToken()));
                         logger.debug("amount:" + fee.getAmount());
                         break;
@@ -537,7 +549,7 @@ public class RegistrationController {
                 params.put("registrationFee", form.getExpense().getTotalRegistrationFee());
                 params.put("mealFee", form.getExpense().getTotalMealsFee());
                 params.put("headCount", String.valueOf(form.getRegistrants().size()));
-                params.put("mealCount", form.getExpense().getLunchCount() + form.getExpense().getDinnerCount() );
+                params.put("mealCount", form.getExpense().getLunchCount() + form.getExpense().getDinnerCount());
 
                 registrationService.sendEmail(form, params, template);
             }
@@ -577,15 +589,11 @@ public class RegistrationController {
         Integer ageLevel = 0;
 
         DateTime now = new DateTime();
-        DateTime effectiveDate = null;
         for (Fee fee : fees) {
-            if (fee.getCodeName().contains("REGISTRATION") && fee.getCurrency().equalsIgnoreCase(currency) && now.isBefore(fee.getEffectiveDate())) {
-
-                if (effectiveDate == null || effectiveDate.isAfter(fee.getEffectiveDate())) {
-                    adultRegistrationFee = fee.getAmount();
-                    ageLevel = fee.getAgeLevel();
-                    effectiveDate = fee.getEffectiveDate();
-                }
+            Interval interval = new Interval(fee.getEffectiveDate(), fee.getExpirationDate());
+            if (fee.getCodeName().contains("REGISTRATION") && fee.getCurrency().equalsIgnoreCase(currency) && interval.contains(now)) {
+                adultRegistrationFee = fee.getAmount();
+                ageLevel = fee.getAgeLevel();
             }
             if (fee.getCodeName().contains("LUNCH") && fee.getCurrency().equalsIgnoreCase(currency)) {
                 lunchFee = fee.getAmount();
@@ -626,7 +634,7 @@ public class RegistrationController {
 
             totalExpense.setBreakfastCount(totalExpense.getBreakfastCount() + breakfastCount);
             totalExpense.setTotalBreakfastFee(totalExpense.getTotalBreakfastFee() + regt.getExpense().getTotalBreakfastFee());
-            
+
             Integer lunchCount = (mp.getLunch1() != null ? mp.getLunch1() : 0)
                     + (mp.getLunch2() != null ? mp.getLunch2() : 0)
                     + (mp.getLunch3() != null ? mp.getLunch3() : 0)
@@ -634,7 +642,7 @@ public class RegistrationController {
                     + (mp.getLunch5() != null ? mp.getLunch5() : 0);
             regt.getExpense().setLunchCount(lunchCount);
             regt.getExpense().setTotalLunchFee(lunchCount * lunchFee);
-            
+
             totalExpense.setLunchCount(totalExpense.getLunchCount() + lunchCount);
             totalExpense.setTotalLunchFee(totalExpense.getTotalLunchFee() + regt.getExpense().getTotalLunchFee());
 
@@ -648,7 +656,7 @@ public class RegistrationController {
 
             totalExpense.setDinnerCount(totalExpense.getDinnerCount() + dinnerCount);
             totalExpense.setTotalDinnerFee(totalExpense.getTotalDinnerFee() + regt.getExpense().getTotalDinnerFee());
-            
+
             regt.getExpense().setTotalMealsFee(regt.getExpense().getTotalBreakfastFee() + regt.getExpense().getTotalLunchFee() + regt.getExpense().getTotalDinnerFee());
             // Grand total
             grpTotalRegistrationFee += regt.getExpense().getTotalRegistrationFee();

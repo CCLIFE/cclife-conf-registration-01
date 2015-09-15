@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -36,6 +37,8 @@ public class RegistrationServiceImplTest {
     private static final Logger logger = Logger.getLogger(RegistrationServiceImplTest.class);
     ApplicationContext applicationContext = null;
     private final Integer testId = 53;
+    @Autowired
+    private GenericJPADao<Family> familyDao ;
 
     public RegistrationServiceImplTest() {
     }
@@ -57,6 +60,7 @@ public class RegistrationServiceImplTest {
 
         try {
             applicationContext = new FileSystemXmlApplicationContext(xmlFiles);
+            familyDao = (GenericJPADao<Family>) applicationContext.getBean("familyDao") ;
 
         } catch (org.springframework.beans.factory.BeanCreationException e) {
             logger.error(e.getMessage());
@@ -76,8 +80,6 @@ public class RegistrationServiceImplTest {
      */
     @Test
     public void testSubmit() throws Exception {
-
-        GenericJPADao<Family> familyDao = (GenericJPADao<Family>) applicationContext.getBean("familyDao");
 
         Family family = new Family();
         logger.debug(family.getHomeAddress());

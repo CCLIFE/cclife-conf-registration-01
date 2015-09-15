@@ -16,8 +16,9 @@ public class Fee implements Serializable {
 
     private String eventID;
     private DateTime effectiveDate;
+    private DateTime expirationDate;
     private Integer ageLevel;
-    private int priority ;
+    private int priority;
     private String codeName;
     private String description;
     private Double amount;
@@ -133,5 +134,19 @@ public class Fee implements Serializable {
      */
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    /**
+     * @return the expirationDate
+     */
+    public DateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    /**
+     * @param expirationDate the expirationDate to set
+     */
+    public void setExpirationDate(DateTime expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }
