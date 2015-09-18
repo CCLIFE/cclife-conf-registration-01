@@ -16,4 +16,6 @@ public interface RegistrationService {
     public boolean submit(RegistrationForm form) throws Exception;
 
     public void sendEmail(RegistrationForm form, Map<String, Object> params, String template) ;
+    
+    public void cancel(String registrationID);
 }

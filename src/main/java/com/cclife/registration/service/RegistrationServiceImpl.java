@@ -6,6 +6,7 @@ package com.cclife.registration.service;
 
 import com.cclife.registration.dao.GenericJPADao;
 import com.cclife.registration.dao.PaymentDao;
+import com.cclife.registration.dao.exceptions.RollbackFailureException;
 import com.cclife.registration.domain.PaymentMethod;
 import com.cclife.registration.domain.Registrant;
 import com.cclife.registration.domain.RegistrationForm;
@@ -16,7 +17,9 @@ import com.cclife.registration.model.Profile;
 import com.cclife.registration.model.Mealplan;
 import com.cclife.registration.model.Payment;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import javax.mail.MessagingException;
@@ -54,6 +57,8 @@ public class RegistrationServiceImpl implements RegistrationService {
      */
     @Override
     public boolean submit(RegistrationForm form) throws Exception {
+
+        cancel(form.getFormID().toString());
 
         Family family = form.getAddress();
         logger.debug(family.getHomeAddress());
@@ -217,8 +222,37 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
     }
-    
+
+    @Override
     public void cancel(String registrationID) {
-        
+        try {
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("registrationID", registrationID);
+            
+            List<Profile> list = profileDao.findByNamedQuery("Profile.findByRegistrationID", map);
+            if (list.isEmpty()) {
+                return;
+            }
+            Integer fid = 0;
+            Integer pid = 0;
+            for (Profile p : list) {
+                fid = p.getFamilyID();
+                pid = p.getPersonID();
+            }
+            List<Payment> plist = paymentDao.findPaymentByQuery("SELECT p FROM Payment p WHERE p.registrationID = '" + registrationID + "'");
+            for (Payment p : plist) {
+                logger.debug("Payment ID:" + p.getId());
+                paymentDao.delete(p.getId());
+            }
+            
+            mealplanDao.destroy(registrationID);
+            profileDao.destroy(pid);
+            personDao.destroy(pid);
+            familyDao.destroy(fid);
+        } catch (RollbackFailureException ex) {
+            java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(RegistrationServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

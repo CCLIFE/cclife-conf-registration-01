@@ -38,7 +38,13 @@ public class RegistrationServiceImplTest {
     ApplicationContext applicationContext = null;
     private final Integer testId = 53;
     @Autowired
-    private GenericJPADao<Family> familyDao ;
+    private GenericJPADao<Family> familyDao;
+    @Autowired
+    private GenericJPADao<Person> personDao;
+    @Autowired
+    private GenericJPADao<Profile> profileDao;
+    @Autowired
+    private GenericJPADao<Mealplan> mealplanDao;
 
     public RegistrationServiceImplTest() {
     }
@@ -60,7 +66,10 @@ public class RegistrationServiceImplTest {
 
         try {
             applicationContext = new FileSystemXmlApplicationContext(xmlFiles);
-            familyDao = (GenericJPADao<Family>) applicationContext.getBean("familyDao") ;
+            familyDao = (GenericJPADao<Family>) applicationContext.getBean("familyDao");
+            personDao = (GenericJPADao<Person>) applicationContext.getBean("personDao");
+            mealplanDao = (GenericJPADao<Mealplan>) applicationContext.getBean("mealplanDao");
+            profileDao = (GenericJPADao<Profile>) applicationContext.getBean("profileDao");
 
         } catch (org.springframework.beans.factory.BeanCreationException e) {
             logger.error(e.getMessage());
@@ -94,8 +103,6 @@ public class RegistrationServiceImplTest {
 
         familyDao.create(family);
 
-        GenericJPADao<Person> personDao = (GenericJPADao<Person>) applicationContext.getBean("personDao");
-
         logger.debug("Family ID:" + family.getFamilyID());
         Person person = new Person();
 //        person.setPersonID(testId);
@@ -108,25 +115,23 @@ public class RegistrationServiceImplTest {
 
         logger.debug("Person ID:" + person.getPersonID());
         logger.debug("Family ID:" + person.getFamilyID());
-        GenericJPADao<Profile> profileDao = (GenericJPADao<Profile>) applicationContext.getBean("profileDao");
 
         Profile profile = new Profile();
-        
+
         profile.setRegistrationID(fid.toString());
         profile.setFamilyID(person.getFamilyID());
         profile.setPersonID(person.getPersonID());
         profile.setNeedHotel(Boolean.TRUE);
         profile.setLastModified(new Date());
         profileDao.create(profile);
-        
-        GenericJPADao<Mealplan> mealplanDao = (GenericJPADao<Mealplan>) applicationContext.getBean("mealplanDao");
+
         Mealplan mealPlan = new Mealplan();
-        
+
         mealPlan.setRegistrationID(profile.getRegistrationID());
         mealPlan.setBreakfast1(2);
-        
+
         mealplanDao.create(mealPlan);
-        
+
 //        System.out.println("submit");
 //        RegistrationForm form = null;
 //        RegistrationServiceImpl instance = new RegistrationServiceImpl();
